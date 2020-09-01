@@ -6,7 +6,7 @@
 # We use an image based on Alpine Linux that contains
 # Qt 5.9.6 and the necessary  
 
-image: pervasivetut/alpine_qt_5.9.6:latest
+image: honksu/new-qt:5142
 
 # We currently only need the build stage
 stages:
