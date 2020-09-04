@@ -1,7 +1,21 @@
 TEMPLATE = app
-CONFIG += console c++11
+CONFIG += console c++17
 CONFIG -= app_bundle
-CONFIG -= qt
+CONFIG += qt
 
 SOURCES += \
-        main.cpp
+        date.cc \
+        fraction.cc \
+        main.cpp \
+        string.cc \
+        vector.cc
+
+HEADERS += \
+    date.hh \
+    fraction.hh \
+    string.hh \
+    vector.hh
+
+DISTFILES += \
+    Doxyfile
+
