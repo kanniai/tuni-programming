@@ -1,14 +1,14 @@
 # This GitLab CI configuration is used for the weekly exercies of
 # the course Ohjelmointi 3/Programming 3
 
-# For more information refer to: https://course-gitlab.tut.fi/help/ci/yaml/README.md
+# For more information refer to: https://course-gitlab.tuni.fi/help/ci/README.md
 
 # We use an image based on Alpine Linux that contains
-# Qt 5.9.6 and the necessary  
+# Qt 5.14.2 and the necessary stuff
 
 image: honksu/new-qt:5142
 
-# We currently only need the build stage
+# The stages of our current pipeline
 stages:
   - build
   - test
@@ -25,7 +25,7 @@ build_EX1:
     - make clean
   allow_failure: true
 
-# Build job for Morottaja's unit test
+# Build job for Morottaja's unit test for EX3
 Morottaja:
   # The runner must be able to run and compile Qt projects
   tags:
@@ -53,7 +53,7 @@ Morottaja:
     # How long we store the artifacts in GitLab
     expire_in: 2d
 
-# Test job for Morottaja's unit test
+# Test job for Morottaja's unit test in EX3
 MorottajaTest:
   tags:
     - qt
@@ -66,3 +66,5 @@ MorottajaTest:
   # On what jobs this dependes on, which artifacts we download for this job
   dependencies:
     - Morottaja
+
+# Jobs for date go here
