@@ -7,13 +7,41 @@ public:
   VectorInt();
   ~VectorInt();
 
+  /*!
+   * \brief front
+   * \pre blocksize_ > 0
+   * \return frontmost element
+   */
   int front() const;
 
+  /*!
+   * \brief operator []
+   * \param location
+   * \pre blocksize_ > 0
+   * \return element
+   */
   int& operator[](int location);
+
+  /*!
+   * \brief at
+   * \param location
+   * \pre blocksize_ > 0
+   * \return element
+   */
   int& at(int location);
 
+  /*!
+   * \brief push_back
+   * \pre blocksize_ > 0
+   * \param element
+   */
   void push_back(int element);
 
+  /*!
+   * \brief swap
+   * \pre blocksize_ > 0
+   * \param v
+   */
   void swap(VectorInt& v);
 
 private:

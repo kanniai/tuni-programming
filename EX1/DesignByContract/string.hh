@@ -9,10 +9,27 @@ public:
   String();
   ~String();
 
+  /*!
+   * \brief length
+   * \pre length >= 0
+   * \return length of string
+   */
   int length() const;
 
+  /*!
+   * \brief clear
+   * \pre -
+   * \post string cleared and length set to 0
+   */
   void clear();
 
+  /*!
+   * \brief substr
+   * \param location
+   * \param amount
+   * \pre location > 0 && amount > 0
+   * \return substring
+   */
   String substr(int location, int amount) const;
 
 private:

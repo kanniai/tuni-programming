@@ -14,7 +14,7 @@ public:
 private Q_SLOTS:
     void weekday();
     void weekday_data();
-    void test_month();
+    void test_day();
 };
 
 DateTest::DateTest()
@@ -23,11 +23,12 @@ DateTest::DateTest()
 
 Q_DECLARE_METATYPE(Date::Weekday);
 
-void DateTest::test_month()
+void DateTest::test_day()
 {
     QFETCH(unsigned int, day);
     QFETCH(unsigned int, month);
     QFETCH(unsigned int, year);
+    QFETCH(Date::Weekday, weekday);
 
     Date d(day, month, year);
     QCOMPARE(d.giveDay(), day);

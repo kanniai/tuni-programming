@@ -7,8 +7,25 @@ public:
   Fraction(int numerator, int denominator);
   ~Fraction();
 
+  /*!
+   * \brief giveNumerator
+   * \pre -
+   * \return numerator
+   */
   int giveNumerator() const;
+
+  /*!
+   * \brief givedenominator
+   * \pre denominator != 0
+   * \return denominator
+   */
   int givedenominator() const;
+
+  /*!
+   * \brief giveAsFloating
+   * \return fraction in float type
+   * \pre -
+   */
   double giveAsFloating() const;
 
   Fraction& operator+=(Fraction f);
