@@ -30,7 +30,7 @@ void DateTest::test_month()
     QFETCH(unsigned int, year);
 
     Date d(day, month, year);
-    QCOMPARE(d.giveDay(), std::string("Monday"));
+    QCOMPARE(d.giveDay(), day);
 }
 
 void DateTest::weekday()

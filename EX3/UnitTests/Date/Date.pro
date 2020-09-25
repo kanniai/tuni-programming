@@ -8,9 +8,12 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES +=  tst_date.cpp \
-	../../WelcomeToTampere/date.cc
+        ../../WelcomeToTampere/date.cc \
+        ../../WelcomeToTampere/baddate.cc
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 HEADERS += \
-	../../WelcomeToTampere/date.hh
+        ../../WelcomeToTampere/date.hh \
+        ../../WelcomeToTampere/baddate.hh
+
 INCLUDEPATH += \
             ../../WelcomeToTampere/
