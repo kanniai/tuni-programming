@@ -97,7 +97,7 @@ Date:
     expire_in: 2d
 
 # Test job for Date's unit test in EX3
-MorottajaTest:
+DateTest:
   tags:
     - qt
   stage: test
