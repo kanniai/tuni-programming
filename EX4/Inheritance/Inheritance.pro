@@ -27,21 +27,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
+    dialog.cpp \
         main.cc \
         mainwindow.cc \
     movingobject.cc \
     movingobjectgraphics.cc \
     fastball.cc \
-    objectcontroller.cc
+    objectcontroller.cc \
+    oddball.cpp
 
 
 HEADERS += \
+    dialog.hh \
         mainwindow.hh \
     movingobject.hh \
     movingobjectgraphics.hh \
     fastball.hh \
-    objectcontroller.hh
+    objectcontroller.hh \
+    oddball.hh
     constants.hh
 
 FORMS += \
+    dialog.ui \
     mainwindow.ui

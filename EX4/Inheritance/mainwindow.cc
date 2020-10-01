@@ -1,6 +1,7 @@
 #include "mainwindow.hh"
 #include "ui_mainwindow.h"
 #include "fastball.hh"
+#include "oddball.hh"
 #include "constants.hh"
 #include "movingobjectgraphics.hh"
 
@@ -50,6 +51,15 @@ void MainWindow::spawnObjects(int count, ObjectType type)
         if( type == ObjectType::FASTBALL )
         {
             auto pObj = std::make_shared<FastBall>();
+            engine_->registerObject(pObj);
+            auto pGraph = new MovingObjectGraphics(pObj);
+            graphics_.push_back(pGraph);
+            view_->scene()->addItem(pGraph);
+
+        }
+        else if ( type == ObjectType::ODDBALL )
+        {
+            auto pObj = std::make_shared<OddBall>();
             engine_->registerObject(pObj);
             auto pGraph = new MovingObjectGraphics(pObj);
             graphics_.push_back(pGraph);
