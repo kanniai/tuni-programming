@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
+<<<<<<< HEAD
 <!-- Written by QtCreator 4.11.1, 2020-10-22T10:42:35. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
   <value type="QByteArray">{b23a3b17-7cb7-4280-97cf-189e97a8a168}</value>
+=======
+<!-- Written by QtCreator 4.11.1, 2020-10-22T10:39:50. -->
+<qtcreator>
+ <data>
+  <variable>EnvironmentId</variable>
+  <value type="QByteArray">{548a2c7d-b107-41fb-9995-b24e1f68f811}</value>
+>>>>>>> a72173f4387674935c7ff1fd270d4ed39a7ae47d
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -69,7 +77,11 @@
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
+<<<<<<< HEAD
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/kanniai3/Ohjelmointi_3/build-Nysse-Desktop_Qt_5_14_2_GCC_64bit-Debug</value>
+=======
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/luukkono/build-Nysse-Desktop_Qt_5_14_2_GCC_64bit-Debug</value>
+>>>>>>> a72173f4387674935c7ff1fd270d4ed39a7ae47d
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -117,7 +129,11 @@
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">2</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
+<<<<<<< HEAD
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/kanniai3/Ohjelmointi_3/build-Nysse-Desktop_Qt_5_14_2_GCC_64bit-Release</value>
+=======
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/luukkono/build-Nysse-Desktop_Qt_5_14_2_GCC_64bit-Release</value>
+>>>>>>> a72173f4387674935c7ff1fd270d4ed39a7ae47d
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -165,7 +181,11 @@
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">0</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.2">
+<<<<<<< HEAD
     <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/kanniai3/Ohjelmointi_3/build-Nysse-Desktop_Qt_5_14_2_GCC_64bit-Profile</value>
+=======
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/luukkono/build-Nysse-Desktop_Qt_5_14_2_GCC_64bit-Profile</value>
+>>>>>>> a72173f4387674935c7ff1fd270d4ed39a7ae47d
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -285,8 +305,13 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+<<<<<<< HEAD
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/kanniai3/Ohjelmointi_3/Project/Game/Game.pro</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/kanniai3/Ohjelmointi_3/Project/Game/Game.pro</value>
+=======
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/luukkono/koodia2/Game/Game.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/luukkono/koodia2/Game/Game.pro</value>
+>>>>>>> a72173f4387674935c7ff1fd270d4ed39a7ae47d
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>
@@ -297,7 +322,11 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
+<<<<<<< HEAD
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/kanniai3/Ohjelmointi_3/build-Nysse-Desktop_Qt_5_14_2_GCC_64bit-Debug/Game</value>
+=======
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/luukkono/build-Nysse-Desktop_Qt_5_14_2_GCC_64bit-Debug/Game</value>
+>>>>>>> a72173f4387674935c7ff1fd270d4ed39a7ae47d
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
