@@ -1,4 +1,3 @@
-*.pro.user*
-*build
-    templates/*
-    examples/*
+*.pro.user
+*.pro.user.548a2c7
+build-*
