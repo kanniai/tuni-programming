@@ -6,11 +6,13 @@ QT += core gui widgets network multimedia
 CONFIG += c++14
 
 SOURCES += \
+    city.cpp \
     main.cc
     ../../CourseLib/graphics/simplemainwindow.cpp
 
 HEADERS += \
-    ../../CourseLib/graphics/simplemainwindow.hh
+    ../../CourseLib/graphics/simplemainwindow.hh \
+    city.hh
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
