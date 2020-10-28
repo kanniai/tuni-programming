@@ -1,8 +1,14 @@
 #include "city.hh"
 #include "graphics/simplemainwindow.hh"
+#include <QTime>
 
 namespace StudentSide
 {
+City::City() :
+    simpleMainWindow_(nullptr)
+{
+
+}
 
 City::City(CourseSide::SimpleMainWindow* simpleMainWindow) :
     simpleMainWindow_(simpleMainWindow)
@@ -18,6 +24,11 @@ StudentSide::City::~City()
 void StudentSide::City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
     simpleMainWindow_->setPicture(basicbackground);
+}
+
+void City::setClock(QTime clock)
+{
+
 }
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
@@ -62,7 +73,7 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 
 bool City::isGameOver() const
 {
-    return false;
+
 }
 }
 
