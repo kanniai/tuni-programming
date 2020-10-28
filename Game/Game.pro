@@ -7,12 +7,14 @@ CONFIG += c++14
 
 SOURCES += \
     city.cpp \
+    engine.cpp \
     main.cc
     ../../CourseLib/graphics/simplemainwindow.cpp
 
 HEADERS += \
     ../../CourseLib/graphics/simplemainwindow.hh \
-    city.hh
+    city.hh \
+    engine.hh
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
