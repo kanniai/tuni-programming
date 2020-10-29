@@ -10,7 +10,6 @@ namespace StudentSide
 
 class Engine : public QMainWindow
 {
-    Q_OBJECT
 public:
     Engine();
     ~Engine();
@@ -18,10 +17,11 @@ public:
 
 public slots:
     void gameStarted();
+    void drawMap();
 
 private:
     CourseSide::Logic logic_;
-    CourseSide::SimpleMainWindow* window_;
+    CourseSide::SimpleMainWindow window_;
 };
 
 }

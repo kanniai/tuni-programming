@@ -5,26 +5,13 @@
 #include <QObject>
 #include <QMainWindow>
 
-const QImage *MAP_BIG2 = new QImage("../Course/CourseLib/offlinedata/offlinedata/kartta_iso_1095x592");
-const QImage *MAP_BASIC1 = new QImage("../Course/CourseLib/offlinedata/offlinedata/kartta_small_500x500");
-QImage MAP_BASIC("../Course/CourseLib/offlinedata/offlinedata/kartta_small_500x500");
-QImage MAP_BIG("../Course/CourseLib/offlinedata/offlinedata/kartta_iso_1095x592");
-
 namespace StudentSide
 {
 Engine::Engine()
 {
-    CourseSide::SimpleMainWindow* w = new CourseSide::SimpleMainWindow();
-    window_ = w;
-    CourseSide::Logic logic;
-    StudentSide::City city(w);
+    CourseSide::SimpleMainWindow window_;
+    CourseSide::Logic logic_;
 
-
-    QObject::connect(window_, SIGNAL(gameStarted()), this, SLOT(gameStarted()));
-
-
-    city.setBackground(MAP_BASIC, MAP_BIG);
-    w->show();
 }
 
 Engine::~Engine()
@@ -34,9 +21,14 @@ Engine::~Engine()
 void Engine::gameStarted()
 {
     logic_.fileConfig();
-    logic_.finalizeGameStart();
-    window_->close();
 
+}
+void Engine::drawMap()
+{
+    QImage img(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
+
+    window_.setPicture(img);
+    window_.show();
 }
 
 }
