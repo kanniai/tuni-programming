@@ -3,12 +3,13 @@
 #include "../Course/CourseLib/core/logic.hh"
 #include <QObject>
 #include <QMainWindow>
+#include "city.hh"
 #include "simplemainwindow.hh"
 
 namespace StudentSide
 {
 
-class Engine : public QMainWindow
+class Engine
 {
 public:
     Engine();
@@ -16,12 +17,8 @@ public:
 
 
 public slots:
-    void gameStarted();
-    void drawMap();
 
 private:
-    CourseSide::Logic logic_;
-    CourseSide::SimpleMainWindow window_;
 };
 
 }

@@ -6,15 +6,25 @@ QT += core gui widgets network multimedia
 CONFIG += c++14
 
 SOURCES += \
+    actor.cpp \
     city.cpp \
     engine.cpp \
-    main.cc
+    main.cc \
+    passenger.cpp \
+    statistics.cpp \
+    stop.cpp \
+    vehicle.cpp
     ../../CourseLib/graphics/simplemainwindow.cpp
 
 HEADERS += \
     ../../CourseLib/graphics/simplemainwindow.hh \
+    actor.hh \
     city.hh \
-    engine.hh
+    engine.hh \
+    passenger.hh \
+    statistics.hh \
+    stop.hh \
+    vehicle.hh
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
