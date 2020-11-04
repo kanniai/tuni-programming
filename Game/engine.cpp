@@ -5,7 +5,17 @@ namespace StudentSide
 {
 Engine::Engine()
 {
-    createGame();
+    std::shared_ptr<Interface::ICity> city = createGame();
+
+    CourseSide::Logic logic;
+    logic.fileConfig();
+
+    logic.takeCity(city);
+    unsigned short hr = 12;
+    unsigned short min = 30;
+    logic.setTime(hr, min);
+    //logic.addNewPassengers()
+    logic.finalizeGameStart();
 
     // logic tarvii
     //std::shared_ptr<Interface::ICity> city
@@ -18,9 +28,9 @@ Engine::~Engine()
 
 std::shared_ptr<Interface::ICity> Engine::createGame()
 {
+
     CourseSide::SimpleMainWindow* window = new CourseSide::SimpleMainWindow;
-    CourseSide::Logic logic;
-    logic.fileConfig();
+
 
     StudentSide::City city(window);
 
@@ -32,10 +42,8 @@ std::shared_ptr<Interface::ICity> Engine::createGame()
 
     window->addActor(150, 150, 0);
 
-
-    logic.finalizeGameStart();
-
     return std::shared_ptr<Interface::ICity> (&city);
+
 }
 }
 
