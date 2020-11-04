@@ -32,7 +32,7 @@ public:
 private:
     CourseSide::SimpleMainWindow* simpleMainWindow_;
     QVector<std::shared_ptr<Interface::IActor>> actors_;
-    SimpleMainWindow window_;
+    CourseSide::SimpleMainWindow window_;
 
 };
 
