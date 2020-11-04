@@ -1,12 +1,13 @@
 #include "city.hh"
-#include "graphics/simplemainwindow.hh"
 #include <QTime>
+#include "simplemainwindow.hh"
 
 namespace StudentSide
 {
 City::City() :
-    simpleMainWindow_(nullptr)
-{
+    simpleMainWindow_(nullptr){
+    {
+    }
 
 }
 
@@ -43,6 +44,10 @@ void City::startGame()
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
+
+    actors_.push_back(newactor);
+
+
 
 }
 

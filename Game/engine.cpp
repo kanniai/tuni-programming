@@ -14,13 +14,12 @@ Engine::Engine()
     QImage img_large(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
 
     city.setBackground(img_small, img_large);
-    //window->setPicture(img_large);
     window->show();
 
     window->addActor(150, 150, 0);
 
     logic.fileConfig();
-    logic.finalizeGameStart();
+    //logic.finalizeGameStart();
 
 
 }
