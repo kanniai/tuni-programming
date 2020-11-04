@@ -16,8 +16,8 @@ public:
 
     Interface::Location giveLocation() const override;
     void move(Interface::Location loc) override;
-    bool isDestroyed() const override;
-    void destroy() override;
+    bool isRemoved() const override;
+    void remove() override;
 
 };
 }

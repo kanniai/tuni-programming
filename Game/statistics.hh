@@ -11,11 +11,10 @@ public:
     ~Statistics();
 
     void newNysse() override;
-    void nysseDestroyed() override;
     void nysseLeft() override;
-    void passengerDied(int num) override;
     void morePassengers(int num) override;
-    int givePoints() const override;
+    void nysseRemoved() override;
+
 };
 }
 #endif // STATISTICS_HH

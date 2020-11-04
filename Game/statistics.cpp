@@ -14,17 +14,12 @@ void Statistics::newNysse()
 
 }
 
-void Statistics::nysseDestroyed()
-{
-
-}
-
 void Statistics::nysseLeft()
 {
 
 }
 
-void Statistics::passengerDied(int num)
+void Statistics::nysseRemoved()
 {
 
 }
@@ -34,8 +29,4 @@ void Statistics::morePassengers(int num)
 
 }
 
-int Statistics::givePoints() const
-{
-
-}
 }

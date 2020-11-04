@@ -19,12 +19,12 @@ void StudentSide::Actor::move(Interface::Location loc)
 
 }
 
-bool StudentSide::Actor::isDestroyed() const
+bool StudentSide::Actor::isRemoved() const
 {
 
 }
 
-void StudentSide::Actor::destroy()
+void StudentSide::Actor::remove()
 {
 
 }
