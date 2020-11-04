@@ -1,4 +1,5 @@
 #include "city.hh"
+#include "actor.hh"
 #include <QTime>
 #include "simplemainwindow.hh"
 
@@ -27,14 +28,14 @@ void StudentSide::City::setBackground(QImage &basicbackground, QImage &bigbackgr
     simpleMainWindow_->setPicture(basicbackground);
 }
 
-void City::setClock(QTime clock)
-{
-
-}
-
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
+    stops_.push_back(stop);
+}
 
+void City::setClock(QTime clock)
+{
+    time_ = clock;
 }
 
 void City::startGame()
@@ -44,21 +45,21 @@ void City::startGame()
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
-
     actors_.push_back(newactor);
-
-
-
 }
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-
-}
-
-void City::actorDestroyed(std::shared_ptr<Interface::IActor> actor)
-{
-
+    QVector<std::shared_ptr<Interface::IActor>>::iterator it = actors_.begin();
+    for ( ; it != actors_.end(); ) {
+      if (*it == actor) {
+        it = actors_.erase(it);
+        actor->remove();
+        // actorRemoved(actor);
+      } else {
+        ++it;
+      }
+    }
 }
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
@@ -68,9 +69,12 @@ void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 {
-
+    if ( std::find(actors_.begin(), actors_.end(), actor) != actors_.end() )
+       return true;
+    else
+       return false;
 }
-
+// Logic::advance calls this function
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
 

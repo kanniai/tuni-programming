@@ -19,6 +19,10 @@ public:
     bool isRemoved() const override;
     void remove() override;
 
+private:
+    Interface::Location location_;
+    bool isRemoved_ = false;
+
 };
 }
 
