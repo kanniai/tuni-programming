@@ -7,9 +7,11 @@ CONFIG += c++14
 
 SOURCES += \
     actor.cpp \
+    actoritem.cpp \
     city.cpp \
     engine.cpp \
     main.cc \
+    mainwindow.cpp \
     passenger.cpp \
     statistics.cpp \
     stop.cpp \
@@ -19,8 +21,10 @@ SOURCES += \
 HEADERS += \
     ../../CourseLib/graphics/simplemainwindow.hh \
     actor.hh \
+    actoritem.hh \
     city.hh \
     engine.hh \
+    mainwindow.hh \
     passenger.hh \
     statistics.hh \
     stop.hh \
@@ -51,3 +55,6 @@ else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/debug/CourseLib.lib
 else:unix: PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/libCourseLib.a
+
+FORMS += \
+    mainwindow.ui

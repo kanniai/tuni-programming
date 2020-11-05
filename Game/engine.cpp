@@ -1,5 +1,6 @@
 #include "engine.hh"
 #include "city.hh"
+#include "mainwindow.hh"
 
 namespace StudentSide
 {
@@ -14,7 +15,7 @@ Engine::~Engine()
 void Engine::createGame()
 {
 
-    CourseSide::SimpleMainWindow* window = new CourseSide::SimpleMainWindow;
+    StudentSide::MainWindow* window = new StudentSide::MainWindow();
     CourseSide::Logic logic;
 
     std::shared_ptr<StudentSide::City> city = std::make_shared<StudentSide::City>(window);
