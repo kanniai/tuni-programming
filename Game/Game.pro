@@ -8,11 +8,11 @@ CONFIG += c++14
 SOURCES += \
     actor.cpp \
     city.cpp \
+    dialog.cpp \
     engine.cpp \
     main.cc \
-    passenger.cpp \
+    player.cpp \
     statistics.cpp \
-    stop.cpp \
     vehicle.cpp
     ../../CourseLib/graphics/simplemainwindow.cpp
 
@@ -20,10 +20,10 @@ HEADERS += \
     ../../CourseLib/graphics/simplemainwindow.hh \
     actor.hh \
     city.hh \
+    dialog.hh \
     engine.hh \
-    passenger.hh \
+    player.hh \
     statistics.hh \
-    stop.hh \
     vehicle.hh
 
 win32:CONFIG(release, debug|release): LIBS += \
@@ -51,3 +51,6 @@ else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/debug/CourseLib.lib
 else:unix: PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/libCourseLib.a
+
+FORMS += \
+    dialog.ui
