@@ -1,8 +1,6 @@
 #include "city.hh"
 #include "actor.hh"
 #include <QTime>
-#include "simplemainwindow.hh"
-
 
 namespace StudentSide
 {
