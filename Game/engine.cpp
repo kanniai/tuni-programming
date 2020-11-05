@@ -7,20 +7,6 @@ Engine::Engine()
 {
     std::shared_ptr<Interface::ICity> city = createGame();
 
-    CourseSide::Logic logic;
-    logic.fileConfig();
-
-    logic.takeCity(city);
-    unsigned short hr = 12;
-    unsigned short min = 30;
-    logic.setTime(hr, min);
-    //logic.addNewPassengers()
-    logic.finalizeGameStart();
-
-    // logic tarvii
-    //std::shared_ptr<Interface::ICity> city
-    // kutua add new passengers
-
 }
 
 Engine::~Engine()
@@ -41,6 +27,15 @@ std::shared_ptr<Interface::ICity> Engine::createGame()
     window->show();
 
     window->addActor(150, 150, 0);
+
+    CourseSide::Logic logic;
+    logic.fileConfig();
+
+    logic.takeCity(std::shared_ptr<Interface::ICity> (&city));
+
+    //logic.setTime(hr, min);
+    //logic.addNewPassengers()
+    logic.finalizeGameStart();
 
     return std::shared_ptr<Interface::ICity> (&city);
 
