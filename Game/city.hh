@@ -2,7 +2,7 @@
 #define CITY_HH
 #include "interfaces/icity.hh"
 #include "simplemainwindow.hh"
-#include "mainwindow.hh"
+#include "mainwindow1.hh"
 #include <QTime>
 
 namespace StudentSide

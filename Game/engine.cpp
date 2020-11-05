@@ -1,6 +1,6 @@
 #include "engine.hh"
 #include "city.hh"
-#include "mainwindow.hh"
+#include "mainwindow1.hh"
 
 namespace StudentSide
 {

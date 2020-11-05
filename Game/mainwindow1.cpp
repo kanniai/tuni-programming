@@ -1,6 +1,7 @@
-#include "mainwindow.hh"
+#include "mainwindow1.hh"
 #include "ui_mainwindow.h"
 #include <QDebug>
+//joo
 
 const int PADDING = 10;
 
@@ -8,7 +9,7 @@ namespace StudentSide {
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow1)
 {
     ui->setupUi(this);
     ui->gameView->setFixedSize(width_, height_);
