@@ -40,11 +40,20 @@ void City::setClock(QTime clock)
 
 void City::startGame()
 {
+    for (int i = 0; i < stops_.size(); ++i) {
+        Interface::Location location = stops_.at(i)->getLocation();
+        int locX = location.giveX();
+        int locY = location.giveY();
+        // if actor == bus
+        // if actor == passenger
+        simpleMainWindow_->addActor(locX, locY);
 
+    }
 }
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
+
     actors_.push_back(newactor);
 }
 
