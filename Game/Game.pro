@@ -12,8 +12,8 @@ SOURCES += \
     dialog.cpp \
     engine.cpp \
     main.cc \
+    mainwindow1.cpp \
     player.cpp \
-    mainwindow.cpp \
     statistics.cpp \
     vehicle.cpp
     ../../CourseLib/graphics/simplemainwindow.cpp
@@ -25,8 +25,8 @@ HEADERS += \
     city.hh \
     dialog.hh \
     engine.hh \
+    mainwindow1.hh \
     player.hh \
-    mainwindow.hh \
     statistics.hh \
     vehicle.hh
 
@@ -58,3 +58,4 @@ else:unix: PRE_TARGETDEPS += \
 
 FORMS += \
     dialog.ui
+    mainwindow1.ui

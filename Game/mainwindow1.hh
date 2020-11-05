@@ -13,9 +13,10 @@
 #include <memory>
 #include <QVector>
 #include <map>
+//joo
 
 namespace Ui {
-class MainWindow;
+class MainWindow1;
 }
 
 namespace StudentSide {
@@ -42,7 +43,7 @@ private slots:
     void on_startButton_clicked();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow1 *ui;
     QGraphicsScene *map;
     QTimer *timer;
     QVector<QGraphicsItem*> actors_;
