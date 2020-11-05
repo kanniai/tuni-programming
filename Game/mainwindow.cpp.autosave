@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->gameView->setFixedSize(width_, height_);
     ui->centralwidgitget->setFixedSize(width_ + ui->startButton->width() + PADDING, height_ + PADDING);
 
-    ui->startButton->move(width_ + PADDING , PADDING);
+    //ui->startButton->move(width_ + PADDING , PADDING);
 
     map = new QGraphicsScene(this);
     ui->gameView->setScene(map);

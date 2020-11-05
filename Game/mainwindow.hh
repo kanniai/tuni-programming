@@ -4,6 +4,7 @@
 #include "interfaces/iactor.hh"
 #include "../Course/CourseLib/graphics/simpleactoritem.hh"
 #include "actoritem.hh"
+#include "mainwindow.ui"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
