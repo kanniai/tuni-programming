@@ -3,6 +3,7 @@
 #include <QTime>
 #include "simplemainwindow.hh"
 
+
 namespace StudentSide
 {
 City::City() :
@@ -12,7 +13,7 @@ City::City() :
 
 }
 
-City::City(CourseSide::SimpleMainWindow* simpleMainWindow) :
+City::City(StudentSide::MainWindow* simpleMainWindow) :
     simpleMainWindow_(simpleMainWindow)
 {
 
@@ -23,7 +24,7 @@ StudentSide::City::~City()
 
 }
 
-void StudentSide::City::setBackground(QImage &basicbackground, QImage &bigbackground)
+void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
     simpleMainWindow_->setPicture(basicbackground);
 }

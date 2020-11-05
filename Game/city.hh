@@ -2,6 +2,7 @@
 #define CITY_HH
 #include "interfaces/icity.hh"
 #include "simplemainwindow.hh"
+#include "mainwindow.hh"
 #include <QTime>
 
 namespace StudentSide
@@ -11,7 +12,7 @@ class City : public Interface::ICity
 {
 public:
     City();
-    City(CourseSide::SimpleMainWindow* simpleMainWindow);
+    City(StudentSide::MainWindow* simpleMainWindow);
     ~City();
     void setBackground(QImage& basicbackground, QImage& bigbackground);
     void addStop(std::shared_ptr<Interface::IStop> stop);
@@ -26,10 +27,10 @@ public:
     bool isGameOver() const;
 
 private:
-    CourseSide::SimpleMainWindow* simpleMainWindow_;
+    StudentSide::MainWindow* simpleMainWindow_;
     QVector<std::shared_ptr<Interface::IActor>> actors_;
     QVector<std::shared_ptr<Interface::IStop>> stops_;
-    CourseSide::SimpleMainWindow window_;
+    StudentSide::MainWindow window_;
     QTime time_;
 
 
