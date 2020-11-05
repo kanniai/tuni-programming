@@ -12,12 +12,8 @@ SOURCES += \
     dialog.cpp \
     engine.cpp \
     main.cc \
-<<<<<<< HEAD
     player.cpp \
-=======
     mainwindow.cpp \
-    passenger.cpp \
->>>>>>> c071040b59d5b9f1e7f42be5f374dd8bfac62f46
     statistics.cpp \
     vehicle.cpp
     ../../CourseLib/graphics/simplemainwindow.cpp
@@ -29,12 +25,8 @@ HEADERS += \
     city.hh \
     dialog.hh \
     engine.hh \
-<<<<<<< HEAD
     player.hh \
-=======
     mainwindow.hh \
-    passenger.hh \
->>>>>>> c071040b59d5b9f1e7f42be5f374dd8bfac62f46
     statistics.hh \
     vehicle.hh
 
@@ -65,8 +57,5 @@ else:unix: PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/libCourseLib.a
 
 FORMS += \
-<<<<<<< HEAD
     dialog.ui
-=======
     mainwindow.ui
->>>>>>> c071040b59d5b9f1e7f42be5f374dd8bfac62f46
