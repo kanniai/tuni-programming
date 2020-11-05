@@ -59,3 +59,4 @@ else:unix: PRE_TARGETDEPS += \
 FORMS += \
     dialog.ui \
     mainwindow.ui
+
