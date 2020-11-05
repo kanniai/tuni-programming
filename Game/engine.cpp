@@ -5,39 +5,33 @@ namespace StudentSide
 {
 Engine::Engine()
 {
-    std::shared_ptr<Interface::ICity> city = createGame();
-
+    createGame();
 }
 
 Engine::~Engine()
 {}
 
-std::shared_ptr<Interface::ICity> Engine::createGame()
+void Engine::createGame()
 {
 
     CourseSide::SimpleMainWindow* window = new CourseSide::SimpleMainWindow;
+    CourseSide::Logic logic;
 
-
-    StudentSide::City city(window);
+    std::shared_ptr<StudentSide::City> city = std::make_shared<StudentSide::City>(window);
 
     QImage img_small(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
     QImage img_large(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
 
-    city.setBackground(img_small, img_large);
+    city->setBackground(img_small, img_large);
     window->show();
 
     window->addActor(150, 150, 0);
 
-    CourseSide::Logic logic;
     logic.fileConfig();
 
-    logic.takeCity(std::shared_ptr<Interface::ICity> (&city));
+    logic.takeCity(city);
 
-    //logic.setTime(hr, min);
-    //logic.addNewPassengers()
     logic.finalizeGameStart();
-
-    return std::shared_ptr<Interface::ICity> (&city);
 
 }
 }

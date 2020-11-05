@@ -18,7 +18,7 @@ public:
 public slots:
 
 private:
-    std::shared_ptr<Interface::ICity> createGame();
+    void createGame();
 
 };
 
