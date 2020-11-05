@@ -2,7 +2,6 @@ TEMPLATE = app
 TARGET = NYSSE
 
 QT += core gui widgets network multimedia
-QT += widgets
 
 CONFIG += c++14
 
