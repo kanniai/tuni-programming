@@ -12,7 +12,7 @@ SOURCES += \
     dialog.cpp \
     engine.cpp \
     main.cc \
-    mainwindow1.cpp \
+    mainwindow.cpp \
     player.cpp \
     statistics.cpp \
     vehicle.cpp
@@ -25,7 +25,7 @@ HEADERS += \
     city.hh \
     dialog.hh \
     engine.hh \
-    mainwindow1.hh \
+    mainwindow.hh \
     player.hh \
     statistics.hh \
     vehicle.hh
@@ -57,5 +57,5 @@ else:unix: PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/libCourseLib.a
 
 FORMS += \
-    dialog.ui
-    mainwindow1.ui
+    dialog.ui \
+    mainwindow.ui
