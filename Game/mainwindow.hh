@@ -15,7 +15,7 @@
 //joo
 
 namespace Ui {
-class MainWindow1;
+class MainWindow;
 }
 
 namespace StudentSide {
@@ -42,7 +42,7 @@ private slots:
     void on_startButton_clicked();
 
 private:
-    Ui::MainWindow1 *ui;
+    Ui::MainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
     QVector<QGraphicsItem*> actors_;

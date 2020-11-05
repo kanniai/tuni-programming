@@ -1,4 +1,4 @@
-#include "mainwindow1.hh"
+#include "mainwindow.hh"
 #include "ui_mainwindow.h"
 #include <QDebug>
 //joo
@@ -9,7 +9,7 @@ namespace StudentSide {
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow1)
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->gameView->setFixedSize(width_, height_);
