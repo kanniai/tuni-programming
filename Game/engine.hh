@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QMainWindow>
 #include "city.hh"
-#include "mainwindow1.hh"
+#include "mainwindow.hh"
 
 namespace StudentSide
 {

@@ -2,7 +2,7 @@
 #define CITY_HH
 #include "interfaces/icity.hh"
 #include "simplemainwindow.hh"
-#include "mainwindow1.hh"
+#include "mainwindow.hh"
 #include <QTime>
 
 namespace StudentSide
@@ -29,6 +29,8 @@ public:
 private:
     StudentSide::MainWindow* simpleMainWindow_;
     QVector<std::shared_ptr<Interface::IActor>> actors_;
+    QVector<std::shared_ptr<Interface::IActor>> nysses_;
+    QVector<std::shared_ptr<Interface::IActor>> passengers_;
     QVector<std::shared_ptr<Interface::IStop>> stops_;
     StudentSide::MainWindow window_;
     QTime time_;

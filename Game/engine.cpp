@@ -1,6 +1,6 @@
 #include "engine.hh"
 #include "city.hh"
-#include "mainwindow1.hh"
+#include "mainwindow.hh"
 
 namespace StudentSide
 {
@@ -25,8 +25,6 @@ void Engine::createGame()
 
     city->setBackground(img_small, img_large);
     window->show();
-
-    window->addActor(150, 150, 0);
 
     logic.fileConfig();
 

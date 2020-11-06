@@ -4,7 +4,6 @@
 #include "interfaces/iactor.hh"
 #include "../Course/CourseLib/graphics/simpleactoritem.hh"
 #include "actoritem.hh"
-#include "mainwindow.ui"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -13,6 +12,8 @@
 #include <memory>
 #include <QVector>
 #include <map>
+#include <QPainter>
+#include <QStyleOptionGraphicsItem>
 //joo
 
 namespace Ui {
@@ -32,7 +33,11 @@ public:
     void setSize(int w, int h);
     void setTick(int t);
 
+    // type 0 = stop =
+    // type 1 = nysse
+    // type 2 = passenger
     virtual void addActor(int locX, int locY, int type = 0);
+
     void updateCoords(int nX, int nY);
     void setPicture(QImage &img);
 
