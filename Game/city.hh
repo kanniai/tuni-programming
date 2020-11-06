@@ -29,6 +29,8 @@ public:
 private:
     StudentSide::MainWindow* simpleMainWindow_;
     QVector<std::shared_ptr<Interface::IActor>> actors_;
+    QVector<std::shared_ptr<Interface::IActor>> nysses_;
+    QVector<std::shared_ptr<Interface::IActor>> passengers_;
     QVector<std::shared_ptr<Interface::IStop>> stops_;
     StudentSide::MainWindow window_;
     QTime time_;

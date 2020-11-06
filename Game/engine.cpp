@@ -26,8 +26,6 @@ void Engine::createGame()
     city->setBackground(img_small, img_large);
     window->show();
 
-    window->addActor(150, 150, 0);
-
     logic.fileConfig();
 
     logic.takeCity(city);

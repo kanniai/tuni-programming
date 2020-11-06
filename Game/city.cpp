@@ -1,6 +1,7 @@
 #include "city.hh"
 #include "actor.hh"
 #include <QTime>
+#include "../Course/CourseLib/actors/nysse.hh"
 
 namespace StudentSide
 {
@@ -39,21 +40,41 @@ void City::setClock(QTime clock)
 
 void City::startGame()
 {
+
     for (int i = 0; i < stops_.size(); ++i) {
         Interface::Location location = stops_.at(i)->getLocation();
         int locX = location.giveX();
         int locY = location.giveY();
-        // if actor == bus
-        // if actor == passenger
-        simpleMainWindow_->addActor(locX, locY);
-
+        simpleMainWindow_->addActor(locX, locY, 0);
+    }
+    /*
+    for (int i = 0; i < passengers_.size(); ++i) {
+        Interface::Location location = passengers_.at(i)->giveLocation();
+        int locX = location.giveX();
+        int locY = location.giveY();
+        simpleMainWindow_->addActor(locX, locY, 2);
+    }
+    */
+    for (int i = 0; i < nysses_.size(); ++i) {
+        Interface::Location location = nysses_.at(i)->giveLocation();
+        int locX = location.giveX();
+        int locY = location.giveY();
+        simpleMainWindow_->addActor(locX, locY, 1);
     }
 }
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
+    std::shared_ptr<CourseSide::Nysse> nysse = std::dynamic_pointer_cast<CourseSide::Nysse>(newactor);
 
-    actors_.push_back(newactor);
+    if (nysse != 0) {
+        nysses_.push_back(newactor);
+    }
+    std::shared_ptr<CourseSide::Passenger> passenger = std::dynamic_pointer_cast<CourseSide::Passenger>(newactor);
+    if (passenger != 0) {
+        passengers_.push_back(newactor);
+    }
+
 }
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)

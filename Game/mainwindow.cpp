@@ -50,6 +50,7 @@ void MainWindow::addActor(int locX, int locY, int type)
     actors_.push_back(nActor);
     map->addItem(nActor);
     last_ = nActor;
+
 }
 
 void MainWindow::updateCoords(int nX, int nY)
