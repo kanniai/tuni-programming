@@ -1,7 +1,6 @@
 #include "mainwindow.hh"
 #include "ui_mainwindow.h"
 #include <QDebug>
-//joo
 
 const int PADDING = 10;
 
