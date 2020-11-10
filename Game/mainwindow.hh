@@ -14,7 +14,6 @@
 #include <map>
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
-//joo
 
 namespace Ui {
 class MainWindow;

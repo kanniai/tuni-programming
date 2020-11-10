@@ -22,10 +22,13 @@ Interface::Location StudentSide::Player::giveLocation() const
 
 }
 
+<<<<<<< HEAD
 void Player::addPlayer()
 {
 
     // passengers_.push_back(newPassenger);
 }
+=======
+>>>>>>> 25aa94cdc16619dd3edf8810b688ee96eca00267
 
 }

@@ -12,8 +12,13 @@ City::City() :
 
 }
 
+<<<<<<< HEAD
 City::City(StudentSide::MainWindow* simpleMainWindow) :
     mainWindow_(simpleMainWindow)
+=======
+City::City(StudentSide::MainWindow* mainWindow) :
+    mainWindow_(mainWindow)
+>>>>>>> 25aa94cdc16619dd3edf8810b688ee96eca00267
 {
 
 }
@@ -43,7 +48,13 @@ void City::startGame()
 
     for (int i = 0; i < stops_.size(); ++i) {
         Interface::Location location = stops_.at(i)->getLocation();
+<<<<<<< HEAD
         mainWindow_->addActor(location.giveX(), location.giveY(), 0);
+=======
+        int locX = location.giveX();
+        int locY = location.giveY();
+        mainWindow_->addActor(locX, locY, 0);
+>>>>>>> 25aa94cdc16619dd3edf8810b688ee96eca00267
     }
 
     for (int i = 0; i < passengers_.size(); ++i) {
@@ -53,12 +64,18 @@ void City::startGame()
 
     for (int i = 0; i < nysses_.size(); ++i) {
         Interface::Location location = nysses_.at(i)->giveLocation();
+<<<<<<< HEAD
         mainWindow_->addActor(location.giveX(), location.giveY(), 1);
     }
 
     for (auto player: players_) {
         Interface::Location location = player->giveLocation();
         mainWindow_->addActor(location.giveX(), location.giveY(), 3);
+=======
+        int locX = location.giveX();
+        int locY = location.giveY();
+        mainWindow_->addActor(locX, locY, 1);
+>>>>>>> 25aa94cdc16619dd3edf8810b688ee96eca00267
     }
 
 }

@@ -1,7 +1,13 @@
 #include "engine.hh"
+<<<<<<< HEAD
 
 int PLAYER_X_COORD = 30;
 int PLAYER_Y_COORD = 0;
+=======
+#include "city.hh"
+#include "mainwindow.hh"
+#include "time.h"
+>>>>>>> 25aa94cdc16619dd3edf8810b688ee96eca00267
 
 namespace StudentSide
 {

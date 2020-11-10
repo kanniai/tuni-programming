@@ -23,7 +23,6 @@ public:
 
     void move(Interface::Location loc) override;
     Interface::Location giveLocation() const override;
-    void addPlayer();
 
 private:
     Interface::Location playerLocation_;
