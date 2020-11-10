@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include "city.hh"
 #include "mainwindow.hh"
+#include "player.hh"
 
 namespace StudentSide
 {

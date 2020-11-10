@@ -3,6 +3,8 @@
 #include "interfaces/icity.hh"
 #include "simplemainwindow.hh"
 #include "mainwindow.hh"
+#include "player.hh"
+
 #include <QTime>
 
 namespace StudentSide
@@ -27,11 +29,12 @@ public:
     bool isGameOver() const;
 
 private:
-    StudentSide::MainWindow* simpleMainWindow_;
+    StudentSide::MainWindow* mainWindow_;
     QVector<std::shared_ptr<Interface::IActor>> actors_;
     QVector<std::shared_ptr<Interface::IActor>> nysses_;
     QVector<std::shared_ptr<Interface::IActor>> passengers_;
     QVector<std::shared_ptr<Interface::IStop>> stops_;
+    QVector<std::shared_ptr<Interface::IActor>> players_;
     StudentSide::MainWindow window_;
     QTime time_;
 

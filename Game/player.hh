@@ -5,6 +5,7 @@
 #include "actor.hh"
 #include "city.hh"
 
+
 #include <QTime>
 #include <memory>
 #include <set>
@@ -26,6 +27,7 @@ public:
 
 private:
     Interface::Location playerLocation_;
+    std::shared_ptr<IActor> player1;
 };
 }
 

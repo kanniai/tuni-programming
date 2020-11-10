@@ -36,6 +36,7 @@ public:
     // type 0 = stop =
     // type 1 = nysse
     // type 2 = passenger
+    // type 3 = player
     virtual void addActor(int locX, int locY, int type = 0);
 
     void updateCoords(int nX, int nY);

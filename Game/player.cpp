@@ -4,7 +4,9 @@ namespace StudentSide
 {
 
 Player::Player()
-{}
+{
+
+}
 
 StudentSide::Player::~Player()
 {}
@@ -23,6 +25,7 @@ Interface::Location StudentSide::Player::giveLocation() const
 void Player::addPlayer()
 {
 
+    // passengers_.push_back(newPassenger);
 }
 
 }

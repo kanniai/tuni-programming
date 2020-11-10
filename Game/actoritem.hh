@@ -4,6 +4,8 @@
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QPainter>
+#include <iostream>
+
 
 namespace StudentSide {
 
