@@ -1,6 +1,7 @@
 #include "engine.hh"
 #include "city.hh"
 #include "mainwindow.hh"
+#include "time.h"
 
 namespace StudentSide
 {
@@ -31,6 +32,7 @@ void Engine::createGame()
     logic.takeCity(city);
 
     logic.finalizeGameStart();
+
 
 }
 }

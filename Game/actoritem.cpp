@@ -1,4 +1,5 @@
 #include "actoritem.hh"
+#include <QtWidgets>
 
 namespace StudentSide {
 
@@ -19,7 +20,9 @@ QRectF ActorItem::boundingRect() const
 
 void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+
     QRectF bounds = boundingRect();
+    QImage stop(":/../../../Downloads/stop.png");
     //QColor color(type_%256, type_%256, type_%256);
     QColor color;
     if (type_ == 0) {
@@ -30,6 +33,7 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         color = Qt::red;
     }
     QBrush brush(color);
+
 
     painter->setBrush(brush);
     painter->drawEllipse(bounds);

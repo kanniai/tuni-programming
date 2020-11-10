@@ -6,14 +6,14 @@
 namespace StudentSide
 {
 City::City() :
-    simpleMainWindow_(nullptr){
+    mainWindow_(nullptr){
     {
     }
 
 }
 
-City::City(StudentSide::MainWindow* simpleMainWindow) :
-    simpleMainWindow_(simpleMainWindow)
+City::City(StudentSide::MainWindow* mainWindow) :
+    mainWindow_(mainWindow)
 {
 
 }
@@ -25,7 +25,7 @@ StudentSide::City::~City()
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
-    simpleMainWindow_->setPicture(basicbackground);
+    mainWindow_->setPicture(basicbackground);
 }
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
@@ -45,7 +45,7 @@ void City::startGame()
         Interface::Location location = stops_.at(i)->getLocation();
         int locX = location.giveX();
         int locY = location.giveY();
-        simpleMainWindow_->addActor(locX, locY, 0);
+        mainWindow_->addActor(locX, locY, 0);
     }
     /*
     for (int i = 0; i < passengers_.size(); ++i) {
@@ -59,7 +59,7 @@ void City::startGame()
         Interface::Location location = nysses_.at(i)->giveLocation();
         int locX = location.giveX();
         int locY = location.giveY();
-        simpleMainWindow_->addActor(locX, locY, 1);
+        mainWindow_->addActor(locX, locY, 1);
     }
 }
 

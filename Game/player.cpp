@@ -20,9 +20,5 @@ Interface::Location StudentSide::Player::giveLocation() const
 
 }
 
-void Player::addPlayer()
-{
-
-}
 
 }
