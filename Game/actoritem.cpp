@@ -32,7 +32,7 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     } else if (type_ == 2) {
         color = Qt::red;
     } else if (type_ == 3) {
-        color = Qt::red;
+        color = Qt::yellow;
     }
     QBrush brush(color);
 
