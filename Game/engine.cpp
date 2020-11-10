@@ -3,7 +3,6 @@
 int PLAYER_X_COORD = 30;
 int PLAYER_Y_COORD = 0;
 
-
 namespace StudentSide
 {
 Engine::Engine()

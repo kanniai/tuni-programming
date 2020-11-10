@@ -12,7 +12,6 @@ City::City() :
 
 }
 
-
 City::City(StudentSide::MainWindow* mainWindow) :
     mainWindow_(mainWindow)
 {
