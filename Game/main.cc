@@ -7,7 +7,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     Q_INIT_RESOURCE(offlinedata);
 
-    StudentSide::Engine();
+    StudentSide::Engine* engine = new StudentSide::Engine();
+
 
     return a.exec();
 }

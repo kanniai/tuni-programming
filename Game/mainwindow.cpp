@@ -63,6 +63,19 @@ void MainWindow::setPicture(QImage &img)
     map->setBackgroundBrush(img);
 }
 
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_W) {
+        emit buttonPressed('w');
+    } else if (event->key() == Qt::Key_D) {
+        emit buttonPressed('d');
+    } else if (event->key() == Qt::Key_S) {
+        emit buttonPressed('s');
+    } else if (event->key() == Qt::Key_A) {
+        emit buttonPressed('a');
+    }
+}
+
 }
 
 void StudentSide::MainWindow::on_startButton_clicked()

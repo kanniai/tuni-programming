@@ -22,6 +22,11 @@ public:
     ~Player();
 
     void move(Interface::Location loc) override;
+    void moveUp();
+    void moveDown();
+    void moveRight();
+    void moveLeft();
+
     Interface::Location giveLocation() const override;
 
 private:

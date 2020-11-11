@@ -14,6 +14,7 @@
 #include <map>
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
+#include <QKeyEvent>
 
 namespace Ui {
 class MainWindow;
@@ -43,9 +44,14 @@ public:
 
 signals:
     void gameStarted();
+    void buttonPressed(char button);
+
+public slots:
+    void keyPressEvent(QKeyEvent* event) override;
 
 private slots:
     void on_startButton_clicked();
+
 
 private:
     Ui::MainWindow *ui;
