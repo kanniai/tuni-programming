@@ -16,7 +16,7 @@ Engine::Engine()
 
     window_->show();
 
-    createGame(window_);
+    createGame();
 
 }
 
@@ -43,24 +43,23 @@ void Engine::movePlayer(char button)
 
 void Engine::engineGameStarted()
 {
-    std::cout << "gamestratedengine" << std::endl;
+    std::cout << "gamestartedengine" << std::endl;
 }
 
-void Engine::createGame(StudentSide::MainWindow* window)
+void Engine::createGame()
 {
 
-    CourseSide::Logic logic;
 
-    std::shared_ptr<StudentSide::City> city = std::make_shared<StudentSide::City>(window);
+    std::shared_ptr<StudentSide::City> city = std::make_shared<StudentSide::City>(window_);
 
     QImage img_small(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
     QImage img_large(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
 
     city->setBackground(img_small, img_large);
 
-    logic.fileConfig();
+    logic_.fileConfig();
 
-    logic.takeCity(city);
+    logic_.takeCity(city);
 
     player1_ = std::make_shared<StudentSide::Player>();
     Interface::Location loc;
@@ -68,8 +67,7 @@ void Engine::createGame(StudentSide::MainWindow* window)
     player1_->move(loc);
     city->addActor(player1_);
 
-    logic.finalizeGameStart();
-
+    logic_.finalizeGameStart();
 
 
 

@@ -35,7 +35,6 @@ private:
     QVector<std::shared_ptr<Interface::IActor>> passengers_;
     QVector<std::shared_ptr<Interface::IStop>> stops_;
     QVector<std::shared_ptr<Interface::IActor>> players_;
-    StudentSide::MainWindow window_;
     QTime time_;
 
 
