@@ -16,6 +16,8 @@
 #include <QStyleOptionGraphicsItem>
 #include <QKeyEvent>
 
+#include <QString>
+
 namespace Ui {
 class MainWindow;
 }
@@ -40,7 +42,9 @@ public:
     virtual void addActor(int locX, int locY, int type = 0);
 
     void updateCoords(int nX, int nY);
+    void showTime();
     void setPicture(QImage &img);
+    void setTime(int hours, int minutes);
 
 signals:
     void gameStarted();
@@ -59,6 +63,9 @@ private:
     QTimer *timer;
     QVector<QGraphicsItem*> actors_;
     ActorItem* last_;
+
+    int hours_;
+    int minutes_;
 
     int width_ = 500; //pxls
     int height_ = 500;
