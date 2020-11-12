@@ -58,9 +58,30 @@ void MainWindow::updateCoords(int nX, int nY)
     last_->setCoord(nX, nY);
 }
 
+void StudentSide::MainWindow::MainWindow::showTime()
+{
+    QString minutes = QString::number(minutes_);
+    QString hours = QString::number(hours_);
+
+    if (minutes_ < 10) {
+        minutes = "0" + minutes;
+    }
+    if (hours_ < 10) {
+        hours = "0" + hours;
+    }
+
+    ui->runningTime->setText(hours + " : " + minutes);
+}
+
 void MainWindow::setPicture(QImage &img)
 {
     map->setBackgroundBrush(img);
+}
+
+void MainWindow::setTime(int hours, int minutes)
+{
+    hours_ = hours;
+    minutes_ = minutes;
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)

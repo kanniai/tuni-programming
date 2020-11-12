@@ -36,6 +36,9 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 void City::setClock(QTime clock)
 {
     time_ = clock;
+    mainWindow_->setTime(clock.hour(), clock.minute());
+    mainWindow_->showTime();
+
 }
 
 void City::startGame()
