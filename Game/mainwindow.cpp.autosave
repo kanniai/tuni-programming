@@ -73,11 +73,6 @@ void MainWindow::updateActorCoords(int nX, int nY, std::shared_ptr<Interface::IA
         if (it != buses_.end())
           it->second->setCoord(nX, nY);
     } else if (type == 2) {
-        //for (auto data_pair: passengers_) {
-            //if (data_pair.first == actor) {
-            //    data_pair.second ->setCoord(nX, nY);
-          //  }
-        //}
         std::map<std::shared_ptr<Interface::IActor>,ActorItem*>::iterator it;
         it = passengers_.find(actor);
         if (it != passengers_.end())

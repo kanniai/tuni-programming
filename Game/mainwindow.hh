@@ -17,6 +17,7 @@
 #include <QKeyEvent>
 
 #include <QString>
+#include <map>
 
 namespace Ui {
 class MainWindow;
@@ -39,9 +40,10 @@ public:
     // type 1 = nysse
     // type 2 = passenger
     // type 3 = player
-    virtual void addActor(int locX, int locY, int type = 0);
+    virtual void addActor(int locX, int locY, int type = 0, std::shared_ptr<Interface::IActor> actor = nullptr);
 
     void updateCoords(int nX, int nY);
+    void updateActorCoords(int nX, int nY, std::shared_ptr<Interface::IActor>  actor, int type);
     void showTime();
     void setPicture(QImage &img);
     void setTime(int hours, int minutes);
@@ -63,6 +65,10 @@ private:
     QTimer *timer;
     QVector<QGraphicsItem*> actors_;
     ActorItem* last_;
+    std::map<std::shared_ptr<Interface::IActor>, ActorItem*> actorsAndActorItems_;
+
+    std::map<std::shared_ptr<Interface::IActor>, ActorItem*> buses_;
+    std::map<std::shared_ptr<Interface::IActor>, ActorItem*> passengers_;
 
     int hours_;
     int minutes_;

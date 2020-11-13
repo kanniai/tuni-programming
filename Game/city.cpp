@@ -3,6 +3,11 @@
 #include <QTime>
 #include "../Course/CourseLib/actors/nysse.hh"
 
+int STOP = 0;
+int NYSSE = 1;
+int PASSENGER = 2;
+int PLAYER1 = 3;
+
 namespace StudentSide
 {
 City::City() :
@@ -46,22 +51,22 @@ void City::startGame()
 
     for (int i = 0; i < stops_.size(); ++i) {
         Interface::Location location = stops_.at(i)->getLocation();
-        mainWindow_->addActor(location.giveX(), location.giveY(), 0);
+        mainWindow_->addActor(location.giveX(), location.giveY(), STOP);
     }
 
     for (int i = 0; i < passengers_.size(); ++i) {
         Interface::Location location = passengers_.at(i)->giveLocation();
-        mainWindow_->addActor(location.giveX(), location.giveY(), 2);
+        mainWindow_->addActor(location.giveX(), location.giveY(), PASSENGER, passengers_.at(i));
     }
 
     for (int i = 0; i < nysses_.size(); ++i) {
         Interface::Location location = nysses_.at(i)->giveLocation();
-        mainWindow_->addActor(location.giveX(), location.giveY(), 1);
+        mainWindow_->addActor(location.giveX(), location.giveY(), NYSSE, nysses_.at(i));
     }
 
     for (auto player: players_) {
         Interface::Location location = player->giveLocation();
-        mainWindow_->addActor(location.giveX(), location.giveY(), 3);
+        mainWindow_->addActor(location.giveX(), location.giveY(), PLAYER1, player);
     }
 
 }
@@ -100,7 +105,7 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
-
+    Interface::Location location = actor->giveLocation();
 }
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
@@ -113,8 +118,19 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 // Logic::advance calls this function
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
+    std::shared_ptr<CourseSide::Nysse> nysse = std::dynamic_pointer_cast<CourseSide::Nysse>(actor);
 
+    if (nysse != 0) {
+        mainWindow_->updateActorCoords(actor->giveLocation().giveX(),
+                                       actor->giveLocation().giveY(), actor, NYSSE);
+    }
+    std::shared_ptr<CourseSide::Passenger> passenger = std::dynamic_pointer_cast<CourseSide::Passenger>(actor);
+    if (passenger != 0) {
+        mainWindow_->updateActorCoords(actor->giveLocation().giveX(),
+                                       actor->giveLocation().giveY(), actor, PASSENGER);
+    }
 }
+
 
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
 {
