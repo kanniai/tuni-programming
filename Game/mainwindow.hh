@@ -35,7 +35,7 @@ public:
     void setSize(int w, int h);
     void setTick(int t);
 
-    // type 0 = stop =
+    // type 0 = stop
     // type 1 = nysse
     // type 2 = passenger
     // type 3 = player

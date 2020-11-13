@@ -15,6 +15,10 @@ public:
     void morePassengers(int num) override;
     void nysseRemoved() override;
 
+
+private:
+    int nysses_ = 0;
+
 };
 }
 #endif // STATISTICS_HH

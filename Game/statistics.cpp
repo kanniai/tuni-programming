@@ -1,4 +1,5 @@
 #include "statistics.hh"
+#include "iostream"
 
 namespace StudentSide
 {
@@ -11,7 +12,8 @@ StudentSide::Statistics::~Statistics()
 
 void Statistics::newNysse()
 {
-
+    nysses_++;
+    std::cout << "Nysse created";
 }
 
 void Statistics::nysseLeft()
