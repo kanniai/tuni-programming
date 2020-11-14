@@ -28,7 +28,7 @@ private:
     void createGame();
 
     std::shared_ptr<StudentSide::Player> player1_;
-    StudentSide::MainWindow* window_;
+    StudentSide::MainWindow* mainWindow_;
     CourseSide::Logic logic_;
 
 };

@@ -141,4 +141,9 @@ bool City::isGameOver() const
 {
     return false;
 }
+
+MainWindow* City::returnMainwindow()
+{
+    return mainWindow_;
+}
 }

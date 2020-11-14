@@ -13,7 +13,6 @@ StudentSide::Statistics::~Statistics()
 void Statistics::newNysse()
 {
     nysses_++;
-    std::cout << "Nysse created";
 }
 
 void Statistics::nysseLeft()

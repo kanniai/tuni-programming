@@ -9,12 +9,12 @@ namespace StudentSide
 {
 Engine::Engine()
 {
-    window_ = new StudentSide::MainWindow();
+    mainWindow_ = new StudentSide::MainWindow();
 
-    connect(window_, &StudentSide::MainWindow::gameStarted, this, &StudentSide::Engine::engineGameStarted);
-    connect(window_, &StudentSide::MainWindow::buttonPressed, this, &Engine::movePlayer);
+    connect(mainWindow_, &StudentSide::MainWindow::gameStarted, this, &StudentSide::Engine::engineGameStarted);
+    connect(mainWindow_, &StudentSide::MainWindow::buttonPressed, this, &Engine::movePlayer);
 
-    window_->show();
+    mainWindow_->show();
 
     createGame();
 
@@ -38,7 +38,7 @@ void Engine::movePlayer(char button)
         player1_->moveLeft();
     }
 
-    window_->updateCoords(player1_->giveLocation().giveX(), player1_->giveLocation().giveY());
+    mainWindow_->updateCoords(player1_->giveLocation().giveX(), player1_->giveLocation().giveY());
 }
 
 void Engine::engineGameStarted()
@@ -50,7 +50,7 @@ void Engine::createGame()
 {
 
 
-    std::shared_ptr<StudentSide::City> city = std::make_shared<StudentSide::City>(window_);
+    std::shared_ptr<StudentSide::City> city = std::make_shared<StudentSide::City>(mainWindow_);
 
     QImage img_small(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
     QImage img_large(":/offlinedata/offlinedata/kartta_iso_1095x592.png");

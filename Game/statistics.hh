@@ -1,6 +1,7 @@
 #ifndef STATISTICS_HH
 #define STATISTICS_HH
 #include "interfaces/istatistics.hh"
+#include "mainwindow.hh"
 
 namespace StudentSide
 {
@@ -18,6 +19,7 @@ public:
 
 private:
     int nysses_ = 0;
+    StudentSide::MainWindow* mainWindow_;
 
 };
 }
