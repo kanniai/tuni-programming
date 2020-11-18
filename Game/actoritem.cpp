@@ -24,7 +24,6 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
     QRectF bounds = boundingRect();
 
-
     //QColor color(type_%256, type_%256, type_%256);
     QColor color;
     if (type_ == 0) {
@@ -32,7 +31,7 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     } else if (type_ == 1) {
         painter->drawImage(bounds, QImage(":/images/bus.jpg"));
     } else if (type_ == 2) {
-        painter->drawImage(bounds, QImage(":/images/passenger.jpg"));
+       // painter->drawImage(bounds, QImage(":/images/passenger.jpg"));
     } else if (type_ == 3) {
         painter->drawImage(bounds, QImage(":/images/fighter.jpg"));
     } else if (type_ == 4) {
