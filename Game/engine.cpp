@@ -2,9 +2,13 @@
 
 #include <QDebug>
 
-int PLAYER_X_COORD = 30;
-int PLAYER_Y_COORD = 0;
+const int PLAYER_X_COORD = 30;
+const int PLAYER_Y_COORD = 0;
 
+const int MAP_LEFT_SIDE_XCOORD = 20;
+const int MAP_UPPER_YCOORD = 20;
+const int MAP_RIGHT_SIDE_XCOORD = 469;
+const int MAP_LOWER_YCOORD = 469;
 
 namespace StudentSide
 {
@@ -30,12 +34,24 @@ Engine::~Engine()
 void Engine::movePlayer(char button)
 {
     if (button == 'w') {
+        if (player1_->giveLocation().giveY() < MAP_UPPER_YCOORD) {
+            return;
+        }
         player1_->moveUp();
     } else if (button == 'd') {
+        if (player1_->giveLocation().giveX() > MAP_RIGHT_SIDE_XCOORD) {
+            return;
+        }
         player1_->moveRight();
     } else if (button == 's') {
+        if (player1_->giveLocation().giveY() > MAP_LOWER_YCOORD) {
+            return;
+        }
         player1_->moveDown();
     } else if (button == 'a') {
+        if (player1_->giveLocation().giveX() < MAP_LEFT_SIDE_XCOORD) {
+            return;
+        }
         player1_->moveLeft();
     }
 

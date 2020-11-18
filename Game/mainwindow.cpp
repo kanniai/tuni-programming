@@ -5,6 +5,11 @@
 const int PADDING = 10;
 const int MATCH_COORDINATES = 9;
 
+const int MAP_LEFT_SIDE_XCOORD = 20;
+const int MAP_UPPER_YCOORD = 20;
+const int MAP_RIGHT_SIDE_XCOORD = 469;
+const int MAP_LOWER_YCOORD = 469;
+
 namespace StudentSide {
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -147,6 +152,13 @@ void MainWindow::bulletMoved(int x2, int y2)
 {
     bullet2_->setPos(x2, y2);
     checkCollision(bullet2_);
+
+    if (bullet2_->x() < MAP_LEFT_SIDE_XCOORD -30  || bullet2_->y() < MAP_UPPER_YCOORD -20
+            || bullet2_->x() > MAP_RIGHT_SIDE_XCOORD + 10 || bullet2_->y() > MAP_LOWER_YCOORD + 10) {
+        bullet2_->removeBullet();
+        map->removeItem(bullet2_);
+
+    }
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
@@ -190,6 +202,10 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 
 void MainWindow::spacePressed()
 {
+    if (bullet2_->isBulletMoving() == true) {
+        return;
+    }
+
     bullet2_->shoot(player1_.first->giveLocation().giveX(),
                                       player1_.first->giveLocation().giveY(),
                                 player1_.second->rotation());
@@ -204,12 +220,17 @@ void MainWindow::checkCollision(QGraphicsItem* actorItem)
         for (QGraphicsItem* actor: collidingActors) {
             if (actor == bullet2_) {
                 continue;
+            } else if (actor == player1_.second) {
+                return;
             }
 
             map->removeItem(actor);
+            bullet2_->removeBullet();
+            map->removeItem(bullet2_);
+            break;
             //std::shared_ptr<Interface::IActor> IActor = getActor(actorItem);
 
-            // if actor is stop
+            // if actor is stop, do not remove it
             //if (IActor == nullptr) {
               //  return;
             //}

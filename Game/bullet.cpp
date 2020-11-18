@@ -50,4 +50,20 @@ void Bullet::move()
     //qDebug() << "x " << x_ + dx << " y " << y_ + dy;
     emit bulletMoved(x_ + dx, y_ + dy);
 }
+
+void Bullet::setAngle(int angle)
+{
+    radianAngle_ = (double) angle* (M_PI/180);
+}
+
+void Bullet::removeBullet()
+{
+    timer_->stop();
+    //remove();
+}
+
+bool Bullet::isBulletMoving()
+{
+    return timer_->isActive();
+}
 }
