@@ -4,6 +4,7 @@
 #include "interfaces/iactor.hh"
 #include "../Course/CourseLib/graphics/simpleactoritem.hh"
 #include "actoritem.hh"
+#include "animation.hh"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -18,6 +19,8 @@
 
 #include <QString>
 #include <map>
+#include <QGraphicsItemAnimation>
+#include <QTimeLine>
 
 namespace Ui {
 class MainWindow;
@@ -36,10 +39,11 @@ public:
     void setSize(int w, int h);
     void setTick(int t);
 
-    // type 0 = stop =
+    // type 0 = stop
     // type 1 = nysse
     // type 2 = passenger
     // type 3 = player
+    // type 4 = bullet
     virtual void addActor(int locX, int locY, int type = 0, std::shared_ptr<Interface::IActor> actor = nullptr);
 
     void updateCoords(int nX, int nY);
@@ -48,27 +52,42 @@ public:
     void setPicture(QImage &img);
     void setTime(int hours, int minutes);
 
+    std::pair<std::shared_ptr<Interface::IActor>, ActorItem*> getPlayer1() const;
+
+
+
 signals:
     void gameStarted();
     void buttonPressed(char button);
 
 public slots:
-    void keyPressEvent(QKeyEvent* event) override;
+    void checkBulletCollision(int animationXCoord_, int animationYCoord_,
+                              int playerXCoord, int playerYCoord);
 
 private slots:
     void on_startButton_clicked();
+    void keyPressEvent(QKeyEvent* event) override;
+    void mousePressEvent(QMouseEvent* event) override;
+
 
 
 private:
+    void checkCollision(ActorItem* actorItem);
+    std::shared_ptr<Interface::IActor> getActor(ActorItem* actorItem);
+    void removeBullet();
+
     Ui::MainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
-    QVector<QGraphicsItem*> actors_;
+    //QVector<QGraphicsItem*> actors_;
     ActorItem* last_;
-    std::map<std::shared_ptr<Interface::IActor>, ActorItem*> actorsAndActorItems_;
+    ActorItem* bullet_;
 
     std::map<std::shared_ptr<Interface::IActor>, ActorItem*> buses_;
     std::map<std::shared_ptr<Interface::IActor>, ActorItem*> passengers_;
+    std::pair<std::shared_ptr<Interface::IActor>, ActorItem*> player1_;
+
+    StudentSide::Animation* animation_;
 
     int hours_;
     int minutes_;

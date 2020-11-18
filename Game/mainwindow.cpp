@@ -3,6 +3,7 @@
 #include <QDebug>
 
 const int PADDING = 10;
+const int MATCH_COORDINATES = 9;
 
 namespace StudentSide {
 
@@ -26,6 +27,14 @@ MainWindow::MainWindow(QWidget *parent) :
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
     timer->start(tick_);
+
+    animation_ = new StudentSide::Animation();
+
+    connect(animation_, &StudentSide::Animation::animationLocation, this,
+            &StudentSide::MainWindow::checkBulletCollision);
+    connect(animation_, &StudentSide::Animation::signalRemoveBullet, this,
+            &StudentSide::MainWindow::removeBullet);
+
 }
 
 MainWindow::~MainWindow()
@@ -47,7 +56,6 @@ void MainWindow::setTick(int t)
 void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interface::IActor> actor)
 {
     ActorItem* nActor = new ActorItem(locX, locY, type);
-    actors_.push_back(nActor);
     map->addItem(nActor);
     last_ = nActor;
 
@@ -55,13 +63,16 @@ void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interfac
         buses_.insert( {actor, nActor} );
     } else if (type == 2) {
         passengers_.insert( {actor, nActor} );
+    } else if (type == 3) {
+        player1_.first = actor;
+        player1_.second = nActor;
     }
-
 }
 
 void MainWindow::updateCoords(int nX, int nY)
 {
     last_->setCoord(nX, nY);
+    checkCollision(last_);
 }
 
 void MainWindow::updateActorCoords(int nX, int nY, std::shared_ptr<Interface::IActor> actor,
@@ -73,11 +84,6 @@ void MainWindow::updateActorCoords(int nX, int nY, std::shared_ptr<Interface::IA
         if (it != buses_.end())
           it->second->setCoord(nX, nY);
     } else if (type == 2) {
-        //for (auto data_pair: passengers_) {
-            //if (data_pair.first == actor) {
-            //    data_pair.second ->setCoord(nX, nY);
-          //  }
-        //}
         std::map<std::shared_ptr<Interface::IActor>,ActorItem*>::iterator it;
         it = passengers_.find(actor);
         if (it != passengers_.end())
@@ -111,6 +117,28 @@ void MainWindow::setTime(int hours, int minutes)
     minutes_ = minutes;
 }
 
+std::pair<std::shared_ptr<Interface::IActor>, ActorItem *> MainWindow::getPlayer1() const
+{
+    return player1_;
+}
+
+void MainWindow::checkBulletCollision(int animationXCoord_, int animationYCoord_,
+                                      int playerXCoord, int playerYCoord)
+{
+    bullet_->setCoord(animationXCoord_ + playerXCoord, animationYCoord_ + playerYCoord);
+
+    QList<QGraphicsItem *> collidingActors = bullet_->collidingItems();
+
+    if (collidingActors.size() != 0) {
+        for (QGraphicsItem* actor: collidingActors) {
+            if (actor == player1_.second) {
+                continue;
+            }
+            map->removeItem(actor);
+        }
+    }      //Miten saan poistettua passengerin logickista?
+}
+
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_W) {
@@ -124,10 +152,63 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     }
 }
 
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+    if (animation_->isBulletMoving() == true) {
+        return;
+    }
+    int x2 = event->x() - MATCH_COORDINATES;
+    int y2 = event->y() - MATCH_COORDINATES;
+
+    int x = player1_.first->giveLocation().giveX();
+    int y = player1_.first->giveLocation().giveY();
+
+    bullet_ = new ActorItem(x, y, 4);
+    map->addItem(bullet_);
+
+    animation_->newAnimation(x, y, x2, y2, bullet_);
+
 }
+
+void MainWindow::checkCollision(ActorItem* actorItem)
+{
+
+    QList<QGraphicsItem *> collidingActors = last_->collidingItems();
+    if (collidingActors.size() != 0) {
+        for (QGraphicsItem* actor: collidingActors) {
+            if (actor == bullet_) {
+                continue;
+            }
+
+            map->removeItem(actor);
+            std::shared_ptr<Interface::IActor> IActor = getActor(actorItem);
+
+            // if actor is stop
+            //if (IActor == nullptr) {
+              //  return;
+            //}
+
+            //Passenger::remove()
+            // Miten tuhota actorit logicista?
+            //https://www.boost.org/doc/libs/1_66_0/libs/bimap/doc/html/boost_bimap/one_minute_tutorial.html
+        }
+    }
+}
+
+std::shared_ptr<Interface::IActor> MainWindow::getActor(ActorItem* actorItem)
+{
+    return nullptr;
+}
+
+void MainWindow::removeBullet()
+{
+    map->removeItem(bullet_);
+}
+
 
 void StudentSide::MainWindow::on_startButton_clicked()
 {
     qDebug() << "Start clicked";
     emit gameStarted();
+}
 }

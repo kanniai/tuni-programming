@@ -8,6 +8,7 @@ CONFIG += c++14
 SOURCES += \
     actor.cpp \
     actoritem.cpp \
+    animation.cpp \
     city.cpp \
     dialog.cpp \
     engine.cpp \
@@ -22,6 +23,7 @@ HEADERS += \
     ../../CourseLib/graphics/simplemainwindow.hh \
     actor.hh \
     actoritem.hh \
+    animation.hh \
     city.hh \
     dialog.hh \
     engine.hh \

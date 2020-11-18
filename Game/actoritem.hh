@@ -9,9 +9,6 @@
 
 namespace StudentSide {
 
-const int WIDTH = 15;
-const int HEIGHT = 15;
-
 class ActorItem : public QGraphicsItem
 {
 public:
@@ -21,6 +18,9 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void setCoord(int x, int y);
+
+    const int WIDTH = 15;
+    const int HEIGHT = 15;
 
 private:
     int x_;

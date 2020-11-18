@@ -17,8 +17,8 @@
    <widget class="QGraphicsView" name="gameView">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>10</y>
+      <x>0</x>
+      <y>0</y>
       <width>256</width>
       <height>192</height>
      </rect>

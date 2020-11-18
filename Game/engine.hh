@@ -1,11 +1,14 @@
 #ifndef ENGINE_HH
 #define ENGINE_HH
 #include "../Course/CourseLib/core/logic.hh"
+
 #include <QObject>
 
 #include "city.hh"
 #include "mainwindow.hh"
 #include "player.hh"
+
+#include <ostream>
 
 namespace StudentSide
 {
@@ -22,7 +25,6 @@ public:
 public slots:
     void movePlayer(char button);
     void engineGameStarted();
-
 
 private:
     void createGame();

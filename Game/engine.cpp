@@ -5,6 +5,7 @@
 int PLAYER_X_COORD = 30;
 int PLAYER_Y_COORD = 0;
 
+
 namespace StudentSide
 {
 Engine::Engine()
@@ -15,7 +16,7 @@ Engine::Engine()
     connect(window_, &StudentSide::MainWindow::buttonPressed, this, &Engine::movePlayer);
 
     window_->show();
-
+    window_->setTick(1000/30);
     createGame();
 
 }
@@ -68,9 +69,6 @@ void Engine::createGame()
     city->addActor(player1_);
 
     logic_.finalizeGameStart();
-
-
-
 }
 }
 
