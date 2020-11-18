@@ -60,3 +60,6 @@ FORMS += \
     dialog.ui \
     mainwindow.ui
 
+RESOURCES += \ \
+    data.qrc
+

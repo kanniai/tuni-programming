@@ -1,5 +1,6 @@
 #include "actoritem.hh"
 #include <QtWidgets>
+#include <QPixmap>
 
 namespace StudentSide {
 
@@ -22,23 +23,23 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 {
 
     QRectF bounds = boundingRect();
-    QImage stop(":/../../../Downloads/stop.png");
+
+
     //QColor color(type_%256, type_%256, type_%256);
     QColor color;
     if (type_ == 0) {
-        color = Qt::blue;
+        painter->drawImage(bounds, QImage(":/images/stop.jpg"));
     } else if (type_ == 1) {
-        color = Qt::green;
+        painter->drawImage(bounds, QImage(":/images/bus.jpg"));
     } else if (type_ == 2) {
-        color = Qt::red;
+        painter->drawImage(bounds, QImage(":/images/passenger.jpg"));
     } else if (type_ == 3) {
-        color = Qt::yellow;
+        painter->drawImage(bounds, QImage(":/images/fighter.jpg"));
     }
     QBrush brush(color);
 
 
     painter->setBrush(brush);
-    painter->drawEllipse(bounds);
 
 }
 
