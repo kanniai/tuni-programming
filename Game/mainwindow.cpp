@@ -29,11 +29,15 @@ MainWindow::MainWindow(QWidget *parent) :
     timer->start(tick_);
 
     animation_ = new StudentSide::Animation();
+    bullet2_ = new StudentSide::Bullet();
 
     connect(animation_, &StudentSide::Animation::animationLocation, this,
             &StudentSide::MainWindow::checkBulletCollision);
     connect(animation_, &StudentSide::Animation::signalRemoveBullet, this,
             &StudentSide::MainWindow::removeBullet);
+
+    connect(bullet2_, &StudentSide::Bullet::bulletMoved, this,
+            &StudentSide::MainWindow::bulletMoved);
 
 }
 
@@ -139,16 +143,30 @@ void MainWindow::checkBulletCollision(int animationXCoord_, int animationYCoord_
     }      //Miten saan poistettua passengerin logickista?
 }
 
+void MainWindow::bulletMoved(int x2, int y2)
+{
+    bullet2_->setPos(x2, y2);
+    checkCollision(bullet2_);
+}
+
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_W) {
         emit buttonPressed('w');
+        player1_.second->setRotation(-90);
     } else if (event->key() == Qt::Key_D) {
         emit buttonPressed('d');
+        player1_.second->setRotation(0);
     } else if (event->key() == Qt::Key_S) {
         emit buttonPressed('s');
+        player1_.second->setRotation(90);
     } else if (event->key() == Qt::Key_A) {
         emit buttonPressed('a');
+        player1_.second->setRotation(180);
+
+    } else if (event->key() == Qt::Key_Space) {
+        qDebug() << "space pressed";
+        spacePressed();
     }
 }
 
@@ -170,18 +188,26 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 
 }
 
-void MainWindow::checkCollision(ActorItem* actorItem)
+void MainWindow::spacePressed()
+{
+    bullet2_->shoot(player1_.first->giveLocation().giveX(),
+                                      player1_.first->giveLocation().giveY(),
+                                player1_.second->rotation());
+    map->addItem(bullet2_);
+}
+
+void MainWindow::checkCollision(QGraphicsItem* actorItem)
 {
 
-    QList<QGraphicsItem *> collidingActors = last_->collidingItems();
+    QList<QGraphicsItem *> collidingActors = actorItem->collidingItems();
     if (collidingActors.size() != 0) {
         for (QGraphicsItem* actor: collidingActors) {
-            if (actor == bullet_) {
+            if (actor == bullet2_) {
                 continue;
             }
 
             map->removeItem(actor);
-            std::shared_ptr<Interface::IActor> IActor = getActor(actorItem);
+            //std::shared_ptr<Interface::IActor> IActor = getActor(actorItem);
 
             // if actor is stop
             //if (IActor == nullptr) {
@@ -204,7 +230,6 @@ void MainWindow::removeBullet()
 {
     map->removeItem(bullet_);
 }
-
 
 void StudentSide::MainWindow::on_startButton_clicked()
 {

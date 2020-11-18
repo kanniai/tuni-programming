@@ -5,6 +5,7 @@
 #include "../Course/CourseLib/graphics/simpleactoritem.hh"
 #include "actoritem.hh"
 #include "animation.hh"
+#include "bullet.hh"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -63,16 +64,18 @@ signals:
 public slots:
     void checkBulletCollision(int animationXCoord_, int animationYCoord_,
                               int playerXCoord, int playerYCoord);
+    void bulletMoved(int x2, int y2);
 
 private slots:
     void on_startButton_clicked();
     void keyPressEvent(QKeyEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
+    void spacePressed();
 
 
 
 private:
-    void checkCollision(ActorItem* actorItem);
+    void checkCollision(QGraphicsItem* actorItem);
     std::shared_ptr<Interface::IActor> getActor(ActorItem* actorItem);
     void removeBullet();
 
@@ -82,6 +85,7 @@ private:
     //QVector<QGraphicsItem*> actors_;
     ActorItem* last_;
     ActorItem* bullet_;
+    StudentSide::Bullet* bullet2_;
 
     std::map<std::shared_ptr<Interface::IActor>, ActorItem*> buses_;
     std::map<std::shared_ptr<Interface::IActor>, ActorItem*> passengers_;

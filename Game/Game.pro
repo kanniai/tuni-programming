@@ -9,6 +9,7 @@ SOURCES += \
     actor.cpp \
     actoritem.cpp \
     animation.cpp \
+    bullet.cpp \
     city.cpp \
     dialog.cpp \
     engine.cpp \
@@ -24,6 +25,7 @@ HEADERS += \
     actor.hh \
     actoritem.hh \
     animation.hh \
+    bullet.hh \
     city.hh \
     dialog.hh \
     engine.hh \
