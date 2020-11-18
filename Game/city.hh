@@ -4,6 +4,7 @@
 #include "simplemainwindow.hh"
 #include "mainwindow.hh"
 #include "player.hh"
+#include "statistics.hh"
 
 #include <QTime>
 
@@ -28,8 +29,11 @@ public:
     std::vector<std::shared_ptr<Interface::IActor>> getNearbyActors(Interface::Location loc) const;
     bool isGameOver() const;
 
+    StudentSide::MainWindow* returnMainwindow();
+
 private:
     StudentSide::MainWindow* mainWindow_;
+    StudentSide::Statistics statistics_;
     QVector<std::shared_ptr<Interface::IActor>> actors_;
     QVector<std::shared_ptr<Interface::IActor>> nysses_;
     QVector<std::shared_ptr<Interface::IActor>> passengers_;

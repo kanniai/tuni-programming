@@ -1,6 +1,5 @@
 #include "player.hh"
 
-const int MOVING_DISCANCE = 10;
 
 namespace StudentSide
 {
@@ -20,22 +19,22 @@ void StudentSide::Player::move(Interface::Location loc)
 
 void Player::moveUp()
 {
-    playerLocation_.setXY(playerLocation_.giveX(), playerLocation_.giveY() - MOVING_DISCANCE);
+    playerLocation_.setXY(playerLocation_.giveX(), playerLocation_.giveY() - MOVING_DISTANCE);
 }
 
 void Player::moveDown()
 {
-    playerLocation_.setXY(playerLocation_.giveX(), playerLocation_.giveY() + MOVING_DISCANCE);
+    playerLocation_.setXY(playerLocation_.giveX(), playerLocation_.giveY() + MOVING_DISTANCE);
 }
 
 void Player::moveRight()
 {
-    playerLocation_.setXY(playerLocation_.giveX() + MOVING_DISCANCE, playerLocation_.giveY());
+    playerLocation_.setXY(playerLocation_.giveX() + MOVING_DISTANCE, playerLocation_.giveY());
 }
 
 void Player::moveLeft()
 {
-    playerLocation_.setXY(playerLocation_.giveX() - MOVING_DISCANCE, playerLocation_.giveY());
+    playerLocation_.setXY(playerLocation_.giveX() - MOVING_DISTANCE, playerLocation_.giveY());
 }
 
 Interface::Location StudentSide::Player::giveLocation() const

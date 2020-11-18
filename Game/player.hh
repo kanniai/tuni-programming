@@ -15,6 +15,8 @@
 namespace StudentSide
 {
 
+const int MOVING_DISTANCE = 10;
+
 class Player : public StudentSide::Actor
 {
 public:

@@ -1,6 +1,7 @@
 #ifndef STATISTICS_HH
 #define STATISTICS_HH
 #include "interfaces/istatistics.hh"
+#include "mainwindow.hh"
 
 namespace StudentSide
 {
@@ -14,6 +15,11 @@ public:
     void nysseLeft() override;
     void morePassengers(int num) override;
     void nysseRemoved() override;
+
+
+private:
+    int nysses_ = 0;
+    StudentSide::MainWindow* mainWindow_;
 
 };
 }
