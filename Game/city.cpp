@@ -62,7 +62,7 @@ void City::startGame()
 
     for (int i = 0; i < stops_.size(); ++i) {
         Interface::Location location = stops_.at(i)->getLocation();
-        mainWindow_->addActor(location.giveX(), location.giveY(), STOP);
+        mainWindow_->addStop(location.giveX(), location.giveY(), STOP, stops_.at(i));
     }
 
     for (int i = 0; i < passengers_.size(); ++i) {
@@ -101,10 +101,7 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-    std::shared_ptr<CourseSide::Nysse> nysse = std::dynamic_pointer_cast<CourseSide::Nysse>(actor);
-    if (nysse != 0) {
         statistics_.nysseRemoved();
-    }
 
     QVector<std::shared_ptr<Interface::IActor>>::iterator it = actors_.begin();
     for ( ; it != actors_.end(); ) {
@@ -145,7 +142,6 @@ void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
                                        actor->giveLocation().giveY(), actor, PASSENGER);
     }
 }
-
 
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
 {

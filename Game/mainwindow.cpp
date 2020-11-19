@@ -15,6 +15,12 @@ const int NEXTROW = 30;
 const int WINDOW_WIDTH = 700;
 const int WINDOW_HEIGHT = 700;
 
+const int ACTOR_WIDTH = 15;
+const int ACTOR_HEIGHT = 15;
+
+const int MAP_CENTER_XCOORD = 250;
+const int MAP_CENTER_YCOORD = 250;
+
 
 namespace StudentSide {
 
@@ -89,17 +95,38 @@ void MainWindow::setTick(int t)
 void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interface::IActor> actor)
 {
     ActorItem* nActor = new ActorItem(locX, locY, type);
-    map->addItem(nActor);
-    last_ = nActor;
-
     if (type == 1) {
-        buses_.insert( {actor, nActor} );
+        std::shared_ptr<CourseSide::Nysse> nysse =
+                       std::dynamic_pointer_cast<CourseSide::Nysse> (actor);
+        buses_.insert( {nysse, nActor} );
     } else if (type == 2) {
-        passengers_.insert( {actor, nActor} );
+
+        std::shared_ptr<CourseSide::Passenger> passenger =
+                       std::dynamic_pointer_cast<CourseSide::Passenger> (actor);
+
+        passengers_.insert( {passenger, nActor} );
+
+        if (passenger->getStop() != nullptr || passenger->isInVehicle()) {
+            return;
+        }
+
     } else if (type == 3) {
         player1_.first = actor;
         player1_.second = nActor;
     }
+
+    map->addItem(nActor);
+    last_ = nActor;
+}
+
+void MainWindow::addStop(int locX, int locY, int type, std::shared_ptr<Interface::IStop> stop)
+{
+    std::shared_ptr<CourseSide::Stop> stop2 =
+                   std::dynamic_pointer_cast<CourseSide::Stop> (stop);
+    ActorItem* nActor = new ActorItem(locX, locY, type);
+    map->addItem(nActor);
+    stops_.insert({stop2, nActor});
+
 }
 
 void MainWindow::updateCoords(int nX, int nY)
@@ -112,16 +139,28 @@ void MainWindow::updateActorCoords(int nX, int nY, std::shared_ptr<Interface::IA
                                    int type)
 {
     if (type == 1) {
-        std::map<std::shared_ptr<Interface::IActor>,ActorItem*>::iterator it;
-        it = buses_.find(actor);
+        std::map<std::shared_ptr<CourseSide::Nysse>,ActorItem*>::iterator it;
+        std::shared_ptr<CourseSide::Nysse> nysse =
+                       std::dynamic_pointer_cast<CourseSide::Nysse> (actor);
+        it = buses_.find(nysse);
         if (it != buses_.end())
           it->second->setCoord(nX, nY);
+
     } else if (type == 2) {
-        std::map<std::shared_ptr<Interface::IActor>,ActorItem*>::iterator it;
-        it = passengers_.find(actor);
+        std::shared_ptr<CourseSide::Passenger> passenger =
+                       std::dynamic_pointer_cast<CourseSide::Passenger> (actor);
+        std::map<std::shared_ptr<CourseSide::Passenger>,ActorItem*>::iterator it;
+        it = passengers_.find(passenger);
         if (it != passengers_.end())
+            //if (!it->first->isInVehicle()) {
+              //  ActorItem* nActor = new ActorItem(it->first->giveLocation().giveX(),
+                //                                  it->first->giveLocation().giveY(), type);
+                //map->addItem(nActor);
+            //}
+
           it->second->setCoord(nX, nY);
     }
+    
 }
 
 void StudentSide::MainWindow::MainWindow::showTime()
@@ -154,7 +193,7 @@ void MainWindow::nysseCount(int count, int delta)
 {
     ui->busCount->setText(QString::number(count));
     if (delta > 0) {
-        ui->busesAdded->setText(QString::number(delta));
+        ui->busesAdded->setText(QString::number(delta)+ " new buses added");
     }
 }
 
@@ -197,17 +236,33 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_W) {
         emit buttonPressed('w');
+
+        player1_.second->setCoord(player1_.second->x() + ACTOR_WIDTH/2,
+                                  player1_.second->y() + ACTOR_WIDTH/2);
         player1_.second->setRotation(-90);
+        player1_.second->setCoord(player1_.second->x() - ACTOR_WIDTH/2,
+                                  player1_.second->y() - ACTOR_WIDTH/2);
     } else if (event->key() == Qt::Key_D) {
         emit buttonPressed('d');
+        player1_.second->setCoord(player1_.second->x() + ACTOR_WIDTH/2,
+                                  player1_.second->y() + ACTOR_WIDTH/2);
         player1_.second->setRotation(0);
+        player1_.second->setCoord(player1_.second->x() - ACTOR_WIDTH/2,
+                                  player1_.second->y() - ACTOR_WIDTH/2);
     } else if (event->key() == Qt::Key_S) {
         emit buttonPressed('s');
+        player1_.second->setCoord(player1_.second->x() + ACTOR_WIDTH/2,
+                                  player1_.second->y() + ACTOR_WIDTH/2);
         player1_.second->setRotation(90);
+        player1_.second->setCoord(player1_.second->x() - ACTOR_WIDTH/2,
+                                  player1_.second->y() - ACTOR_WIDTH/2);
     } else if (event->key() == Qt::Key_A) {
         emit buttonPressed('a');
+        player1_.second->setCoord(player1_.second->x() + ACTOR_WIDTH/2,
+                                  player1_.second->y() + ACTOR_WIDTH/2);
         player1_.second->setRotation(180);
-
+        player1_.second->setCoord(player1_.second->x() - ACTOR_WIDTH/2,
+                                  player1_.second->y() - ACTOR_WIDTH/2);
     } else if (event->key() == Qt::Key_Space) {
         qDebug() << "space pressed";
         spacePressed();
@@ -253,23 +308,35 @@ void MainWindow::checkCollision(QGraphicsItem* actorItem)
             if (actor == bullet2_) {
                 continue;
             } else if (actor == player1_.second) {
-                return;
+                continue;
             }
 
-            map->removeItem(actor);
-            bullet2_->removeBullet();
-            map->removeItem(bullet2_);
-            break;
-            //std::shared_ptr<Interface::IActor> IActor = getActor(actorItem);
+            for(auto nysse: buses_) {
+                if (nysse.second->x() == actor->x() && nysse.second->y() == actor->y()) {
 
-            // if actor is stop, do not remove it
-            //if (IActor == nullptr) {
-              //  return;
-            //}
+                    map->removeItem(nysse.second);
+                    bullet2_->removeBullet();
+                    map->removeItem(bullet2_);
+                    std::vector<std::shared_ptr<Interface::IPassenger>> passengersInNysse =
+                            nysse.first->getPassengers();
+                    for (auto passenger: passengersInNysse) {
+                        passenger->remove();
 
-            //Passenger::remove()
-            // Miten tuhota actorit logicista?
-            //https://www.boost.org/doc/libs/1_66_0/libs/bimap/doc/html/boost_bimap/one_minute_tutorial.html
+                    }
+                }
+            }
+            for(auto stop: stops_) {
+                if (stop.second->x() == actor->x() && stop.second->y() == actor->y()) {
+                    bullet2_->removeBullet();
+                    map->removeItem(bullet2_);
+                    std::vector<std::shared_ptr<Interface::IPassenger>> passengersInNysse =
+                            stop.first->getPassengers();
+                    for (auto passenger: passengersInNysse) {
+                        passenger->remove();
+
+                    }
+                }
+            }
         }
     }
 }

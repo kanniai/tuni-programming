@@ -2,10 +2,14 @@
 #define MAINWINDOW_HH
 
 #include "interfaces/iactor.hh"
+#include "interfaces/istop.hh"
+#include "actors/nysse.hh"
+#include "actors/passenger.hh"
 #include "../Course/CourseLib/graphics/simpleactoritem.hh"
 #include "actoritem.hh"
 #include "animation.hh"
 #include "bullet.hh"
+
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -46,6 +50,7 @@ public:
     // type 3 = player
     // type 4 = bullet
     virtual void addActor(int locX, int locY, int type = 0, std::shared_ptr<Interface::IActor> actor = nullptr);
+    void addStop(int locX, int locY, int type = 0, std::shared_ptr<Interface::IStop> stop = nullptr);
 
     void updateCoords(int nX, int nY);
     void updateActorCoords(int nX, int nY, std::shared_ptr<Interface::IActor>  actor, int type);
@@ -89,8 +94,9 @@ private:
     ActorItem* bullet_;
     StudentSide::Bullet* bullet2_;
 
-    std::map<std::shared_ptr<Interface::IActor>, ActorItem*> buses_;
-    std::map<std::shared_ptr<Interface::IActor>, ActorItem*> passengers_;
+    std::map<std::shared_ptr<CourseSide::Stop>, ActorItem*> stops_;
+    std::map<std::shared_ptr<CourseSide::Nysse>, ActorItem*> buses_;
+    std::map<std::shared_ptr<CourseSide::Passenger>, ActorItem*> passengers_;
     std::pair<std::shared_ptr<Interface::IActor>, ActorItem*> player1_;
 
     StudentSide::Animation* animation_;

@@ -26,19 +26,27 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
     //QColor color(type_%256, type_%256, type_%256);
     QColor color;
+    QBrush brush(color);
     if (type_ == 0) {
         painter->drawImage(bounds, QImage(":/images/stop.jpg"));
     } else if (type_ == 1) {
         painter->drawImage(bounds, QImage(":/images/bus.jpg"));
     } else if (type_ == 2) {
        // painter->drawImage(bounds, QImage(":/images/passenger.jpg"));
+        color = Qt::red;
+        QBrush brush(color);
+        painter->setBrush(brush);
+        painter->drawEllipse(bounds);
     } else if (type_ == 3) {
         painter->drawImage(bounds, QImage(":/images/fighter.jpg"));
     } else if (type_ == 4) {
         color = Qt::black;
+        QBrush brush(color);
+        painter->setBrush(brush);
+        painter->drawEllipse(bounds);
     }
-    QBrush brush(color);
-    painter->setBrush(brush);
+
+
 
 }
 
