@@ -77,7 +77,7 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 
     if (nysse != 0) {
         nysses_.push_back(newactor);
-        //statistics_.newNysse;
+        statistics_.newNysse();
     }
     std::shared_ptr<CourseSide::Passenger> passenger = std::dynamic_pointer_cast<CourseSide::Passenger>(newactor);
     if (passenger != 0) {

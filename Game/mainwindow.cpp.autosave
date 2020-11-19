@@ -279,7 +279,6 @@ void MainWindow::spacePressed()
     bullet2_->shoot(player1_.first->giveLocation().giveX(),
                                       player1_.first->giveLocation().giveY(),
                                 player1_.second->rotation());
-    std::cout << passengers_.size() << std::endl;
 
 }
 
@@ -294,10 +293,13 @@ void MainWindow::checkCollision(QGraphicsItem* actorItem)
             } else if (actor == player1_.second) {
                 continue;
             }
-
+            
             for(auto nysse: buses_) {
                 if (nysse.second->x() == actor->x() && nysse.second->y() == actor->y()) {
-
+                    
+                    nysse.first->remove();
+                    buses_.erase(nysse.first);
+                    
                     map->removeItem(nysse.second);
                     bullet2_->stopTimer();
                     map->removeItem(bullet2_);
@@ -305,7 +307,6 @@ void MainWindow::checkCollision(QGraphicsItem* actorItem)
                             nysse.first->getPassengers();
                     for (auto passenger: passengersInNysse) {
                         passenger->remove();
-
                     }
                 }
             }

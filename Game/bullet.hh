@@ -25,7 +25,7 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void move();
     void setAngle(int angle);
-    void removeBullet();
+    void stopTimer();
     bool isBulletMoving();
 
 signals:

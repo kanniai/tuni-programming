@@ -1,5 +1,5 @@
 #include "bullet.hh"
-const int STEP_SIZE = 10;
+const int STEP_SIZE = 5;
 
 namespace StudentSide {
 
@@ -13,14 +13,11 @@ Bullet::~Bullet()
 {}
 
 void Bullet::shoot(int x, int y, int angle)
-
 {
      x_ = x;
      y_ = y;
      radianAngle_ = (double) angle* (M_PI/180);
-     qDebug() << "degreeangle " << angle;
-     qDebug() << "radianAngle_ " << radianAngle_;
-     timer_->start(1000/30);
+     timer_->start(1000/60);
 }
 
 QRectF Bullet::boundingRect() const
@@ -46,8 +43,6 @@ void Bullet::move()
     y_ += dy;
     setX(x_);
     setY(y_);
-    //qDebug() << "bullet move";
-    //qDebug() << "x " << x_ + dx << " y " << y_ + dy;
     emit bulletMoved(x_ + dx, y_ + dy);
 }
 
@@ -56,10 +51,9 @@ void Bullet::setAngle(int angle)
     radianAngle_ = (double) angle* (M_PI/180);
 }
 
-void Bullet::removeBullet()
+void Bullet::stopTimer()
 {
     timer_->stop();
-    //remove();
 }
 
 bool Bullet::isBulletMoving()
