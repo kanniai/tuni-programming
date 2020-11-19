@@ -318,13 +318,12 @@ void MainWindow::checkCollision(QGraphicsItem* actorItem)
 
                     nysse.first->remove();
                     buses_.erase(nysse.first);
-                    return;
+
                     // logic poistaa nyssen sisällä olevat passengerit automaattisesti?
                     std::vector<std::shared_ptr<Interface::IPassenger>> passengersInNysse =
                             nysse.first->getPassengers();
                     for (auto passenger: passengersInNysse) {
                         passenger->remove();
-
                     }
                 }
             }
@@ -337,7 +336,6 @@ void MainWindow::checkCollision(QGraphicsItem* actorItem)
                             stop.first->getPassengers();
                     for (auto passenger: passengersAtStop) {
                         passenger->remove();
-                        return;
                     }  
                 }
             }

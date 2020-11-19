@@ -2,6 +2,8 @@
 #define STATISTICS_HH
 #include "interfaces/istatistics.hh"
 #include "mainwindow.hh"
+//#include <QtTest/QTest>
+
 
 namespace StudentSide
 {
@@ -16,13 +18,12 @@ public:
     void morePassengers(int num) override;
     void nysseRemoved() override;
     int returnNysses();
-    void returnNewNysses();
 
 
 
 private:
     int nysses_ = 0;
-    int new_nysses_ = 0;
+    int passengers_ = 0;
     StudentSide::MainWindow* mainWindow_;
 
 };
