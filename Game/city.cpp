@@ -101,7 +101,7 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-        statistics_.nysseRemoved();
+    statistics_.nysseRemoved();
 
     QVector<std::shared_ptr<Interface::IActor>>::iterator it = actors_.begin();
     for ( ; it != actors_.end(); ) {
