@@ -193,13 +193,13 @@ void MainWindow::nysseCount(int count, int delta)
 {
     ui->busCount->setText(QString::number(count));
     if (delta == 1) {
-        ui->busesAdded->setText(QString::number(delta)+ " new bus added!");
+        ui->busesAdded->setText(QString::number(delta)+ " new bus journey");
     } else if (delta == -1) {
-        ui->busesAdded->setText(QString::number(abs(delta))+ " bus removed!");
+        ui->busesAdded->setText(QString::number(abs(delta))+ " bus arrived to final stop");
     } else if (delta > 1) {
-        ui->busesAdded->setText(QString::number(delta)+ " new buses added!");
+        ui->busesAdded->setText(QString::number(delta)+ " new buses started the journey");
     } else if (delta < -1) {
-        ui->busesAdded->setText(QString::number(abs(delta)) + " buses removed!");
+        ui->busesAdded->setText(QString::number(abs(delta)) + " buses arrived to final stop");
     } else if (delta == 0) {
         ui->busesAdded->setText(" ");
     }
