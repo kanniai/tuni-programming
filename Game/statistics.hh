@@ -15,14 +15,13 @@ public:
     void nysseLeft() override;
     void morePassengers(int num) override;
     void nysseRemoved() override;
+
     int returnNysses();
-    void returnNewNysses();
 
 
 
 private:
     int nysses_ = 0;
-    int new_nysses_ = 0;
     StudentSide::MainWindow* mainWindow_;
 
 };

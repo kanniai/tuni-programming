@@ -60,6 +60,8 @@ public:
     void setTime(int hours, int minutes);
 
     void nysseCount(int count, int delta);
+    void updateStatistics(int buses, int passengers);
+    void checkCollision(QGraphicsItem* actorItem);
 
     std::pair<std::shared_ptr<Interface::IActor>, ActorItem*> getPlayer1() const;
 
@@ -83,7 +85,7 @@ private slots:
 
 
 private:
-    void checkCollision(QGraphicsItem* actorItem);
+
     std::shared_ptr<Interface::IActor> getActor(ActorItem* actorItem);
     void removeBullet();
 
@@ -104,6 +106,8 @@ private:
 
     int hours_;
     int minutes_;
+    int nyssesDestroyed_ = 0;
+    int passengersKilled_ = 0;
 
     int width_ = 500; //pxls
     int height_ = 500;

@@ -54,6 +54,7 @@ void City::setClock(QTime clock)
     mainWindow_->nysseCount(nysses, delta);
 
 
+
 }
 
 void City::startGame()
