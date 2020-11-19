@@ -160,7 +160,8 @@ void MainWindow::updateActorCoords(int nX, int nY, std::shared_ptr<Interface::IA
 
           it->second->setCoord(nX, nY);
     }
-    
+    updateStatistics(nyssesDestroyed_, passengersKilled_);
+
 }
 
 void StudentSide::MainWindow::MainWindow::showTime()
@@ -193,16 +194,25 @@ void MainWindow::nysseCount(int count, int delta)
 {
     ui->busCount->setText(QString::number(count));
     if (delta == 1) {
-        ui->busesAdded->setText(QString::number(delta)+ " new bus added!");
+        ui->busesAdded->setText(QString::number(delta)+ " new bus journey");
     } else if (delta == -1) {
-        ui->busesAdded->setText(QString::number(abs(delta))+ " bus removed!");
+        ui->busesAdded->setText(QString::number(abs(delta))+ " bus arrived to final stop");
     } else if (delta > 1) {
-        ui->busesAdded->setText(QString::number(delta)+ " new buses added!");
+        ui->busesAdded->setText(QString::number(delta)+ " new buses started the journey");
     } else if (delta < -1) {
-        ui->busesAdded->setText(QString::number(abs(delta)) + " buses removed!");
+        ui->busesAdded->setText(QString::number(abs(delta)) + " buses arrived to final stop");
     } else if (delta == 0) {
         ui->busesAdded->setText(" ");
     }
+}
+
+void MainWindow::updateStatistics(int buses, int passengers)
+{
+    std::cout << buses << std::endl;
+    std::cout << passengers << std::endl;
+    ui->destroyedLabel->setText(QString::number(buses));
+    ui->killedLabel->setText(QString::number(passengers));
+
 }
 
 std::pair<std::shared_ptr<Interface::IActor>, ActorItem *> MainWindow::getPlayer1() const
@@ -319,11 +329,15 @@ void MainWindow::checkCollision(QGraphicsItem* actorItem)
                     nysse.first->remove();
                     buses_.erase(nysse.first);
 
-                    // logic poistaa nyssen sisällä olevat passengerit automaattisesti?
+                    nyssesDestroyed_++;
+
                     std::vector<std::shared_ptr<Interface::IPassenger>> passengersInNysse =
                             nysse.first->getPassengers();
-                    for (auto passenger: passengersInNysse) {
-                        passenger->remove();
+                    if (passengersInNysse.size() > 0) {
+                        for (auto passenger: passengersInNysse) {
+                            passenger->remove();
+                            passengersKilled_++;
+                        }
                     }
                 }
             }
@@ -331,12 +345,6 @@ void MainWindow::checkCollision(QGraphicsItem* actorItem)
                 if (stop.second->x() == actor->x() && stop.second->y() == actor->y()) {
                     bullet2_->stopTimer();
                     map->removeItem(bullet2_);
-
-                    std::vector<std::shared_ptr<Interface::IPassenger>> passengersAtStop =
-                            stop.first->getPassengers();
-                    for (auto passenger: passengersAtStop) {
-                        passenger->remove();
-                    }  
                 }
             }
         }

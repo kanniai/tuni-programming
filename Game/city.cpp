@@ -44,6 +44,7 @@ void City::setClock(QTime clock)
     mainWindow_->setTime(clock.hour(), clock.minute());
     mainWindow_->showTime();
     int delta = 0;
+    int nysses = statistics_.returnNysses();
     if (old_nysses_ == 0) {
         old_nysses_ = nysses;
     } else {
@@ -51,6 +52,7 @@ void City::setClock(QTime clock)
         old_nysses_ = nysses;
     }
     mainWindow_->nysseCount(nysses, delta);
+
 
 
 }

@@ -17,6 +17,7 @@ public:
     void nysseLeft() override;
     void morePassengers(int num) override;
     void nysseRemoved() override;
+
     int returnNysses();
 
 
