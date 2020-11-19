@@ -108,7 +108,6 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
           if (*it == nysse) {
             it = nysses_.erase(it);
             statistics_.nysseRemoved();
-            std::cout << "Nysse removed" << std::endl;
             return;
           }
         }

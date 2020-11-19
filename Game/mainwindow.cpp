@@ -13,7 +13,7 @@ const int MAP_LOWER_YCOORD = 469;
 const int PADDING = 40;
 const int NEXTROW = 30;
 const int WINDOW_WIDTH = 700;
-const int WINDOW_HEIGHT = 700;
+const int WINDOW_HEIGHT = 600;
 
 const int ACTOR_WIDTH = 15;
 const int ACTOR_HEIGHT = 15;
@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->busesLabel->move(width_ + PADDING, 5*NEXTROW);
     ui->busCount->move(width_ + 4*PADDING, 5*NEXTROW);
     ui->busesAdded->move(width_ + PADDING, 6*NEXTROW);
-    ui->busesAdded->setText("Testi");
+    ui->busesAdded->setText("");
 
     ui->statisticsLabel->move(width_ + 1.2*PADDING, 7.2*NEXTROW);
     ui->statisticsLabel->setStyleSheet("border-bottom-width: 1px; border-bottom-style: solid; border-radius: 0px");
@@ -192,10 +192,16 @@ void MainWindow::setTime(int hours, int minutes)
 void MainWindow::nysseCount(int count, int delta)
 {
     ui->busCount->setText(QString::number(count));
-    if (delta > 0) {
+    if (delta == 1) {
+        ui->busesAdded->setText(QString::number(delta)+ " new bus added!");
+    } else if (delta == -1) {
+        ui->busesAdded->setText(QString::number(abs(delta))+ " bus removed!");
+    } else if (delta > 1) {
         ui->busesAdded->setText(QString::number(delta)+ " new buses added!");
-    } else if (delta < 0) {
-        ui->busesAdded->setText(QString::number(abs(delta)) + " buses deleted!");
+    } else if (delta < -1) {
+        ui->busesAdded->setText(QString::number(abs(delta)) + " buses removed!");
+    } else if (delta == 0) {
+        ui->busesAdded->setText(" ");
     }
 }
 
