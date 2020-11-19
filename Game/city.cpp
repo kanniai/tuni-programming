@@ -104,7 +104,7 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
     std::shared_ptr<CourseSide::Nysse> nysse = std::dynamic_pointer_cast<CourseSide::Nysse>(actor);
     if (nysse != 0) {
         QVector<std::shared_ptr<Interface::IActor>>::iterator it = nysses_.begin();
-        for ( ; it != nysses_.end(); ) {
+        for ( ; it != nysses_.end(); ++it) {
           if (*it == nysse) {
             it = nysses_.erase(it);
             // kutsu statiistikkaa, että nysse poistettu

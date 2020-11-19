@@ -46,11 +46,6 @@ void Bullet::move()
     emit bulletMoved(x_ + dx, y_ + dy);
 }
 
-void Bullet::setAngle(int angle)
-{
-    radianAngle_ = (double) angle* (M_PI/180);
-}
-
 void Bullet::stopTimer()
 {
     timer_->stop();
