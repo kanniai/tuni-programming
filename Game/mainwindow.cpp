@@ -21,7 +21,6 @@ const int ACTOR_HEIGHT = 15;
 const int MAP_CENTER_XCOORD = 250;
 const int MAP_CENTER_YCOORD = 250;
 
-
 namespace StudentSide {
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -307,24 +306,30 @@ void MainWindow::checkCollision(QGraphicsItem* actorItem)
                     map->removeItem(nysse.second);
                     bullet2_->stopTimer();
                     map->removeItem(bullet2_);
-                    std::vector<std::shared_ptr<Interface::IPassenger>> passengersInNysse =
-                            nysse.first->getPassengers();
-                    for (auto passenger: passengersInNysse) {
-                        passenger->remove();
 
-                    }
+                    nysse.first->remove();
+                    buses_.erase(nysse.first);
+                    return;
+                    // logic poistaa nyssen sisällä olevat passengerit automaattisesti?
+                    //std::vector<std::shared_ptr<Interface::IPassenger>> passengersInNysse =
+                      //      nysse.first->getPassengers();
+                    //for (auto passenger: passengersInNysse) {
+                      //  passenger->remove();
+
+                    //}
                 }
             }
             for(auto stop: stops_) {
                 if (stop.second->x() == actor->x() && stop.second->y() == actor->y()) {
                     bullet2_->stopTimer();
                     map->removeItem(bullet2_);
-                    std::vector<std::shared_ptr<Interface::IPassenger>> passengersInNysse =
-                            stop.first->getPassengers();
-                    for (auto passenger: passengersInNysse) {
-                        passenger->remove();
 
-                    }
+                    std::vector<std::shared_ptr<Interface::IPassenger>> passengersAtStop =
+                            stop.first->getPassengers();
+                    for (auto passenger: passengersAtStop) {
+                        passenger->remove();
+                        return;
+                    }  
                 }
             }
         }

@@ -15,7 +15,6 @@ City::City() :
     mainWindow_(nullptr){
     {
     }
-
 }
 
 City::City(StudentSide::MainWindow* mainWindow) :
@@ -101,18 +100,31 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-        statistics_.nysseRemoved();
 
-    QVector<std::shared_ptr<Interface::IActor>>::iterator it = actors_.begin();
-    for ( ; it != actors_.end(); ) {
-      if (*it == actor) {
-        it = actors_.erase(it);
-        actor->remove();
-        // actorRemoved(actor);
-      } else {
-        ++it;
-      }
+    std::shared_ptr<CourseSide::Nysse> nysse = std::dynamic_pointer_cast<CourseSide::Nysse>(actor);
+    if (nysse != 0) {
+        QVector<std::shared_ptr<Interface::IActor>>::iterator it = nysses_.begin();
+        for ( ; it != nysses_.end(); ) {
+          if (*it == nysse) {
+            it = nysses_.erase(it);
+            // kutsu statiistikkaa, että nysse poistettu
+            std::cout << "Nysse removed" << std::endl;
+            return;
+          }
+        }
     }
+    std::shared_ptr<CourseSide::Passenger> passenger = std::dynamic_pointer_cast<CourseSide::Passenger>(actor);
+    if (passenger != 0) {
+        QVector<std::shared_ptr<Interface::IActor>>::iterator it = passengers_.begin();
+        for ( ; it != passengers_.end(); ++it) {
+          if (*it == passenger) {
+            it = passengers_.erase(it);
+            // kutsu statiistikkaa, että passenger poistettu
+            return;
+          }
+        }
+    }
+
 }
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
@@ -122,10 +134,24 @@ void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 {
-    if ( std::find(actors_.begin(), actors_.end(), actor) != actors_.end() )
-       return true;
-    else
-       return false;
+
+    std::shared_ptr<CourseSide::Nysse> nysse = std::dynamic_pointer_cast<CourseSide::Nysse>(actor);
+    if (nysse != 0) {
+        if ( std::find(nysses_.begin(), nysses_.end(), nysse) != nysses_.end() ) {
+           return true;
+        } else {
+           return false;
+        }
+    }
+    std::shared_ptr<CourseSide::Passenger> passenger = std::dynamic_pointer_cast<CourseSide::Passenger>(actor);
+    if (passenger != 0) {
+        if ( std::find(passengers_.begin(), passengers_.end(), passenger) != passengers_.end() ) {
+           return true;
+        } else {
+           return false;
+        }
+    }
+
 }
 // Logic::advance calls this function
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
