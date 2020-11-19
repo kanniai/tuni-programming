@@ -26,6 +26,7 @@
 #include <map>
 #include <QGraphicsItemAnimation>
 #include <QTimeLine>
+#include <QPointF>
 
 namespace Ui {
 class MainWindow;

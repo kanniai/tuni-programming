@@ -35,7 +35,6 @@ private:
     StudentSide::MainWindow* mainWindow_;
     StudentSide::Statistics statistics_;
     int old_nysses_ = 0;
-    QVector<std::shared_ptr<Interface::IActor>> actors_;
     QVector<std::shared_ptr<Interface::IActor>> nysses_;
     QVector<std::shared_ptr<Interface::IActor>> passengers_;
     QVector<std::shared_ptr<Interface::IStop>> stops_;

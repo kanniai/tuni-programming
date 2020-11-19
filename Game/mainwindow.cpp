@@ -21,7 +21,6 @@ const int ACTOR_HEIGHT = 15;
 const int MAP_CENTER_XCOORD = 250;
 const int MAP_CENTER_YCOORD = 250;
 
-
 namespace StudentSide {
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -113,6 +112,7 @@ void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interfac
     } else if (type == 3) {
         player1_.first = actor;
         player1_.second = nActor;
+        player1_.second->setTransformOriginPoint(WIDTH/2, WIDTH/2);
     }
 
     map->addItem(nActor);
@@ -193,7 +193,9 @@ void MainWindow::nysseCount(int count, int delta)
 {
     ui->busCount->setText(QString::number(count));
     if (delta > 0) {
-        ui->busesAdded->setText(QString::number(delta)+ " new buses added");
+        ui->busesAdded->setText(QString::number(delta)+ " new buses added!");
+    } else if (delta < 0) {
+        ui->busesAdded->setText(QString::number(abs(delta)) + " buses deleted!");
     }
 }
 
@@ -221,12 +223,13 @@ void MainWindow::checkBulletCollision(int animationXCoord_, int animationYCoord_
 
 void MainWindow::bulletMoved(int x2, int y2)
 {
+    map->addItem(bullet2_);
     bullet2_->setPos(x2, y2);
     checkCollision(bullet2_);
 
     if (bullet2_->x() < MAP_LEFT_SIDE_XCOORD -30  || bullet2_->y() < MAP_UPPER_YCOORD -20
             || bullet2_->x() > MAP_RIGHT_SIDE_XCOORD + 10 || bullet2_->y() > MAP_LOWER_YCOORD + 10) {
-        bullet2_->removeBullet();
+        bullet2_->stopTimer();
         map->removeItem(bullet2_);
 
     }
@@ -234,35 +237,22 @@ void MainWindow::bulletMoved(int x2, int y2)
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
+
     if(event->key() == Qt::Key_W) {
         emit buttonPressed('w');
-
-        player1_.second->setCoord(player1_.second->x() + ACTOR_WIDTH/2,
-                                  player1_.second->y() + ACTOR_WIDTH/2);
         player1_.second->setRotation(-90);
-        player1_.second->setCoord(player1_.second->x() - ACTOR_WIDTH/2,
-                                  player1_.second->y() - ACTOR_WIDTH/2);
+
     } else if (event->key() == Qt::Key_D) {
         emit buttonPressed('d');
-        player1_.second->setCoord(player1_.second->x() + ACTOR_WIDTH/2,
-                                  player1_.second->y() + ACTOR_WIDTH/2);
         player1_.second->setRotation(0);
-        player1_.second->setCoord(player1_.second->x() - ACTOR_WIDTH/2,
-                                  player1_.second->y() - ACTOR_WIDTH/2);
+
     } else if (event->key() == Qt::Key_S) {
         emit buttonPressed('s');
-        player1_.second->setCoord(player1_.second->x() + ACTOR_WIDTH/2,
-                                  player1_.second->y() + ACTOR_WIDTH/2);
         player1_.second->setRotation(90);
-        player1_.second->setCoord(player1_.second->x() - ACTOR_WIDTH/2,
-                                  player1_.second->y() - ACTOR_WIDTH/2);
     } else if (event->key() == Qt::Key_A) {
         emit buttonPressed('a');
-        player1_.second->setCoord(player1_.second->x() + ACTOR_WIDTH/2,
-                                  player1_.second->y() + ACTOR_WIDTH/2);
         player1_.second->setRotation(180);
-        player1_.second->setCoord(player1_.second->x() - ACTOR_WIDTH/2,
-                                  player1_.second->y() - ACTOR_WIDTH/2);
+
     } else if (event->key() == Qt::Key_Space) {
         qDebug() << "space pressed";
         spacePressed();
@@ -296,7 +286,8 @@ void MainWindow::spacePressed()
     bullet2_->shoot(player1_.first->giveLocation().giveX(),
                                       player1_.first->giveLocation().giveY(),
                                 player1_.second->rotation());
-    map->addItem(bullet2_);
+    std::cout << passengers_.size() << std::endl;
+
 }
 
 void MainWindow::checkCollision(QGraphicsItem* actorItem)
@@ -315,26 +306,32 @@ void MainWindow::checkCollision(QGraphicsItem* actorItem)
                 if (nysse.second->x() == actor->x() && nysse.second->y() == actor->y()) {
 
                     map->removeItem(nysse.second);
-                    bullet2_->removeBullet();
+                    bullet2_->stopTimer();
                     map->removeItem(bullet2_);
-                    std::vector<std::shared_ptr<Interface::IPassenger>> passengersInNysse =
-                            nysse.first->getPassengers();
-                    for (auto passenger: passengersInNysse) {
-                        passenger->remove();
 
-                    }
+                    nysse.first->remove();
+                    buses_.erase(nysse.first);
+                    return;
+                    // logic poistaa nyssen sisällä olevat passengerit automaattisesti?
+                    //std::vector<std::shared_ptr<Interface::IPassenger>> passengersInNysse =
+                      //      nysse.first->getPassengers();
+                    //for (auto passenger: passengersInNysse) {
+                      //  passenger->remove();
+
+                    //}
                 }
             }
             for(auto stop: stops_) {
                 if (stop.second->x() == actor->x() && stop.second->y() == actor->y()) {
-                    bullet2_->removeBullet();
+                    bullet2_->stopTimer();
                     map->removeItem(bullet2_);
-                    std::vector<std::shared_ptr<Interface::IPassenger>> passengersInNysse =
-                            stop.first->getPassengers();
-                    for (auto passenger: passengersInNysse) {
-                        passenger->remove();
 
-                    }
+                    std::vector<std::shared_ptr<Interface::IPassenger>> passengersAtStop =
+                            stop.first->getPassengers();
+                    for (auto passenger: passengersAtStop) {
+                        passenger->remove();
+                        return;
+                    }  
                 }
             }
         }
