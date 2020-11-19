@@ -1,6 +1,7 @@
 #include "mainwindow.hh"
 #include "ui_mainwindow.h"
 #include <QDebug>
+#include <iostream>
 
 const int MATCH_COORDINATES = 9;
 
@@ -28,8 +29,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QPalette black = palette();
-    black.setColor(QPalette::Background, Qt::black);
 
     ui->gameView->setFixedSize(width_, height_);
     ui->centralwidget->setFixedSize(WINDOW_WIDTH + ui->startButton->width() + PADDING, WINDOW_HEIGHT+ PADDING);
@@ -40,18 +39,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->timeFrame->move(width_ + 2.75*PADDING, 3*NEXTROW);
 
     ui->busesLabel->move(width_ + PADDING, 5*NEXTROW);
-    ui->busCount->move(width_ + 5*PADDING, 5*NEXTROW);
-    ui->busCount->setAutoFillBackground(true);
-    ui->busCount->setPalette(black);
+    ui->busCount->move(width_ + 4*PADDING, 5*NEXTROW);
+    ui->busesAdded->move(width_ + PADDING, 6*NEXTROW);
+    ui->busesAdded->setText("Testi");
 
-
-    ui->statisticsLabel->move(width_ + 1.2*PADDING, 6.2*NEXTROW);
+    ui->statisticsLabel->move(width_ + 1.2*PADDING, 7.2*NEXTROW);
     ui->statisticsLabel->setStyleSheet("border-bottom-width: 1px; border-bottom-style: solid; border-radius: 0px");
-    ui->destroyedTextLabel->move(width_ + PADDING, 7.5*NEXTROW);
-    ui->destroyedLabel->move(width_ + 6*PADDING, 7.5*NEXTROW);
-    ui->killedTextLabel->move(width_ + PADDING, 8.5*NEXTROW);
-    ui->killedLabel->move(width_ + 6*PADDING, 8.5*NEXTROW);
-    ui->statisticsFrame->move(width_ + 0.8*PADDING, 6*NEXTROW);
+    ui->destroyedTextLabel->move(width_ + PADDING, 8.5*NEXTROW);
+    ui->destroyedLabel->move(width_ + 6*PADDING, 8.5*NEXTROW);
+    ui->killedTextLabel->move(width_ + PADDING, 9.5*NEXTROW);
+    ui->killedLabel->move(width_ + 6*PADDING, 9.5*NEXTROW);
+    ui->statisticsFrame->move(width_ + 0.8*PADDING, 7*NEXTROW);
 
 
     map = new QGraphicsScene(this);
@@ -190,6 +188,14 @@ void MainWindow::setTime(int hours, int minutes)
 {
     hours_ = hours;
     minutes_ = minutes;
+}
+
+void MainWindow::nysseCount(int count, int delta)
+{
+    ui->busCount->setText(QString::number(count));
+    if (delta > 0) {
+        ui->busesAdded->setText(QString::number(delta)+ " new buses added");
+    }
 }
 
 std::pair<std::shared_ptr<Interface::IActor>, ActorItem *> MainWindow::getPlayer1() const

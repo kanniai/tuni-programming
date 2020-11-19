@@ -1,6 +1,7 @@
 #include "city.hh"
 #include "actor.hh"
 #include <QTime>
+#include <iostream>
 #include "../Course/CourseLib/actors/nysse.hh"
 
 int STOP = 0;
@@ -43,6 +44,16 @@ void City::setClock(QTime clock)
     time_ = clock;
     mainWindow_->setTime(clock.hour(), clock.minute());
     mainWindow_->showTime();
+    int delta = 0;
+    int nysses = statistics_.returnNysses();
+    if (old_nysses_ == 0) {
+        old_nysses_ = nysses;
+    } else {
+        delta = nysses - old_nysses_;
+        old_nysses_ = nysses;
+    }
+    mainWindow_->nysseCount(nysses, delta);
+
 
 }
 
@@ -74,7 +85,6 @@ void City::startGame()
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     std::shared_ptr<CourseSide::Nysse> nysse = std::dynamic_pointer_cast<CourseSide::Nysse>(newactor);
-
     if (nysse != 0) {
         nysses_.push_back(newactor);
         statistics_.newNysse();
@@ -91,6 +101,8 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
+        statistics_.nysseRemoved();
+
     QVector<std::shared_ptr<Interface::IActor>>::iterator it = actors_.begin();
     for ( ; it != actors_.end(); ) {
       if (*it == actor) {

@@ -15,13 +15,13 @@ public:
     ActorItem(int x, int y, int type = 0);
     virtual ~ActorItem();
     QRectF boundingRect() const;
+    QRectF playerRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void setCoord(int x, int y);
 
     const int WIDTH = 15;
     const int HEIGHT = 15;
-
 private:
     int x_;
     int y_;

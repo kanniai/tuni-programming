@@ -17,13 +17,19 @@ void Statistics::newNysse()
 
 void Statistics::nysseLeft()
 {
-
+    nysses_--;
 }
 
 void Statistics::nysseRemoved()
 {
-
+    nysses_--;
 }
+
+int Statistics::returnNysses()
+{
+    return nysses_;
+}
+
 
 void Statistics::morePassengers(int num)
 {

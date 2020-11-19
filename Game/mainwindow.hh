@@ -59,6 +59,8 @@ public:
     void setPicture(QImage &img);
     void setTime(int hours, int minutes);
 
+    void nysseCount(int count, int delta);
+
     std::pair<std::shared_ptr<Interface::IActor>, ActorItem*> getPlayer1() const;
 
 

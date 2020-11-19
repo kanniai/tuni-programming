@@ -32,7 +32,7 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     } else if (type_ == 1) {
         painter->drawImage(bounds, QImage(":/images/bus.jpg"));
     } else if (type_ == 2) {
-        //painter->drawImage(bounds, QImage(":/images/passenger.jpg"));
+       // painter->drawImage(bounds, QImage(":/images/passenger.jpg"));
         color = Qt::red;
         QBrush brush(color);
         painter->setBrush(brush);
