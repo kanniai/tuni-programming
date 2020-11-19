@@ -118,6 +118,7 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
         for ( ; it != passengers_.end(); ++it) {
           if (*it == passenger) {
             it = passengers_.erase(it);
+            std::cout << "passenger removed" << std::endl;
             // kutsu statiistikkaa, että passenger poistettu
             return;
           }

@@ -229,7 +229,7 @@ void MainWindow::checkBulletCollision(int animationXCoord_, int animationYCoord_
 
 void MainWindow::bulletMoved(int x2, int y2)
 {
-    map->addItem(bullet2_);
+
     bullet2_->setPos(x2, y2);
     checkCollision(bullet2_);
 
@@ -237,7 +237,6 @@ void MainWindow::bulletMoved(int x2, int y2)
             || bullet2_->x() > MAP_RIGHT_SIDE_XCOORD + 10 || bullet2_->y() > MAP_LOWER_YCOORD + 10) {
         bullet2_->stopTimer();
         map->removeItem(bullet2_);
-
     }
 }
 
@@ -285,14 +284,16 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 
 void MainWindow::spacePressed()
 {
+
     if (bullet2_->isBulletMoving() == true) {
         return;
     }
-
+    map->addItem(bullet2_);
+    bullet2_->setPos(player1_.first->giveLocation().giveX(),
+                     player1_.first->giveLocation().giveY());
     bullet2_->shoot(player1_.first->giveLocation().giveX(),
                                       player1_.first->giveLocation().giveY(),
                                 player1_.second->rotation());
-    std::cout << passengers_.size() << std::endl;
 
 }
 
@@ -319,12 +320,12 @@ void MainWindow::checkCollision(QGraphicsItem* actorItem)
                     buses_.erase(nysse.first);
                     return;
                     // logic poistaa nyssen sisällä olevat passengerit automaattisesti?
-                    //std::vector<std::shared_ptr<Interface::IPassenger>> passengersInNysse =
-                      //      nysse.first->getPassengers();
-                    //for (auto passenger: passengersInNysse) {
-                      //  passenger->remove();
+                    std::vector<std::shared_ptr<Interface::IPassenger>> passengersInNysse =
+                            nysse.first->getPassengers();
+                    for (auto passenger: passengersInNysse) {
+                        passenger->remove();
 
-                    //}
+                    }
                 }
             }
             for(auto stop: stops_) {

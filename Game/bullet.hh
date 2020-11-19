@@ -8,6 +8,8 @@
 #include <qmath.h>
 #include <QDebug>
 
+#include <iostream>
+
 const int WIDTH = 15;
 const int HEIGHT = 15;
 
@@ -24,7 +26,6 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void move();
-    void setAngle(int angle);
     void stopTimer();
     bool isBulletMoving();
 
