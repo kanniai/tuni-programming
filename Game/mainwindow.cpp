@@ -132,7 +132,7 @@ void MainWindow::addStop(int locX, int locY, int type, std::shared_ptr<Interface
 void MainWindow::updateCoords(int nX, int nY)
 {
     last_->setCoord(nX, nY);
-    checkCollision(last_);
+    //checkCollision(last_);
 }
 
 void MainWindow::updateActorCoords(int nX, int nY, std::shared_ptr<Interface::IActor> actor,
@@ -160,7 +160,7 @@ void MainWindow::updateActorCoords(int nX, int nY, std::shared_ptr<Interface::IA
 
           it->second->setCoord(nX, nY);
     }
-    updateStatistics(nyssesDestroyed_, passengersKilled_);
+
 
 }
 
@@ -234,7 +234,7 @@ void MainWindow::checkBulletCollision(int animationXCoord_, int animationYCoord_
             }
             map->removeItem(actor);
         }
-    }      //Miten saan poistettua passengerin logickista?
+    }
 }
 
 void MainWindow::bulletMoved(int x2, int y2)
@@ -248,6 +248,7 @@ void MainWindow::bulletMoved(int x2, int y2)
         bullet2_->stopTimer();
         map->removeItem(bullet2_);
     }
+    updateStatistics(nyssesDestroyed_, passengersKilled_);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)

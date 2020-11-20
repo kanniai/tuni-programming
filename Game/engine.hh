@@ -7,6 +7,8 @@
 #include "city.hh"
 #include "mainwindow.hh"
 #include "player.hh"
+#include "dialog.hh"
+#include "actoritem.hh"
 
 #include <ostream>
 
@@ -25,13 +27,22 @@ public:
 public slots:
     void movePlayer(char button);
     void engineGameStarted();
+    void gameHelicopter();
+    void gameFighter();
+    void gameSpaceShip();
 
 private:
     void createGame();
 
+    int HELICOPTER_NUM = 1;
+    int FIGHTER_NUM = 2;
+    int SPACESHIP_NUM = 3;
+
     std::shared_ptr<StudentSide::Player> player1_;
     StudentSide::MainWindow* mainWindow_;
+    StudentSide::Dialog* dialog_;
     CourseSide::Logic logic_;
+    StudentSide::ActorItem *actoritem_;
 
 };
 

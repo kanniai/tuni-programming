@@ -18,6 +18,8 @@ public:
     QRectF playerRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+    void selectVehicle(int num);
+
     void setCoord(int x, int y);
 
     const int WIDTH = 15;
@@ -26,6 +28,9 @@ private:
     int x_;
     int y_;
     int type_;
+    bool helicopter_ = false;
+    bool fighter_ = false;
+    bool spaceShip_ = false;
 };
 
 }
