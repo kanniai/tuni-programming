@@ -29,9 +29,14 @@ int Statistics::returnNysses()
     return nysses_;
 }
 
+int Statistics::returnPassengers()
+{
+    return passengers_;
+}
+
 void Statistics::morePassengers(int num)
 {
-    //QVERIFY2(num > 1, "num <= 0");
+    QVERIFY(num > 0);
     std::cout << "++ passenger" << passengers_ << std::endl;
     passengers_+= num;
 }
