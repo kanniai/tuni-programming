@@ -38,14 +38,14 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         painter->setBrush(brush);
         painter->drawEllipse(bounds);
     } else if (type_ == 3) {
-        painter->drawImage(bounds, QImage(":/images/heli.jpg"));
+        painter->drawImage(bounds, QImage(":/images/fighter.jpg"));
 //        if (helicopter_) {
 //            painter->drawImage(bounds, QImage(":/images/heli.jpg"));
 //        } else if (fighter_) {
 //            painter->drawImage(bounds, QImage(":/images/fighter.jpg"));
 //        } else if (spaceShip_) {
 //            painter->drawImage(bounds, QImage(":/images/spaceship.jpg"));
-
+//        }
     } else if (type_ == 4) {
         color = Qt::black;
         QBrush brush(color);

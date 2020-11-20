@@ -19,6 +19,7 @@ public:
     void nysseRemoved() override;
 
     int returnNysses();
+    int returnPassengers();
 
 
 
