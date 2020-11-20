@@ -36,7 +36,6 @@ int Statistics::returnPassengers()
 
 void Statistics::morePassengers(int num)
 {
-    QVERIFY(num > 0);
     std::cout << "++ passenger" << passengers_ << std::endl;
     passengers_+= num;
 }

@@ -208,8 +208,6 @@ void MainWindow::nysseCount(int count, int delta)
 
 void MainWindow::updateStatistics(int buses, int passengers)
 {
-    std::cout << buses << std::endl;
-    std::cout << passengers << std::endl;
     ui->destroyedLabel->setText(QString::number(buses));
     ui->killedLabel->setText(QString::number(passengers));
 
@@ -330,21 +328,21 @@ void MainWindow::checkCollision(QGraphicsItem* actorItem)
                     buses_.erase(nysse.first);
 
                     nyssesDestroyed_++;
-
+                    std::vector<std::shared_ptr<Interface::IPassenger>> passangersInNysse;
                     std::vector<std::shared_ptr<Interface::IPassenger>> passengersInNysse =
                             nysse.first->getPassengers();
-                    if (passengersInNysse.size() > 0) {
-                        for (auto passenger: passengersInNysse) {
-                            passenger->remove();
-                            passengersKilled_++;
-                        }
+                    for (auto passenger: passengersInNysse) {
+                        passenger->remove();
+                        passengersKilled_++;
                     }
+                    break;
                 }
             }
             for(auto stop: stops_) {
                 if (stop.second->x() == actor->x() && stop.second->y() == actor->y()) {
                     bullet2_->stopTimer();
                     map->removeItem(bullet2_);
+                    break;
                 }
             }
         }
