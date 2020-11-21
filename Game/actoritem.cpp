@@ -37,15 +37,6 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         QBrush brush(color);
         painter->setBrush(brush);
         painter->drawEllipse(bounds);
-    } else if (type_ == 3) {
-        painter->drawImage(bounds, QImage(":/images/fighter.jpg"));
-//        if (helicopter_) {
-//            painter->drawImage(bounds, QImage(":/images/heli.jpg"));
-//        } else if (fighter_) {
-//            painter->drawImage(bounds, QImage(":/images/fighter.jpg"));
-//        } else if (spaceShip_) {
-//            painter->drawImage(bounds, QImage(":/images/spaceship.jpg"));
-//        }
     } else if (type_ == 4) {
         color = Qt::black;
         QBrush brush(color);
@@ -53,16 +44,18 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         painter->drawEllipse(bounds);
     }
 }
-
 void ActorItem::selectVehicle(int num)
 {
+    QPainter *painter;
+    QRectF bounds = boundingRect();
     if (num == 1) {
-        helicopter_ = true;
-    } else if (num == 2 ) {
-        fighter_ = true;
+        painter->drawImage(bounds, QImage(":/images/heli.jpg"));
+    } else if (num == 2) {
+        painter->drawImage(bounds, QImage(":/images/fighter.jpg"));
     } else if (num == 3) {
-        spaceShip_ = true;
+        painter->drawImage(bounds, QImage(":/images/spaceship.jpg"));
     }
+
 }
 
 void ActorItem::setCoord(int x, int y)

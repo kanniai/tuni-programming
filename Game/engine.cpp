@@ -22,9 +22,10 @@ Engine::Engine()
 
     dialog_->show();
 
-    connect(dialog_, &StudentSide::Dialog::helicopterSelected, this, &StudentSide::Engine::gameHelicopter);
+
     mainWindow_->setTick(1000/30);
     mainWindow_->show();
+    connect(dialog_, &StudentSide::Dialog::helicopterSelected, this, &StudentSide::Engine::gameHelicopter);
 
     createGame();
 
