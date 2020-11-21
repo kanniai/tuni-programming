@@ -20,10 +20,6 @@ Dialog::~Dialog()
 }
 
 
-void Dialog::on_closeButton_clicked()
-{
-    close();
-}
 }
 
 void StudentSide::Dialog::on_heliButton_clicked()

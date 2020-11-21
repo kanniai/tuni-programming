@@ -7,7 +7,9 @@
 int STOP = 0;
 int NYSSE = 1;
 int PASSENGER = 2;
-int PLAYER1 = 3;
+int HELICOPTER= 3;
+int FIGHTER = 4;
+int SPACESHIP = 5;
 
 namespace StudentSide
 {
@@ -78,7 +80,17 @@ void City::startGame()
 
     for (auto player: players_) {
         Interface::Location location = player->giveLocation();
-        mainWindow_->addActor(location.giveX(), location.giveY(), PLAYER1, player);
+        if (helicopter_) {
+            mainWindow_->addActor(location.giveX(), location.giveY(), HELICOPTER, player);
+            helicopter_ = false;
+        } else if (fighter_) {
+            mainWindow_->addActor(location.giveX(), location.giveY(), FIGHTER, player);
+            fighter_ = false;
+        } else if (spaceShip_) {
+            mainWindow_->addActor(location.giveX(), location.giveY(), SPACESHIP, player);
+            spaceShip_ = false;
+        }
+
     }
 
 }
@@ -181,6 +193,17 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 bool City::isGameOver() const
 {
     return false;
+}
+
+void City::selectVehicle(int num)
+{
+    if (num == 1) {
+        helicopter_ = true;
+    } else if (num == 2) {
+        fighter_ = true;
+    } else if (num == 3) {
+        spaceShip_ = true;
+    }
 }
 
 MainWindow* City::returnMainwindow()

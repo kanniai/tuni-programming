@@ -27,10 +27,7 @@ public:
 private:
     int x_;
     int y_;
-    int type_;
-    bool helicopter_ = false;
-    bool fighter_ = false;
-    bool spaceShip_ = false;
+    int type_;   
 };
 
 }

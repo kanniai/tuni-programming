@@ -38,9 +38,6 @@ signals:
 
 
 private slots:
-
-    void on_closeButton_clicked();
-
     void on_heliButton_clicked();
 
     void on_jetButton_clicked();
