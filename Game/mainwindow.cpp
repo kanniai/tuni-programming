@@ -21,6 +21,8 @@ const int ACTOR_HEIGHT = 15;
 const int MAP_CENTER_XCOORD = 250;
 const int MAP_CENTER_YCOORD = 250;
 
+const int GAME_OVER = 5;
+
 namespace StudentSide {
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -98,25 +100,20 @@ void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interfac
         std::shared_ptr<CourseSide::Nysse> nysse =
                        std::dynamic_pointer_cast<CourseSide::Nysse> (actor);
         buses_.insert( {nysse, nActor} );
-    } else if (type == 2) {
 
+    } else if (type == 2) {
         std::shared_ptr<CourseSide::Passenger> passenger =
                        std::dynamic_pointer_cast<CourseSide::Passenger> (actor);
-
         passengers_.insert( {passenger, nActor} );
-
-        if (passenger->getStop() != nullptr || passenger->isInVehicle()) {
-            return;
-        }
+        return;
 
     } else if (type == 3) {
         player1_.first = actor;
         player1_.second = nActor;
         player1_.second->setTransformOriginPoint(WIDTH/2, WIDTH/2);
-    }
 
+    }
     map->addItem(nActor);
-    last_ = nActor;
 }
 
 void MainWindow::addStop(int locX, int locY, int type, std::shared_ptr<Interface::IStop> stop)
@@ -126,13 +123,12 @@ void MainWindow::addStop(int locX, int locY, int type, std::shared_ptr<Interface
     ActorItem* nActor = new ActorItem(locX, locY, type);
     map->addItem(nActor);
     stops_.insert({stop2, nActor});
-
 }
 
 void MainWindow::updateCoords(int nX, int nY)
 {
-    last_->setCoord(nX, nY);
-    checkCollision(last_);
+    player1_.second->setCoord(nX, nY);
+    checkCollision(player1_.second);
 }
 
 void MainWindow::updateActorCoords(int nX, int nY, std::shared_ptr<Interface::IActor> actor,
@@ -151,14 +147,14 @@ void MainWindow::updateActorCoords(int nX, int nY, std::shared_ptr<Interface::IA
                        std::dynamic_pointer_cast<CourseSide::Passenger> (actor);
         std::map<std::shared_ptr<CourseSide::Passenger>,ActorItem*>::iterator it;
         it = passengers_.find(passenger);
-        if (it != passengers_.end())
-            //if (!it->first->isInVehicle()) {
-              //  ActorItem* nActor = new ActorItem(it->first->giveLocation().giveX(),
-                //                                  it->first->giveLocation().giveY(), type);
+       // if (it != passengers_.end())
+            //if (!it->first->isInVehicle() && it->first->getStop() == nullptr) {
+              //  std::cout << "actor ei ole bussissa tai stopilla" << std::endl;
+                //ActorItem* nActor = new ActorItem(it->first->giveLocation().giveX(),
+                                                  //it->first->giveLocation().giveY(), type);
                 //map->addItem(nActor);
-            //}
-
-          it->second->setCoord(nX, nY);
+          //  }
+          //it->second->setCoord(nX, nY);
     }
     updateStatistics(nyssesDestroyed_, passengersKilled_);
 
@@ -328,6 +324,12 @@ void MainWindow::checkCollision(QGraphicsItem* actorItem)
                     buses_.erase(nysse.first);
 
                     nyssesDestroyed_++;
+
+                    if (nyssesDestroyed_ >= GAME_OVER) {
+                        endGame();
+                    }
+
+
                     std::vector<std::shared_ptr<Interface::IPassenger>> passangersInNysse;
                     std::vector<std::shared_ptr<Interface::IPassenger>> passengersInNysse =
                             nysse.first->getPassengers();
@@ -357,6 +359,12 @@ std::shared_ptr<Interface::IActor> MainWindow::getActor(ActorItem* actorItem)
 void MainWindow::removeBullet()
 {
     map->removeItem(bullet_);
+}
+
+void MainWindow::endGame()
+{
+    std::cout << "game over" << std::endl;
+    //emit gameOver();
 }
 
 void StudentSide::MainWindow::on_startButton_clicked()

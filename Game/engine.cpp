@@ -18,7 +18,7 @@ Engine::Engine()
 
     connect(mainWindow_, &StudentSide::MainWindow::gameStarted, this, &StudentSide::Engine::engineGameStarted);
     connect(mainWindow_, &StudentSide::MainWindow::buttonPressed, this, &Engine::movePlayer);
-
+    connect(mainWindow_, &StudentSide::MainWindow::gameOver, this, &Engine::gameOver);
 
     mainWindow_->setTick(1000/30);
     mainWindow_->show();
@@ -63,6 +63,11 @@ void Engine::movePlayer(char button)
 void Engine::engineGameStarted()
 {
     std::cout << "gamestartedengine" << std::endl;
+}
+
+void Engine::gameOver()
+{
+    std:: cout << "gameover" << std::endl;
 }
 
 void Engine::createGame()

@@ -25,6 +25,7 @@ public:
 public slots:
     void movePlayer(char button);
     void engineGameStarted();
+    void gameOver();
 
 private:
     void createGame();
@@ -32,7 +33,6 @@ private:
     std::shared_ptr<StudentSide::Player> player1_;
     StudentSide::MainWindow* mainWindow_;
     CourseSide::Logic logic_;
-
 };
 
 }
