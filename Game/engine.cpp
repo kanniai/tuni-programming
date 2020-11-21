@@ -14,21 +14,14 @@ namespace StudentSide
 {
 Engine::Engine()
 {
-    dialog_ = new StudentSide::Dialog();
     mainWindow_ = new StudentSide::MainWindow();
-    std::shared_ptr<StudentSide::City> city = std::make_shared<StudentSide::City>(mainWindow_);
 
     connect(mainWindow_, &StudentSide::MainWindow::gameStarted, this, &StudentSide::Engine::engineGameStarted);
     connect(mainWindow_, &StudentSide::MainWindow::buttonPressed, this, &Engine::movePlayer);
-
-    dialog_->show();
-
-    //connect(mainWindow_, &StudentSide::MainWindow::gameOver, this, &Engine::gameOver);
+    connect(mainWindow_, &StudentSide::MainWindow::gameOver, this, &Engine::gameOver);
 
     mainWindow_->setTick(1000/30);
     mainWindow_->show();
-
-
 
     createGame();
 
@@ -39,30 +32,6 @@ Engine::~Engine()
 
 
 }
-
-void Engine::gameHelicopter()
-{
-    city->selectVehicle(HELICOPTER_NUM);
-    mainWindow_->setTick(1000/30);
-    mainWindow_->show();
-
-}
-
-void Engine::gameFighter()
-{
-    actoritem_->selectVehicle(FIGHTER_NUM);
-    mainWindow_->setTick(1000/30);
-    mainWindow_->show();
-
-}
-
-void Engine::gameSpaceShip()
-{
-    actoritem_->selectVehicle(SPACESHIP_NUM);
-    mainWindow_->setTick(1000/30);
-    mainWindow_->show();
-}
-
 
 void Engine::movePlayer(char button)
 {
@@ -96,18 +65,16 @@ void Engine::engineGameStarted()
     std::cout << "gamestartedengine" << std::endl;
 }
 
-
 void Engine::gameOver()
 {
     std:: cout << "gameover" << std::endl;
 }
 
-
 void Engine::createGame()
 {
 
 
-
+    std::shared_ptr<StudentSide::City> city = std::make_shared<StudentSide::City>(mainWindow_);
 
     QImage img_small(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
     QImage img_large(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
@@ -127,4 +94,3 @@ void Engine::createGame()
     logic_.finalizeGameStart();
 }
 }
-
