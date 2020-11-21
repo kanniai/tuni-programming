@@ -30,6 +30,7 @@ public slots:
     void gameHelicopter();
     void gameFighter();
     void gameSpaceShip();
+    void gameOver();
 
 private:
     void createGame();
@@ -43,6 +44,7 @@ private:
     StudentSide::Dialog* dialog_;
     CourseSide::Logic logic_;
     StudentSide::ActorItem *actoritem_;
+
 
 };
 

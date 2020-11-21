@@ -111,7 +111,6 @@ void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interfac
         player1_.first = actor;
         player1_.second = nActor;
         player1_.second->setTransformOriginPoint(WIDTH/2, WIDTH/2);
-
     }
     map->addItem(nActor);
 }
