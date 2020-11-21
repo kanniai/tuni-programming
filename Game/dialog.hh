@@ -1,28 +1,26 @@
 #ifndef DIALOG_HH
 #define DIALOG_HH
 
+#include <QDialog>
 #include <QGraphicsScene>
 #include <QTimer>
-#include <iostream>
-#include <memory>
 #include <QVector>
-#include <map>
-#include <QPainter>
-#include <QStyleOptionGraphicsItem>
 #include <QKeyEvent>
-
 #include <QString>
 #include <map>
-#include <QGraphicsItemAnimation>
-#include <QTimeLine>
-#include <QPointF>
-#include <QDialog>
+
 
 namespace Ui {
+
 class Dialog;
 }
 
+
 namespace StudentSide {
+/**
+ * @brief The Dialog class is presented in making pregame-choices before
+ * actually starting the game
+ */
 class Dialog : public QDialog
 {
     Q_OBJECT
@@ -32,16 +30,14 @@ public:
     ~Dialog();
 
 signals:
+    // Player vehicle selection
     void helicopterSelected();
     void fighterSelected();
     void spaceShipSelected();
 
-
 private slots:
     void on_heliButton_clicked();
-
     void on_jetButton_clicked();
-
     void on_spaceButton_clicked();
 
 private:

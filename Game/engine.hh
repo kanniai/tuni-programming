@@ -15,24 +15,52 @@
 namespace StudentSide
 {
 
+/**
+ * @brief The Engine class starts the game and sets up main window and dialog.
+ * Emits the necessary signals for other classes from
+ */
 class Engine : public QObject
 {
     Q_OBJECT
 
 public:
+    /**
+     * @brief Default constructor
+     */
     Engine();
     ~Engine();
 
 
 public slots:
+
+    /**
+     * @brief movePlayer tracks which direction player is to be moved
+     * @param button (w,a,s,d)
+     */
     void movePlayer(char button);
-    void engineGameStarted();
+
+    /**
+     * @brief gameHelicopter: player selects helicopter as vehicle
+     */
     void gameHelicopter();
+
+    /**
+     * @brief gameFighter: player selects fighter as vehicle
+     */
     void gameFighter();
+
+    /**
+     * @brief gameSpaceShip: player selects spaceship as vehicle
+     */
     void gameSpaceShip();
+
+    void engineGameStarted();
     void gameOver();
 
 private:
+    /**
+     * @brief createGame calls the necessary functions to start the game
+     */
     void createGame();
 
     int HELICOPTER_NUM = 1;
