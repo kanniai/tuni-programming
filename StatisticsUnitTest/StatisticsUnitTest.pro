@@ -18,4 +18,4 @@ HEADERS += \
 
 INCLUDEPATH += \
     $$PWD/../Game/ \
-    $$PWD/../Course/CourseLib \
+    $$PWD/../Course/CourseLib
