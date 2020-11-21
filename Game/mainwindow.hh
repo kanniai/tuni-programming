@@ -153,10 +153,6 @@ private:
      */
     void removeBullet();
 
-    /**
-     * @brief endGame
-     * Self-explanatory function
-     */
     void endGame();
     void updateTime();
     bool isGameOver();
