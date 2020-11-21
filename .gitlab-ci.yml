@@ -30,7 +30,7 @@ StatisticsUnitTest:
   artifacts:
     # Paths to the artifacts we want to pass
     paths:
-      - StatisticsUnitTest/tst_statisticsunittest
+      - StatisticsUnitTest/tst_statisticsunittest.cpp
     # How long we store the artifacts in GitLab
     expire_in: 2d
 
@@ -43,7 +43,7 @@ StatisticsUnitTest:
     # Go to the correct directory
     - cd StatisticsUnitTest
     # Run the test binary
-    - ./StatisticsUnitTest
+    - ./tst_statisticsunittest.cpp
   # On what jobs this dependes on, which artifacts we download for this job
   dependencies:
     - StatisticsUnitTest
