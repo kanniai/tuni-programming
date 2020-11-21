@@ -14,12 +14,15 @@ namespace StudentSide
 {
 Engine::Engine()
 {
+    dialog_ = new StudentSide::Dialog();
     mainWindow_ = new StudentSide::MainWindow();
 
     connect(mainWindow_, &StudentSide::MainWindow::gameStarted, this, &StudentSide::Engine::engineGameStarted);
     connect(mainWindow_, &StudentSide::MainWindow::buttonPressed, this, &Engine::movePlayer);
-    connect(mainWindow_, &StudentSide::MainWindow::gameOver, this, &Engine::gameOver);
 
+    dialog_->show();
+
+    //connect(dialog_, &StudentSide::Dialog::helicopterSelected, this, &StudentSide::Engine::gameHelicopter);
     mainWindow_->setTick(1000/30);
     mainWindow_->show();
 
@@ -32,6 +35,35 @@ Engine::~Engine()
 
 
 }
+
+void Engine::gameHelicopter()
+{
+    actoritem_->selectVehicle(HELICOPTER_NUM);
+    mainWindow_->setTick(1000/30);
+    mainWindow_->show();
+
+}
+
+void Engine::gameFighter()
+{
+    actoritem_->selectVehicle(FIGHTER_NUM);
+    mainWindow_->setTick(1000/30);
+    mainWindow_->show();
+
+}
+
+void Engine::gameSpaceShip()
+{
+    actoritem_->selectVehicle(SPACESHIP_NUM);
+    mainWindow_->setTick(1000/30);
+    mainWindow_->show();
+}
+
+void Engine::gameOver()
+{
+
+}
+
 
 void Engine::movePlayer(char button)
 {
@@ -65,10 +97,6 @@ void Engine::engineGameStarted()
     std::cout << "gamestartedengine" << std::endl;
 }
 
-void Engine::gameOver()
-{
-    std:: cout << "gameover" << std::endl;
-}
 
 void Engine::createGame()
 {
@@ -94,3 +122,4 @@ void Engine::createGame()
     logic_.finalizeGameStart();
 }
 }
+

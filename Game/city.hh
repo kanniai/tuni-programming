@@ -28,7 +28,6 @@ public:
     void actorMoved(std::shared_ptr<Interface::IActor> actor);
     std::vector<std::shared_ptr<Interface::IActor>> getNearbyActors(Interface::Location loc) const;
     bool isGameOver() const;
-    void selectVehicle(int num);
 
     StudentSide::MainWindow* returnMainwindow();
 
@@ -41,9 +40,6 @@ private:
     QVector<std::shared_ptr<Interface::IStop>> stops_;
     QVector<std::shared_ptr<Interface::IActor>> players_;
     QTime time_;
-    bool helicopter_ = false;
-    bool fighter_ = false;
-    bool spaceShip_ = false;
 
 
 };

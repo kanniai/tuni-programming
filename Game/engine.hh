@@ -45,7 +45,6 @@ private:
     CourseSide::Logic logic_;
     StudentSide::ActorItem *actoritem_;
 
-
 };
 
 }

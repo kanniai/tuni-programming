@@ -30,13 +30,9 @@ int Statistics::returnNysses()
     return nysses_;
 }
 
-int Statistics::returnPassengers()
-{
-    return passengers_;
-}
-
 void Statistics::morePassengers(int num)
 {
+    std::cout << "++ passenger" << passengers_ << std::endl;
     passengers_+= num;
 }
 

@@ -1,7 +1,6 @@
 #ifndef ACTORITEM_HH
 #define ACTORITEM_HH
 
-#include "dialog.hh"
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QPainter>
@@ -25,7 +24,6 @@ public:
 
     const int WIDTH = 15;
     const int HEIGHT = 15;
-
 private:
     int x_;
     int y_;
@@ -33,8 +31,6 @@ private:
     bool helicopter_ = false;
     bool fighter_ = false;
     bool spaceShip_ = false;
-    StudentSide::Dialog dialog_;
-
 };
 
 }
