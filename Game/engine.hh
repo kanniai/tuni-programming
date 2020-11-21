@@ -44,6 +44,7 @@ private:
     StudentSide::Dialog* dialog_;
     CourseSide::Logic logic_;
     StudentSide::ActorItem *actoritem_;
+    std::shared_ptr<StudentSide::City> city_;
 
 };
 

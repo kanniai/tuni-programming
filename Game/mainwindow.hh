@@ -70,6 +70,7 @@ public:
 signals:
     void gameStarted();
     void buttonPressed(char button);
+    void gameOverSignal();
 
 public slots:
     void checkBulletCollision(int animationXCoord_, int animationYCoord_,
@@ -89,12 +90,12 @@ private:
     std::shared_ptr<Interface::IActor> getActor(ActorItem* actorItem);
     void removeBullet();
     void endGame();
+    void updateTime();
+    bool isGameOver();
 
     Ui::MainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
-    //QVector<QGraphicsItem*> actors_;
-    ActorItem* last_;
     ActorItem* bullet_;
     StudentSide::Bullet* bullet2_;
 
@@ -105,8 +106,8 @@ private:
 
     StudentSide::Animation* animation_;
 
-    //
-    int seconds_;
+    // Real running time
+    int seconds_ = 0;
 
     // Time according to logic
     int hours_;
@@ -118,6 +119,8 @@ private:
     int width_ = 500; //pxls
     int height_ = 500;
     int tick_ = 500; //ms
+
+    bool gameOver_ = false;
 };
 
 } //namespace

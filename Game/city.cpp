@@ -40,6 +40,9 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 
 void City::setClock(QTime clock)
 {
+    if (isGameOver()) {
+        return;
+    }
     time_ = clock;
     mainWindow_->setTime(clock.hour(), clock.minute());
     mainWindow_->showTime();
@@ -85,6 +88,9 @@ void City::startGame()
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
+    if (isGameOver()) {
+        return;
+    }
     std::shared_ptr<CourseSide::Nysse> nysse = std::dynamic_pointer_cast<CourseSide::Nysse>(newactor);
     if (nysse != 0) {
         nysses_.push_back(newactor);
@@ -103,7 +109,9 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-
+    if (isGameOver()) {
+        return;
+    }
     std::shared_ptr<CourseSide::Nysse> nysse = std::dynamic_pointer_cast<CourseSide::Nysse>(actor);
     if (nysse != 0) {
         QVector<std::shared_ptr<Interface::IActor>>::iterator it = nysses_.begin();
@@ -160,6 +168,9 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 // Logic::advance calls this function
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
+    if (isGameOver()) {
+        return;
+    }
     std::shared_ptr<CourseSide::Nysse> nysse = std::dynamic_pointer_cast<CourseSide::Nysse>(actor);
 
     if (nysse != 0) {
@@ -180,8 +191,14 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 
 bool City::isGameOver() const
 {
-    return false;
+    return gameOver_;
 }
+
+void City::gameOver()
+{
+    gameOver_ = true;
+}
+
 
 MainWindow* City::returnMainwindow()
 {

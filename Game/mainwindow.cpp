@@ -21,6 +21,8 @@ const int ACTOR_HEIGHT = 15;
 const int MAP_CENTER_XCOORD = 250;
 const int MAP_CENTER_YCOORD = 250;
 
+const int DESTROYED_NYSSES_NEEDED_FOR_WIN = 1;
+
 namespace StudentSide {
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -50,6 +52,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->killedLabel->move(width_ + 6*PADDING, 9.5*NEXTROW);
     ui->statisticsFrame->move(width_ + 0.8*PADDING, 7*NEXTROW);
 
+    ui->endGameLabel->move(width_ + 1.2*PADDING, 14*NEXTROW);
+    ui->secondsLabel->move(width_ + 1.2*PADDING, 15*NEXTROW);
 
     map = new QGraphicsScene(this);
     ui->gameView->setScene(map);
@@ -59,7 +63,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //ui->gameView->fitInView(0,0, MAPWIDTH, MAPHEIGHT, Qt::KeepAspectRatio);
 
     timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
+    //connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
+    connect(timer, &QTimer::timeout, this, &StudentSide::MainWindow::updateTime);
     timer->start(tick_);
 
     animation_ = new StudentSide::Animation();
@@ -116,7 +121,6 @@ void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interfac
     }
 
     map->addItem(nActor);
-    last_ = nActor;
 }
 
 void MainWindow::addStop(int locX, int locY, int type, std::shared_ptr<Interface::IStop> stop)
@@ -131,8 +135,7 @@ void MainWindow::addStop(int locX, int locY, int type, std::shared_ptr<Interface
 
 void MainWindow::updateCoords(int nX, int nY)
 {
-    last_->setCoord(nX, nY);
-    //checkCollision(last_);
+    player1_.second->setCoord(nX, nY);
 }
 
 void MainWindow::updateActorCoords(int nX, int nY, std::shared_ptr<Interface::IActor> actor,
@@ -253,7 +256,9 @@ void MainWindow::bulletMoved(int x2, int y2)
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-
+    if (isGameOver()) {
+        return;
+    }
     if(event->key() == Qt::Key_W) {
         emit buttonPressed('w');
         player1_.second->setRotation(-90);
@@ -277,6 +282,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
+    if (isGameOver()) {
+        return;
+    }
+
     if (animation_->isBulletMoving() == true) {
         return;
     }
@@ -340,6 +349,10 @@ void MainWindow::checkCollision(QGraphicsItem* actorItem)
                             passengersKilled_++;
                         }
                     }
+                    if (nyssesDestroyed_ >= DESTROYED_NYSSES_NEEDED_FOR_WIN) {
+                        endGame();
+                    }
+                    break;
                 }
             }
             for(auto stop: stops_) {
@@ -347,6 +360,7 @@ void MainWindow::checkCollision(QGraphicsItem* actorItem)
                     bullet2_->stopTimer();
                     map->removeItem(bullet2_);
                 }
+                break;
             }
         }
     }
@@ -362,11 +376,26 @@ void MainWindow::removeBullet()
     map->removeItem(bullet_);
 }
 
-
 void MainWindow::endGame()
 {
+    gameOver_ = true;
+
     std::cout << "game over" << std::endl;
-    //emit gameOver();
+    ui->endGameLabel->setText("You won the game!");
+
+    QString seconds = QString::number(seconds_);
+    ui->secondsLabel->setText("Time spent: " + seconds + " seconds");
+    emit gameOverSignal();
+}
+
+void MainWindow::updateTime()
+{
+    seconds_++;
+}
+
+bool MainWindow::isGameOver()
+{
+    return gameOver_;
 }
 
 void StudentSide::MainWindow::on_startButton_clicked()

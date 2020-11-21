@@ -16,18 +16,18 @@ Engine::Engine()
 {
     dialog_ = new StudentSide::Dialog();
     mainWindow_ = new StudentSide::MainWindow();
+    city_ = std::make_shared<StudentSide::City>(mainWindow_);
 
     connect(mainWindow_, &StudentSide::MainWindow::gameStarted, this, &StudentSide::Engine::engineGameStarted);
     connect(mainWindow_, &StudentSide::MainWindow::buttonPressed, this, &Engine::movePlayer);
+    connect(mainWindow_, &StudentSide::MainWindow::gameOverSignal, this, &Engine::gameOver);
 
     dialog_->show();
 
     //connect(dialog_, &StudentSide::Dialog::helicopterSelected, this, &StudentSide::Engine::gameHelicopter);
-    mainWindow_->setTick(1000/30);
+    mainWindow_->setTick(1000);
     mainWindow_->show();
-
     createGame();
-
 }
 
 Engine::~Engine()
@@ -61,7 +61,7 @@ void Engine::gameSpaceShip()
 
 void Engine::gameOver()
 {
-
+    city_->gameOver();
 }
 
 
@@ -101,23 +101,20 @@ void Engine::engineGameStarted()
 void Engine::createGame()
 {
 
-
-    std::shared_ptr<StudentSide::City> city = std::make_shared<StudentSide::City>(mainWindow_);
-
     QImage img_small(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
     QImage img_large(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
 
-    city->setBackground(img_small, img_large);
+    city_->setBackground(img_small, img_large);
 
     logic_.fileConfig();
 
-    logic_.takeCity(city);
+    logic_.takeCity(city_);
 
     player1_ = std::make_shared<StudentSide::Player>();
     Interface::Location loc;
     loc.setXY(PLAYER_X_COORD, PLAYER_Y_COORD);
     player1_->move(loc);
-    city->addActor(player1_);
+    city_->addActor(player1_);
 
     logic_.finalizeGameStart();
 }
