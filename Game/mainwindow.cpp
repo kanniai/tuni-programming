@@ -154,22 +154,8 @@ void MainWindow::updateActorCoords(int nX, int nY, std::shared_ptr<Interface::IA
         if (it != buses_.end())
           it->second->setCoord(nX, nY);
 
-    } else if (type == 2) {
-        std::shared_ptr<CourseSide::Passenger> passenger =
-                       std::dynamic_pointer_cast<CourseSide::Passenger> (actor);
-        std::map<std::shared_ptr<CourseSide::Passenger>,ActorItem*>::iterator it;
-        it = passengers_.find(passenger);
-       // if (it != passengers_.end())
-            //if (!it->first->isInVehicle() && it->first->getStop() == nullptr) {
-              //  std::cout << "actor ei ole bussissa tai stopilla" << std::endl;
-                //ActorItem* nActor = new ActorItem(it->first->giveLocation().giveX(),
-                                                  //it->first->giveLocation().giveY(), type);
-                //map->addItem(nActor);
-          //  }
-          //it->second->setCoord(nX, nY);
     }
     updateStatistics(nyssesDestroyed_, passengersKilled_);
-
 }
 
 void StudentSide::MainWindow::MainWindow::showTime()
