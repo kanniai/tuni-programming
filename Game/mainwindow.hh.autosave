@@ -90,6 +90,7 @@ private:
     std::shared_ptr<Interface::IActor> getActor(ActorItem* actorItem);
     void removeBullet();
     void endGame();
+    void updateSeconds();
 
     Ui::MainWindow *ui;
     QGraphicsScene *map;

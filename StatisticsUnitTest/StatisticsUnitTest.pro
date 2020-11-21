@@ -1,5 +1,6 @@
 QT += testlib
-QT -= gui
+QT += gui
+QT += widgets
 
 TARGET = tst_statisticsunittest
 
