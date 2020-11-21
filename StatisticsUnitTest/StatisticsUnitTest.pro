@@ -1,10 +1,10 @@
 QT += testlib
-QT += gui
-QT += widgets
+QT -= gui
 
 TARGET = tst_statisticsunittest
 
-CONFIG += qt console warn_on depend_includepath testcase
+
+CONFIG   += console
 CONFIG -= app_bundle
 CONFIG += c++14
 
@@ -12,6 +12,8 @@ TEMPLATE = app
 
 SOURCES +=  tst_statisticsunittest.cpp \
     ../Game/statistics.cpp
+
+DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 HEADERS += \
     ../Game/statistics.hh

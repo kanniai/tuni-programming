@@ -364,6 +364,7 @@ void MainWindow::removeBullet()
 void MainWindow::endGame()
 {
     std::cout << "game over" << std::endl;
+
     //emit gameOver();
 }
 

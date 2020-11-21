@@ -104,6 +104,8 @@ private:
 
     StudentSide::Animation* animation_;
 
+    int realSeconds_;
+
     int hours_;
     int minutes_;
     int nyssesDestroyed_ = 0;
