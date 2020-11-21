@@ -43,8 +43,6 @@ StatisticsUnitTest:
     # Go to the correct directory
     - cd StatisticsUnitTest
     # Run the test binary
-    - ./StatisticsUnitTest
-  # On what jobs this dependes on, which artifacts we download for this job
-  dependencies:
-    - StatisticsUnitTest
+    - ./tst_statisticsunittest
+
 
