@@ -21,8 +21,14 @@ Engine::Engine()
     connect(mainWindow_, &StudentSide::MainWindow::gameStarted, this, &StudentSide::Engine::engineGameStarted);
     connect(mainWindow_, &StudentSide::MainWindow::buttonPressed, this, &Engine::movePlayer);
     connect(mainWindow_, &StudentSide::MainWindow::gameOverSignal, this, &Engine::gameOver);
+    connect(mainWindow_, &StudentSide::MainWindow::nysseDestroyedSignal, this, &Engine::nysseDestroyed);
+
 
     dialog_->show();
+    connect(dialog_, &StudentSide::Dialog::helicopterSelected, this, &StudentSide::Engine::gameHelicopter);
+    connect(dialog_, &StudentSide::Dialog::fighterSelected, this, &StudentSide::Engine::gameFighter);
+    connect(dialog_, &StudentSide::Dialog::spaceShipSelected, this, &StudentSide::Engine::gameSpaceShip);
+    dialog_->exec();
 
     //connect(dialog_, &StudentSide::Dialog::helicopterSelected, this, &StudentSide::Engine::gameHelicopter);
     mainWindow_->setTick(1000);
@@ -38,30 +44,28 @@ Engine::~Engine()
 
 void Engine::gameHelicopter()
 {
-    actoritem_->selectVehicle(HELICOPTER_NUM);
-    mainWindow_->setTick(1000/30);
-    mainWindow_->show();
-
+    city_->selectVehicle(HELICOPTER_NUM);
 }
 
 void Engine::gameFighter()
-{
-    actoritem_->selectVehicle(FIGHTER_NUM);
-    mainWindow_->setTick(1000/30);
-    mainWindow_->show();
+{  
+    city_->selectVehicle(FIGHTER_NUM);
 
 }
 
 void Engine::gameSpaceShip()
 {
-    actoritem_->selectVehicle(SPACESHIP_NUM);
-    mainWindow_->setTick(1000/30);
-    mainWindow_->show();
+    city_->selectVehicle(SPACESHIP_NUM);
 }
 
 void Engine::gameOver()
 {
     city_->gameOver();
+}
+
+void Engine::nysseDestroyed()
+{
+    city_->nysseDestroyed();
 }
 
 

@@ -71,6 +71,7 @@ signals:
     void gameStarted();
     void buttonPressed(char button);
     void gameOverSignal();
+    void nysseDestroyedSignal();
 
 public slots:
     void checkBulletCollision(int animationXCoord_, int animationYCoord_,

@@ -31,6 +31,8 @@ public slots:
     void gameFighter();
     void gameSpaceShip();
     void gameOver();
+    void nysseDestroyed();
+
 
 private:
     void createGame();

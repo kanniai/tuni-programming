@@ -2,7 +2,7 @@
 #define STATISTICS_HH
 #include "interfaces/istatistics.hh"
 #include "mainwindow.hh"
-//#include <QtTest/QTest>
+#include <cassert>
 
 
 namespace StudentSide
