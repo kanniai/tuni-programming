@@ -1,12 +1,13 @@
 #ifndef CITY_HH
 #define CITY_HH
 #include "interfaces/icity.hh"
-#include "simplemainwindow.hh"
 #include "mainwindow.hh"
 #include "player.hh"
 #include "statistics.hh"
 
 #include <QTime>
+
+
 
 namespace StudentSide
 {
@@ -28,9 +29,18 @@ public:
     void actorMoved(std::shared_ptr<Interface::IActor> actor);
     std::vector<std::shared_ptr<Interface::IActor>> getNearbyActors(Interface::Location loc) const;
     bool isGameOver() const;
+    void gameOver();
     void selectVehicle(int num);
+    void nysseDestroyed();
 
     StudentSide::MainWindow* returnMainwindow();
+
+    int STOP = 0;
+    int NYSSE = 1;
+    int PASSENGER = 2;
+    int HELICOPTER= 3;
+    int FIGHTER = 4;
+    int SPACESHIP = 5;
 
 private:
     StudentSide::MainWindow* mainWindow_;
@@ -44,6 +54,7 @@ private:
     bool helicopter_ = false;
     bool fighter_ = false;
     bool spaceShip_ = false;
+    bool gameOver_ = false;
 
 
 };

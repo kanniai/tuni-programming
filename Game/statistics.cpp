@@ -32,7 +32,7 @@ int Statistics::returnNysses()
 
 void Statistics::morePassengers(int num)
 {
-    std::cout << "++ passenger" << passengers_ << std::endl;
+    Q_ASSERT(num > 0);
     passengers_+= num;
 }
 

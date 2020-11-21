@@ -18,9 +18,11 @@ Engine::Engine()
     mainWindow_ = new StudentSide::MainWindow();
     city_ = std::make_shared<StudentSide::City>(mainWindow_);
 
-
     connect(mainWindow_, &StudentSide::MainWindow::gameStarted, this, &StudentSide::Engine::engineGameStarted);
     connect(mainWindow_, &StudentSide::MainWindow::buttonPressed, this, &Engine::movePlayer);
+    connect(mainWindow_, &StudentSide::MainWindow::gameOverSignal, this, &Engine::gameOver);
+    connect(mainWindow_, &StudentSide::MainWindow::nysseDestroyedSignal, this, &Engine::nysseDestroyed);
+
 
     dialog_->show();
     connect(dialog_, &StudentSide::Dialog::helicopterSelected, this, &StudentSide::Engine::gameHelicopter);
@@ -28,11 +30,10 @@ Engine::Engine()
     connect(dialog_, &StudentSide::Dialog::spaceShipSelected, this, &StudentSide::Engine::gameSpaceShip);
     dialog_->exec();
 
-    mainWindow_->setTick(1000/30);
+    //connect(dialog_, &StudentSide::Dialog::helicopterSelected, this, &StudentSide::Engine::gameHelicopter);
+    mainWindow_->setTick(1000);
     mainWindow_->show();
-
     createGame();
-
 }
 
 Engine::~Engine()
@@ -59,7 +60,12 @@ void Engine::gameSpaceShip()
 
 void Engine::gameOver()
 {
+    city_->gameOver();
+}
 
+void Engine::nysseDestroyed()
+{
+    city_->nysseDestroyed();
 }
 
 

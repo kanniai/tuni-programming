@@ -122,6 +122,8 @@ public:
 signals:
     void gameStarted();
     void buttonPressed(char button);
+    void gameOverSignal();
+    void nysseDestroyedSignal();
 
 public slots:
     void checkBulletCollision(int animationXCoord_, int animationYCoord_,
@@ -156,6 +158,8 @@ private:
      * Self-explanatory function
      */
     void endGame();
+    void updateTime();
+    bool isGameOver();
 
 
     Ui::MainWindow *ui;
@@ -172,8 +176,9 @@ private:
 
     StudentSide::Animation* animation_;
 
+
     // Time used in complete the game
-    int seconds_;
+    int seconds_ = 0;
 
     // Time according to logic
     int hours_;
@@ -185,6 +190,8 @@ private:
     int width_ = 500; //pxls
     int height_ = 500;
     int tick_ = 500; //ms
+
+    bool gameOver_ = false;
 };
 
 }

@@ -56,6 +56,8 @@ public slots:
 
     void engineGameStarted();
     void gameOver();
+    void nysseDestroyed();
+
 
 private:
     /**
