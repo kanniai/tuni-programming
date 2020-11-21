@@ -190,10 +190,6 @@ void MainWindow::setTime(int hours, int minutes)
     minutes_ = minutes;
 }
 
-void MainWindow::selectVehicle(int num)
-{
-
-}
 
 void MainWindow::nysseCount(int count, int delta)
 {

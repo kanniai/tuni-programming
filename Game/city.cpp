@@ -7,7 +7,9 @@
 int STOP = 0;
 int NYSSE = 1;
 int PASSENGER = 2;
-int PLAYER1 = 3;
+int HELICOPTER = 3;
+int FIGHTER = 4;
+int SPACESHIP = 5;
 
 namespace StudentSide
 {
@@ -78,7 +80,9 @@ void City::startGame()
 
     for (auto player: players_) {
         Interface::Location location = player->giveLocation();
-        mainWindow_->addActor(location.giveX(), location.giveY(), PLAYER1, player);
+        mainWindow_->addActor(location.giveX(), location.giveY(), HELICOPTER, player);
+        mainWindow_->addActor(location.giveX(), location.giveY(), FIGHTER, player);
+        mainWindow_->addActor(location.giveX(), location.giveY(), SPACESHIP, player);
     }
 
 }
