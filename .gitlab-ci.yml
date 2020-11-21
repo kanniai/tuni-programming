@@ -44,9 +44,5 @@ StatisticsUnitTest:
     - cd StatisticsUnitTest
     # Run the test binary
     - ./tst_statisticsunittest
-  # On what jobs this dependes on, which artifacts we download for this job
-  dependencies:
-    - StatisticsUnitTest.pro
-    - tst_statisticsunittest.cpp
-     
+
 
