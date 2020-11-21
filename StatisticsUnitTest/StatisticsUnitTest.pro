@@ -19,3 +19,7 @@ HEADERS += \
 INCLUDEPATH += \
     $$PWD/../Game/ \
     $$PWD/../Course/CourseLib
+
+DEPENDPATH += \
+    $$PWD/../Game/ \
+    $$PWD/../Course/CourseLib
