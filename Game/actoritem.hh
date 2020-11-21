@@ -22,9 +22,6 @@ public:
     QRectF boundingRect() const;
     QRectF playerRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-
-    void selectVehicle(int num);
-
     void setCoord(int x, int y);
 
     const int WIDTH = 15;

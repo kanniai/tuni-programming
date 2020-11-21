@@ -2,13 +2,7 @@
 
 #include <QDebug>
 
-const int PLAYER_X_COORD = 30;
-const int PLAYER_Y_COORD = 0;
 
-const int MAP_LEFT_SIDE_XCOORD = 20;
-const int MAP_UPPER_YCOORD = 20;
-const int MAP_RIGHT_SIDE_XCOORD = 469;
-const int MAP_LOWER_YCOORD = 469;
 
 namespace StudentSide
 {
@@ -45,17 +39,19 @@ Engine::~Engine()
 void Engine::gameHelicopter()
 {
     city_->selectVehicle(HELICOPTER_NUM);
+    helicopter_ = true;
 }
 
 void Engine::gameFighter()
 {  
     city_->selectVehicle(FIGHTER_NUM);
-
+    fighter_ = true;
 }
 
 void Engine::gameSpaceShip()
 {
     city_->selectVehicle(SPACESHIP_NUM);
+    spaceShip_ = true;
 }
 
 void Engine::gameOver()
@@ -71,6 +67,17 @@ void Engine::nysseDestroyed()
 
 void Engine::movePlayer(char button)
 {
+    if (helicopter_) {
+        player1_->determineSpeed(HELICOPTER_NUM);
+        bullet_.setBulletSpeed(HELICOPTER_NUM);
+    } else if (fighter_) {
+        player1_->determineSpeed(FIGHTER_NUM);
+        bullet_.setBulletSpeed(FIGHTER_NUM);
+    } else if (spaceShip_) {
+        player1_->determineSpeed(SPACESHIP_NUM);
+        bullet_.setBulletSpeed(SPACESHIP_NUM);
+    }
+
     if (button == 'w') {
         if (player1_->giveLocation().giveY() < MAP_UPPER_YCOORD) {
             return;

@@ -42,6 +42,8 @@ public:
     void move();
     void stopTimer();
 
+    void setBulletSpeed(int num);
+
     /**
      * @brief return true if timer is active
      */
@@ -55,6 +57,7 @@ private:
     int y_;
     double radianAngle_;
     QTimer* timer_;
+    int bulletSpeed_ = 10;
 
 };
 
