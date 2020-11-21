@@ -70,7 +70,6 @@ public:
 signals:
     void gameStarted();
     void buttonPressed(char button);
-    void gameOver();
 
 public slots:
     void checkBulletCollision(int animationXCoord_, int animationYCoord_,
@@ -94,6 +93,8 @@ private:
     Ui::MainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
+    //QVector<QGraphicsItem*> actors_;
+    ActorItem* last_;
     ActorItem* bullet_;
     StudentSide::Bullet* bullet2_;
 

@@ -43,6 +43,7 @@ void City::setClock(QTime clock)
     time_ = clock;
     mainWindow_->setTime(clock.hour(), clock.minute());
     mainWindow_->showTime();
+
     int delta = 0;
     int nysses = statistics_.returnNysses();
     if (old_nysses_ == 0) {
