@@ -93,7 +93,7 @@ void Engine::movePlayer(char button)
         player1_->moveLeft();
     }
 
-    mainWindow_->updateCoords(player1_->giveLocation().giveX(), player1_->giveLocation().giveY());
+    mainWindow_->updatePlayerCoords(player1_->giveLocation().giveX(), player1_->giveLocation().giveY());
 }
 
 void Engine::engineGameStarted()

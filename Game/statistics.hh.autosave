@@ -2,10 +2,7 @@
 #define STATISTICS_HH
 #include "interfaces/istatistics.hh"
 #include "mainwindow.hh"
-<<<<<<< HEAD
-=======
 #include <cassert>
->>>>>>> 77a2c8dfaea86a98a06b545766fabf2954cc3a02
 
 
 namespace StudentSide

@@ -16,8 +16,7 @@ SOURCES += \
     main.cc \
     mainwindow.cpp \
     player.cpp \
-    statistics.cpp \
-    vehicle.cpp
+    statistics.cpp
     ../../CourseLib/graphics/simplemainwindow.cpp
 
 HEADERS += \
@@ -31,8 +30,7 @@ HEADERS += \
     engine.hh \
     mainwindow.hh \
     player.hh \
-    statistics.hh \
-    vehicle.hh
+    statistics.hh
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib

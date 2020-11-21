@@ -138,7 +138,7 @@ void MainWindow::addStop(int locX, int locY, int type, std::shared_ptr<Interface
     stops_.insert({stop2, nActor});
 }
 
-void MainWindow::updateCoords(int nX, int nY)
+void MainWindow::updatePlayerCoords(int nX, int nY)
 {
     player1_.second->setCoord(nX, nY);
 }
@@ -219,11 +219,6 @@ void MainWindow::updateStatistics(int buses, int passengers)
     ui->destroyedLabel->setText(QString::number(buses));
     ui->killedLabel->setText(QString::number(passengers));
 
-}
-
-std::pair<std::shared_ptr<Interface::IActor>, ActorItem *> MainWindow::getPlayer1() const
-{
-    return player1_;
 }
 
 void MainWindow::checkBulletCollision(int animationXCoord_, int animationYCoord_,
@@ -370,10 +365,6 @@ void MainWindow::checkCollision(QGraphicsItem* actorItem)
     }
 }
 
-std::shared_ptr<Interface::IActor> MainWindow::getActor(ActorItem* actorItem)
-{
-    return nullptr;
-}
 
 void MainWindow::removeBullet()
 {
