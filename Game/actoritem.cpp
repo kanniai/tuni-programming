@@ -2,6 +2,14 @@
 #include <QtWidgets>
 #include <QPixmap>
 
+const int STOP = 0;
+const int NYSSE = 1;
+const int PASSENGER = 2;
+const int HELICOPTER= 3;
+const int FIGHTER = 4;
+const int SPACESHIP = 5;
+const int BULLET = 6;
+
 namespace StudentSide {
 
 ActorItem::ActorItem(int x, int y, int type):x_(x), y_(y), type_(type)
@@ -27,23 +35,23 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     //QColor color(type_%256, type_%256, type_%256);
     QColor color;
     QBrush brush(color);
-    if (type_ == 0) {
+    if (type_ == STOP) {
         painter->drawImage(bounds, QImage(":/images/stop.jpg"));
-    } else if (type_ == 1) {
+    } else if (type_ == NYSSE) {
         painter->drawImage(bounds, QImage(":/images/bus.jpg"));
-    } else if (type_ == 2) {
+    } else if (type_ == PASSENGER) {
        // painter->drawImage(bounds, QImage(":/images/passenger.jpg"));
         color = Qt::red;
         QBrush brush(color);
         painter->setBrush(brush);
         painter->drawEllipse(bounds);
-    } else if (type_ == 3) {
+    } else if (type_ == HELICOPTER) {
         painter->drawImage(bounds, QImage(":/images/heli.jpg"));
-    } else if (type_ == 4) {
+    } else if (type_ == FIGHTER) {
         painter->drawImage(bounds, QImage(":/images/fighter.jpg"));
-    } else if (type_ == 5) {
+    } else if (type_ == SPACESHIP) {
         painter->drawImage(bounds, QImage(":/images/spaceship.jpg"));
-    } else if (type_ == 6) {
+    } else if (type_ == BULLET) {
         color = Qt::black;
         QBrush brush(color);
         painter->setBrush(brush);

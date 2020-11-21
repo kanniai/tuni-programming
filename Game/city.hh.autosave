@@ -47,15 +47,39 @@ public:
      */
     void removeActor(std::shared_ptr<Interface::IActor> actor);
 
-
+    // empty method in our project
     void actorRemoved(std::shared_ptr<Interface::IActor> actor);
+    
+    /**
+     * @brief Return true if actor is found in nysses_ or passengers_
+     */
     bool findActor(std::shared_ptr<Interface::IActor> actor) const;
+    
+    /**
+     * @return true if actor is found in nysses_ or passengers_
+     */
     void actorMoved(std::shared_ptr<Interface::IActor> actor);
+    
+    // empty method in our project
     std::vector<std::shared_ptr<Interface::IActor>> getNearbyActors(Interface::Location loc) const;
+    
     bool isGameOver() const;
-
+    
+    /**
+     * @Brief Change gameOver_ = true
+     */
     void gameOver();
+    
+    /**
+     * @Brief Select vehicle for player
+     * * @param 1 = helicopter, 2 = fighter, 3 = spaceship
+     */
     void selectVehicle(int num);
+    
+    /**
+     * @return Select vehicle for player
+     * * @param 1 = helicopter, 2 = fighter, 3 = spaceship
+     */
     void nysseDestroyed();
 
     StudentSide::MainWindow* returnMainwindow();

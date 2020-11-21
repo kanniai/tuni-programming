@@ -8,7 +8,10 @@
 #include <qmath.h>
 #include <QDebug>
 
-#include <iostream>
+/**
+  * @brief Defines a bullet that moves when user shoots
+  */
+
 
 const int WIDTH = 15;
 const int HEIGHT = 15;
@@ -22,11 +25,26 @@ class Bullet : public QObject, public QGraphicsItem
 public:
     Bullet();
     virtual ~Bullet();
+
+    /**
+     * @brief Initializes bullet coordinates and angle. Start timer
+     * @param angle in degrees.
+     * @param x and y: initial coordinates of bullet
+     */
     void shoot(int x, int y, int angle);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+    /**
+     * @brief Timer is connected to this function
+     * emit bulletMoved which is connected to MainWindow
+     */
     void move();
     void stopTimer();
+
+    /**
+     * @brief return true if timer is active
+     */
     bool isBulletMoving();
 
 signals:

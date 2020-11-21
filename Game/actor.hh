@@ -1,9 +1,13 @@
 #ifndef ACTOR_HH
 #define ACTOR_HH
 #include "interfaces/iactor.hh"
-#include "graphics/simplemainwindow.hh"
 #include <QTime>
 #include "core/location.hh"
+
+/**
+  * @brief Base class for class Player
+  */
+
 
 namespace StudentSide
 {

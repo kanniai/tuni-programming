@@ -17,6 +17,14 @@ const int WINDOW_HEIGHT = 600;
 
 const int DESTROYED_NYSSES_NEEDED_FOR_WIN = 5;
 
+const int STOP = 0;
+const int NYSSE = 1;
+const int PASSENGER = 2;
+const int HELICOPTER= 3;
+const int FIGHTER = 4;
+const int SPACESHIP = 5;
+const int BULLET = 6;
+
 namespace StudentSide {
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -93,26 +101,26 @@ void MainWindow::setTick(int t)
 void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interface::IActor> actor)
 {
     ActorItem* nActor = new ActorItem(locX, locY, type);
-    if (type == 1) {
+    if (type == NYSSE) {
         std::shared_ptr<CourseSide::Nysse> nysse =
                        std::dynamic_pointer_cast<CourseSide::Nysse> (actor);
         buses_.insert( {nysse, nActor} );
 
-    } else if (type == 2) {
+    } else if (type == PASSENGER) {
         std::shared_ptr<CourseSide::Passenger> passenger =
                        std::dynamic_pointer_cast<CourseSide::Passenger> (actor);
         passengers_.insert( {passenger, nActor} );
         return;
 
-    } else if (type == 3) {
+    } else if (type == HELICOPTER) {
         player1_.first = actor;
         player1_.second = nActor;
         player1_.second->setTransformOriginPoint(WIDTH/2, WIDTH/2);
-    } else if (type == 4) {
+    } else if (type == FIGHTER) {
         player1_.first = actor;
         player1_.second = nActor;
         player1_.second->setTransformOriginPoint(WIDTH/2, WIDTH/2);
-    } else if (type == 5) {
+    } else if (type == SPACESHIP) {
         player1_.first = actor;
         player1_.second = nActor;
         player1_.second->setTransformOriginPoint(WIDTH/2, WIDTH/2);
@@ -289,7 +297,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     int x = player1_.first->giveLocation().giveX();
     int y = player1_.first->giveLocation().giveY();
 
-    bullet_ = new ActorItem(x, y, 6);
+    bullet_ = new ActorItem(x, y, BULLET);
     map->addItem(bullet_);
 
     animation_->newAnimation(x, y, x2, y2, bullet_);

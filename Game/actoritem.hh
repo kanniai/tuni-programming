@@ -6,7 +6,10 @@
 #include <QPainter>
 #include <iostream>
 
-//#include "engine.hh"
+/**
+  * @brief Base class for class Player
+  */
+
 
 
 namespace StudentSide {

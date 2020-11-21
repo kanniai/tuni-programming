@@ -7,6 +7,9 @@
 #include <QTimer>
 #include <QObject>
 
+/**
+  * @brief Base class for class Player
+  */
 
 namespace StudentSide {
 

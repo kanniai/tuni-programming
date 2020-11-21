@@ -169,7 +169,6 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
     }
 
 }
-// Logic::advance calls this function
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
     if (isGameOver()) {
