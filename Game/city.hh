@@ -64,7 +64,7 @@ public:
     std::vector<std::shared_ptr<Interface::IActor>> getNearbyActors(Interface::Location loc) const;
 
     bool isGameOver() const;
-
+    
     /**
      * @Brief Change gameOver_ = true
      */
@@ -78,6 +78,8 @@ public:
 
     /**
      * @Brief remove nysse from statistics
+     * @return Select vehicle for player
+     * * @param 1 = helicopter, 2 = fighter, 3 = spaceship
      */
     void nysseDestroyed();
 

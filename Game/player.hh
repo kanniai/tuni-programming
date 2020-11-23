@@ -16,7 +16,10 @@
 namespace StudentSide
 {
 
-const int MOVING_DISTANCE = 10;
+const int HELICOPTER_SPEED = 3;
+const int FIGHTER_SPEED = 8;
+const int SPACESHIP_SPEED = 13;
+
 
 /**
  * @brief The Player class is used to locate the player in the game grid
@@ -44,6 +47,8 @@ public:
     void moveRight();
     void moveLeft();
 
+    void determineSpeed(int num);
+
     /**
      * @brief giveLocation
      * @return location of the player
@@ -53,6 +58,7 @@ public:
 private:
     Interface::Location playerLocation_;
     std::shared_ptr<IActor> player1;
+    int speed_ = 0;
 };
 }
 
