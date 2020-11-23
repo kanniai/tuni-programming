@@ -57,7 +57,7 @@ public:
      * @brief setTick sets the frequency of timer
      * @param t
      */
-    void setTick(int t);
+    void setTickAndStartTimer(int t);
 
     /**
      * @brief addStop adds new bus stop to the game
@@ -117,8 +117,6 @@ public:
      */
     void updateStatistics(int buses, int passengers);
 
-
-
 signals:
     void gameStarted();
     void buttonPressed(char button);
@@ -126,7 +124,7 @@ signals:
     void nysseDestroyedSignal();
 
 public slots:
-    void bulletMoved(int x2, int y2);
+    void player1BulletMoved(int x2, int y2);
     void cannonBulletMoved(int x2, int y2);
 
 private slots:
@@ -156,18 +154,19 @@ private:
      */
     void checkBulletLocation(StudentSide::Bullet* bullet);
 
+    /**
+     * @param Player who won the game
+     */
     void endGame(QString player);
     void updateTime();
     void updatePlayer1HealthLabel();
     bool isGameOver();
 
-
-
     Ui::MainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
     ActorItem* bullet_;
-    StudentSide::Bullet* bullet2_;
+    StudentSide::Bullet* player1Bullet_;
     StudentSide::Bullet* cannonBullet_;
 
     // Data structures of different actors
@@ -176,9 +175,6 @@ private:
     std::map<std::shared_ptr<CourseSide::Passenger>, ActorItem*> passengers_;
     std::pair<std::shared_ptr<Interface::IActor>, ActorItem*> player1_;
     std::pair<std::shared_ptr<Interface::IActor>, ActorItem*> player2_;
-
-
-
 
     // Time used in complete the game
     int seconds_ = 0;
@@ -192,7 +188,7 @@ private:
 
     int width_ = 500; //pxls
     int height_ = 500;
-    int tick_ = 500; //ms
+    int tick_ = 1000; //ms
 
     int player1Health_ = 5;
 

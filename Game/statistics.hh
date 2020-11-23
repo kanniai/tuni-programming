@@ -63,6 +63,7 @@ private:
     // Statistics for Nysses or passengers
     int nysses_ = 0;
     int passengers_ = 0;
+
     StudentSide::MainWindow* mainWindow_;
 
 };

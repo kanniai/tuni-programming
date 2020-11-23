@@ -6,10 +6,10 @@
 const int MATCH_MOUSEPRESS_XCOORD = 20;
 const int MATCH_MOUSEPRESS_YCOORD = 15;
 
-const int MAP_LEFT_SIDE_XCOORD = 10;
-const int MAP_UPPER_YCOORD = 20;
-const int MAP_RIGHT_SIDE_XCOORD = 469;
-const int MAP_LOWER_YCOORD = 469;
+const int MAP_LEFT_SIDE_XCOORD = 8;
+const int MAP_UPPER_YCOORD = 8;
+const int MAP_RIGHT_SIDE_XCOORD = 480;
+const int MAP_LOWER_YCOORD = 480;
 
 const int PADDING = 40;
 const int NEXTROW = 30;
@@ -18,14 +18,14 @@ const int WINDOW_HEIGHT = 600;
 
 const int DESTROYED_NYSSES_NEEDED_FOR_WIN = 5;
 
-const int STOP = 0;
 const int NYSSE = 1;
 const int PASSENGER = 2;
 const int HELICOPTER= 3;
 const int FIGHTER = 4;
 const int SPACESHIP = 5;
-const int BULLET = 6;
-const int CANNON = 7;
+const int CANNON = 6;
+
+const int CANNON_NUM = 4;
 
 namespace StudentSide {
 
@@ -71,16 +71,15 @@ MainWindow::MainWindow(QWidget *parent) :
     timer = new QTimer(this);
     //connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
     connect(timer, &QTimer::timeout, this, &StudentSide::MainWindow::updateTime);
-    timer->start(tick_);
 
-    bullet2_ = new StudentSide::Bullet();
+
+    player1Bullet_ = new StudentSide::Bullet();
     cannonBullet_ = new StudentSide::Bullet();
 
-    connect(bullet2_, &StudentSide::Bullet::bulletMoved, this,
-            &StudentSide::MainWindow::bulletMoved);
+    connect(player1Bullet_, &StudentSide::Bullet::bulletMoved, this,
+            &StudentSide::MainWindow::player1BulletMoved);
     connect(cannonBullet_, &StudentSide::Bullet::bulletMoved, this,
             &StudentSide::MainWindow::cannonBulletMoved);
-
 }
 
 MainWindow::~MainWindow()
@@ -94,9 +93,10 @@ void MainWindow::setSize(int w, int h)
     height_ = h;
 }
 
-void MainWindow::setTick(int t)
+void MainWindow::setTickAndStartTimer(int t)
 {
     tick_ = t;
+    timer->start(tick_);
 }
 
 void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interface::IActor> actor)
@@ -209,16 +209,14 @@ void MainWindow::updateStatistics(int buses, int passengers)
 {
     ui->destroyedLabel->setText(QString::number(buses));
     ui->killedLabel->setText(QString::number(passengers));
-
 }
 
-void MainWindow::bulletMoved(int x2, int y2)
+void MainWindow::player1BulletMoved(int x2, int y2)
 {
 
-    bullet2_->setPos(x2, y2);
-    checkCollision(bullet2_);
-    checkBulletLocation(bullet2_);
-
+    player1Bullet_->setPos(x2, y2);
+    checkCollision(player1Bullet_);
+    checkBulletLocation(player1Bullet_);
 }
 
 void MainWindow::cannonBulletMoved(int x2, int y2)
@@ -226,7 +224,6 @@ void MainWindow::cannonBulletMoved(int x2, int y2)
     cannonBullet_->setPos(x2, y2);
     checkCollision(cannonBullet_);
     checkBulletLocation(cannonBullet_);
-
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
@@ -234,6 +231,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if (isGameOver()) {
         return;
     }
+
     if(event->key() == Qt::Key_W) {
         emit buttonPressed('w');
         player1_.second->setRotation(-90);
@@ -275,7 +273,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     player2_.second->setRotation(angleInDegrees);
     map->addItem(cannonBullet_);
     cannonBullet_->setPos(x, y);
-    cannonBullet_->setBulletSpeed(4);
+    cannonBullet_->setBulletSpeed(CANNON_NUM);
     cannonBullet_->shoot(x, y, angleInDegrees);
 
 }
@@ -283,23 +281,22 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 void MainWindow::spacePressed()
 {
 
-    if (bullet2_->isBulletMoving() == true) {
+    if (player1Bullet_->isBulletMoving() == true) {
         return;
     }
-    map->addItem(bullet2_);
-    bullet2_->setPos(player1_.first->giveLocation().giveX(),
+    map->addItem(player1Bullet_);
+    player1Bullet_->setPos(player1_.first->giveLocation().giveX(),
                      player1_.first->giveLocation().giveY());
-    bullet2_->shoot(player1_.first->giveLocation().giveX(),
+    player1Bullet_->shoot(player1_.first->giveLocation().giveX(),
                                       player1_.first->giveLocation().giveY(),
                                 player1_.second->rotation());
-
 }
 
 void MainWindow::checkCollision(StudentSide::Bullet* bullet)
 {
     if (bullet == cannonBullet_) {
-
         QList<QGraphicsItem *> collidingActors = bullet->collidingItems();
+
         for (QGraphicsItem* actor: collidingActors) {
             if (actor == player1_.second) {
                 player1Health_--;
@@ -310,12 +307,11 @@ void MainWindow::checkCollision(StudentSide::Bullet* bullet)
                 if (player1Health_ == 0) {
                     map->removeItem(player1_.second);
                     endGame("Player 2");
-
                 }
                 break;
             }
         }
-    } else if (bullet == bullet2_) {
+    } else if (bullet == player1Bullet_) {
         QList<QGraphicsItem *> collidingActors = bullet->collidingItems();
         if (collidingActors.size() != 0) {
             for (QGraphicsItem* actor: collidingActors) {
@@ -326,15 +322,14 @@ void MainWindow::checkCollision(StudentSide::Bullet* bullet)
                         map->removeItem(nysse.second);
                         bullet->stopTimer();
                         map->removeItem(bullet);
-
                         nysse.first->remove();
                         buses_.erase(nysse.first);
 
                         nyssesDestroyed_++;
                         emit nysseDestroyedSignal();
 
-                        std::vector<std::shared_ptr<Interface::IPassenger>> passengersInNysse =
-                                nysse.first->getPassengers();
+                        std::vector<std::shared_ptr<Interface::IPassenger>>
+                                passengersInNysse =nysse.first->getPassengers();
                         for (auto passenger: passengersInNysse) {
                             passenger->remove();
                             passengersKilled_++;
@@ -350,7 +345,7 @@ void MainWindow::checkCollision(StudentSide::Bullet* bullet)
                 for(auto stop: stops_) {
                     if (stop.second->x() == actor->x() && stop.second->y() == actor->y()) {
                         bullet->stopTimer();
-                        map->removeItem(bullet2_);
+                        map->removeItem(player1Bullet_);
                         break;
                     }
                 }
@@ -359,7 +354,6 @@ void MainWindow::checkCollision(StudentSide::Bullet* bullet)
     }
 }
 
-
 void MainWindow::removeBullet()
 {
     map->removeItem(bullet_);
@@ -367,10 +361,10 @@ void MainWindow::removeBullet()
 
 void MainWindow::checkBulletLocation(StudentSide::Bullet* bullet)
 {
-    if (bullet->x() < MAP_LEFT_SIDE_XCOORD -30
+    if (bullet->x() < MAP_LEFT_SIDE_XCOORD -20
             || bullet->y() < MAP_UPPER_YCOORD -20
-            || bullet->x() > MAP_RIGHT_SIDE_XCOORD + 10
-            || bullet->y() > MAP_LOWER_YCOORD + 10) {
+            || bullet->x() > MAP_RIGHT_SIDE_XCOORD + 20
+            || bullet->y() > MAP_LOWER_YCOORD + 20) {
 
         bullet->stopTimer();
         map->removeItem(bullet);

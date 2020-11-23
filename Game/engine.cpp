@@ -17,7 +17,6 @@ Engine::Engine()
     connect(mainWindow_, &StudentSide::MainWindow::gameOverSignal, this, &Engine::gameOver);
     connect(mainWindow_, &StudentSide::MainWindow::nysseDestroyedSignal, this, &Engine::nysseDestroyed);
 
-
     dialog_->show();
     connect(dialog_, &StudentSide::Dialog::helicopterSelected, this, &StudentSide::Engine::gameHelicopter);
     connect(dialog_, &StudentSide::Dialog::fighterSelected, this, &StudentSide::Engine::gameFighter);
@@ -25,7 +24,6 @@ Engine::Engine()
     dialog_->exec();
 
     //connect(dialog_, &StudentSide::Dialog::helicopterSelected, this, &StudentSide::Engine::gameHelicopter);
-    mainWindow_->setTick(1000);
     mainWindow_->show();
     createGame();
 }
@@ -40,18 +38,21 @@ void Engine::gameHelicopter()
 {
     city_->selectVehicle(HELICOPTER_NUM);
     helicopter_ = true;
+    mainWindow_->setTickAndStartTimer(1000);
 }
 
 void Engine::gameFighter()
 {  
     city_->selectVehicle(FIGHTER_NUM);
     fighter_ = true;
+    mainWindow_->setTickAndStartTimer(1000);
 }
 
 void Engine::gameSpaceShip()
 {
     city_->selectVehicle(SPACESHIP_NUM);
     spaceShip_ = true;
+    mainWindow_->setTickAndStartTimer(1000);
 }
 
 void Engine::gameOver()

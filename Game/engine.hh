@@ -20,7 +20,6 @@ const int PLAYER_Y_COORD = 0;
 const int PLAYER2_X_COORD = 240;
 const int PLAYER2_Y_COORD = 300;
 
-
 const int MAP_LEFT_SIDE_XCOORD = 8;
 const int MAP_UPPER_YCOORD = 8;
 const int MAP_RIGHT_SIDE_XCOORD = 480;

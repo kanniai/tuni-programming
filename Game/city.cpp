@@ -4,13 +4,6 @@
 #include <iostream>
 #include "../Course/CourseLib/actors/nysse.hh"
 
-int STOP = 0;
-int NYSSE = 1;
-int PASSENGER = 2;
-int HELICOPTER= 3;
-int FIGHTER = 4;
-int SPACESHIP = 5;
-
 namespace StudentSide
 {
 City::City() :

@@ -7,7 +7,13 @@
 
 #include <QTime>
 
-
+const int STOP = 0;
+const int NYSSE = 1;
+const int PASSENGER = 2;
+const int HELICOPTER= 3;
+const int FIGHTER = 4;
+const int SPACESHIP = 5;
+const int CANNON = 6;
 
 namespace StudentSide
 {
@@ -84,14 +90,6 @@ public:
     void nysseDestroyed();
 
     StudentSide::MainWindow* returnMainwindow();
-
-    int STOP = 0;
-    int NYSSE = 1;
-    int PASSENGER = 2;
-    int HELICOPTER= 3;
-    int FIGHTER = 4;
-    int SPACESHIP = 5;
-    int CANNON = 7;
 
 private:
     StudentSide::MainWindow* mainWindow_;

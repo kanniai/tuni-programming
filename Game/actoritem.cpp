@@ -8,8 +8,7 @@ const int PASSENGER = 2;
 const int HELICOPTER= 3;
 const int FIGHTER = 4;
 const int SPACESHIP = 5;
-const int BULLET = 6;
-const int CANNON = 7;
+const int CANNON = 6;
 
 namespace StudentSide {
 
@@ -52,11 +51,6 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
         painter->drawImage(bounds, QImage(":/images/fighter.jpg"));
     } else if (type_ == SPACESHIP) {
         painter->drawImage(bounds, QImage(":/images/spaceship.jpg"));
-    } else if (type_ == BULLET) {
-        color = Qt::black;
-        QBrush brush(color);
-        painter->setBrush(brush);
-        painter->drawEllipse(bounds);
     } else if (type_ == CANNON) {
         painter->drawImage(bounds, QImage(":/images/spaceship.jpg"));
     }
