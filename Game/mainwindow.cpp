@@ -73,14 +73,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer, &QTimer::timeout, this, &StudentSide::MainWindow::updateTime);
     timer->start(tick_);
 
-    animation_ = new StudentSide::Animation();
     bullet2_ = new StudentSide::Bullet();
     cannonBullet_ = new StudentSide::Bullet();
-
-    connect(animation_, &StudentSide::Animation::animationLocation, this,
-            &StudentSide::MainWindow::checkBulletCollision);
-    connect(animation_, &StudentSide::Animation::signalRemoveBullet, this,
-            &StudentSide::MainWindow::removeBullet);
 
     connect(bullet2_, &StudentSide::Bullet::bulletMoved, this,
             &StudentSide::MainWindow::bulletMoved);
@@ -218,23 +212,6 @@ void MainWindow::updateStatistics(int buses, int passengers)
 
 }
 
-void MainWindow::checkBulletCollision(int animationXCoord_, int animationYCoord_,
-                                      int playerXCoord, int playerYCoord)
-{
-    bullet_->setCoord(animationXCoord_ + playerXCoord, animationYCoord_ + playerYCoord);
-
-    QList<QGraphicsItem *> collidingActors = bullet_->collidingItems();
-
-    if (collidingActors.size() != 0) {
-        for (QGraphicsItem* actor: collidingActors) {
-            if (actor == player1_.second) {
-                continue;
-            }
-            map->removeItem(actor);
-        }
-    }      //Miten saan poistettua passengerin logickista?
-}
-
 void MainWindow::bulletMoved(int x2, int y2)
 {
 
@@ -280,25 +257,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
-    /*
-    if (isGameOver()) {
-        return;
-    }
 
-    if (animation_->isBulletMoving() == true) {
-        return;
-    }
-    int x2 = event->x() - MATCH_COORDINATES;
-    int y2 = event->y() - MATCH_COORDINATES;
-
-    int x = player1_.first->giveLocation().giveX();
-    int y = player1_.first->giveLocation().giveY();
-
-    bullet_ = new ActorItem(x, y, BULLET);
-    map->addItem(bullet_);
-
-    animation_->newAnimation(x, y, x2, y2, bullet_);
-    */
     if (cannonBullet_->isBulletMoving() == true) {
         return;
     }
@@ -318,7 +277,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     cannonBullet_->setPos(x, y);
     cannonBullet_->setBulletSpeed(4);
     cannonBullet_->shoot(x, y, angleInDegrees);
-
 
 }
 

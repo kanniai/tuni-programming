@@ -6,7 +6,6 @@
 #include "actors/nysse.hh"
 #include "actors/passenger.hh"
 #include "actoritem.hh"
-#include "animation.hh"
 #include "bullet.hh"
 
 #include <QMainWindow>
@@ -127,8 +126,6 @@ signals:
     void nysseDestroyedSignal();
 
 public slots:
-    void checkBulletCollision(int animationXCoord_, int animationYCoord_,
-                              int playerXCoord, int playerYCoord);
     void bulletMoved(int x2, int y2);
     void cannonBulletMoved(int x2, int y2);
 
@@ -138,8 +135,6 @@ private slots:
     void keyPressEvent(QKeyEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void spacePressed();
-
-
 
 private:
 
@@ -182,7 +177,7 @@ private:
     std::pair<std::shared_ptr<Interface::IActor>, ActorItem*> player1_;
     std::pair<std::shared_ptr<Interface::IActor>, ActorItem*> player2_;
 
-    StudentSide::Animation* animation_;
+
 
 
     // Time used in complete the game
