@@ -238,6 +238,32 @@
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="Player1HealthTextLabel">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>510</y>
+      <width>101</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Player 1 health:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="player1HealthLabel">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>510</y>
+      <width>21</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

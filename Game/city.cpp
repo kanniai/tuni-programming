@@ -77,19 +77,27 @@ void City::startGame()
         mainWindow_->addActor(location.giveX(), location.giveY(), NYSSE, nysses_.at(i));
     }
 
+    int playerCalculator = 1;
     for (auto player: players_) {
         Interface::Location location = player->giveLocation();
-        if (helicopter_) {
-            mainWindow_->addActor(location.giveX(), location.giveY(), HELICOPTER, player);
-            helicopter_ = false;
-        } else if (fighter_) {
-            mainWindow_->addActor(location.giveX(), location.giveY(), FIGHTER, player);
-            fighter_ = false;
-        } else if (spaceShip_) {
-            mainWindow_->addActor(location.giveX(), location.giveY(), SPACESHIP, player);
+
+        if (playerCalculator == 1) {
+            if (helicopter_) {
+                mainWindow_->addActor(location.giveX(), location.giveY(), HELICOPTER, player);
+                helicopter_ = false;
+            } else if (fighter_) {
+                mainWindow_->addActor(location.giveX(), location.giveY(), FIGHTER, player);
+                fighter_ = false;
+            } else if (spaceShip_) {
+                mainWindow_->addActor(location.giveX(), location.giveY(), SPACESHIP, player);
+                spaceShip_ = false;
+            }
+
+        } else if (playerCalculator == 2) {
+            mainWindow_->addActor(location.giveX(), location.giveY(), CANNON, player);
             spaceShip_ = false;
         }
-
+        playerCalculator++;
     }
 
 }

@@ -57,12 +57,12 @@
     <rect>
      <x>40</x>
      <y>80</y>
-     <width>181</width>
+     <width>211</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>Select the player vehicle:</string>
+    <string>Select the vehicle for player 1:</string>
    </property>
   </widget>
   <widget class="QLabel" name="heliStatsLabel_1">

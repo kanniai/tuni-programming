@@ -319,7 +319,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     cannonBullet_->setBulletSpeed(4);
     cannonBullet_->shoot(x, y, angleInDegrees);
 
-
 }
 
 void MainWindow::spacePressed()

@@ -122,10 +122,18 @@ void Engine::createGame()
     logic_.takeCity(city_);
 
     player1_ = std::make_shared<StudentSide::Player>();
+    player2_ = std::make_shared<StudentSide::Player>();
+
     Interface::Location loc;
     loc.setXY(PLAYER_X_COORD, PLAYER_Y_COORD);
     player1_->move(loc);
+
+    Interface::Location loc2;
+    loc2.setXY(PLAYER2_X_COORD, PLAYER2_Y_COORD);
+    player2_->move(loc2);
+
     city_->addActor(player1_);
+    city_->addActor(player2_);
 
     logic_.finalizeGameStart();
 }

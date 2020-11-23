@@ -91,6 +91,7 @@ public:
     int HELICOPTER= 3;
     int FIGHTER = 4;
     int SPACESHIP = 5;
+    int CANNON = 7;
 
 private:
     StudentSide::MainWindow* mainWindow_;
@@ -99,6 +100,7 @@ private:
     QVector<std::shared_ptr<Interface::IActor>> passengers_;
     QVector<std::shared_ptr<Interface::IStop>> stops_;
     QVector<std::shared_ptr<Interface::IActor>> players_;
+
     bool helicopter_ = false;
     bool fighter_ = false;
     bool spaceShip_ = false;

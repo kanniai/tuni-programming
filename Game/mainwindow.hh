@@ -16,6 +16,7 @@
 #include <QKeyEvent>
 #include <QString>
 #include <map>
+#include <qmath.h>
 
 
 namespace Ui {
@@ -129,6 +130,7 @@ public slots:
     void checkBulletCollision(int animationXCoord_, int animationYCoord_,
                               int playerXCoord, int playerYCoord);
     void bulletMoved(int x2, int y2);
+    void cannonBulletMoved(int x2, int y2);
 
 private slots:
     // Slots of different actions
@@ -143,19 +145,27 @@ private:
 
     /**
      * @brief checkCollision checks if bullet hits the actor
+     * If the bullet of player 1 hits a bus, bus is destroyed
+     * If the bullet of player 2 hits player 1, player 1 loses one health point.
      * @param actorItem
      */
-    void checkCollision(QGraphicsItem* actorItem);
+    void checkCollision(StudentSide::Bullet* bullet);
 
     /**
      * @brief removeBullet removes the bullet when it hits actor or passes the
-     * boundaries
+     * map boundaries
      */
     void removeBullet();
+    /**
+     * @brief if bullet passes the map boundaries, call removeBullet() method
+     */
+    void checkBulletLocation(StudentSide::Bullet* bullet);
 
-    void endGame();
+    void endGame(QString player);
     void updateTime();
+    void updatePlayer1HealthLabel();
     bool isGameOver();
+
 
 
     Ui::MainWindow *ui;
@@ -163,12 +173,14 @@ private:
     QTimer *timer;
     ActorItem* bullet_;
     StudentSide::Bullet* bullet2_;
+    StudentSide::Bullet* cannonBullet_;
 
     // Data structures of different actors
     std::map<std::shared_ptr<CourseSide::Stop>, ActorItem*> stops_;
     std::map<std::shared_ptr<CourseSide::Nysse>, ActorItem*> buses_;
     std::map<std::shared_ptr<CourseSide::Passenger>, ActorItem*> passengers_;
     std::pair<std::shared_ptr<Interface::IActor>, ActorItem*> player1_;
+    std::pair<std::shared_ptr<Interface::IActor>, ActorItem*> player2_;
 
     StudentSide::Animation* animation_;
 
@@ -186,6 +198,8 @@ private:
     int width_ = 500; //pxls
     int height_ = 500;
     int tick_ = 500; //ms
+
+    int player1Health_ = 5;
 
     bool gameOver_ = false;
 };

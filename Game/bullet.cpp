@@ -2,6 +2,7 @@
 const int HELIBULLETSPEED = 10;
 const int FIGHTERBULLETSPEED = 6;
 const int SPACEBULLETSPEED = 2;
+const int CANNONBULLETSPEED = 15;
 
 namespace StudentSide {
 
@@ -61,6 +62,8 @@ void Bullet::setBulletSpeed(int num)
         bulletSpeed_ = FIGHTERBULLETSPEED;
     } else if (num == 3) {
         bulletSpeed_ = SPACEBULLETSPEED;
+    } else if (num == 4) {
+        bulletSpeed_ = CANNONBULLETSPEED;
     }
 }
 

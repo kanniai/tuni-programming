@@ -15,12 +15,16 @@
 
 namespace StudentSide
 {
-const int PLAYER_X_COORD = 30;
+const int PLAYER_X_COORD = 0;
 const int PLAYER_Y_COORD = 0;
-const int MAP_LEFT_SIDE_XCOORD = 20;
-const int MAP_UPPER_YCOORD = 20;
-const int MAP_RIGHT_SIDE_XCOORD = 469;
-const int MAP_LOWER_YCOORD = 469;
+const int PLAYER2_X_COORD = 240;
+const int PLAYER2_Y_COORD = 300;
+
+
+const int MAP_LEFT_SIDE_XCOORD = 8;
+const int MAP_UPPER_YCOORD = 8;
+const int MAP_RIGHT_SIDE_XCOORD = 480;
+const int MAP_LOWER_YCOORD = 480;
 
 const int HELICOPTER_NUM = 1;
 const int FIGHTER_NUM = 2;
@@ -77,6 +81,7 @@ private:
     void createGame();
 
     std::shared_ptr<StudentSide::Player> player1_;
+    std::shared_ptr<StudentSide::Player> player2_;
     StudentSide::MainWindow* mainWindow_;
     StudentSide::Dialog* dialog_;
     CourseSide::Logic logic_;
