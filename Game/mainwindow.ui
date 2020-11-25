@@ -50,7 +50,7 @@
      <string>Time:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="runningTime">
+   <widget class="QLabel" name="logicTime">
     <property name="geometry">
      <rect>
       <x>560</x>
@@ -212,12 +212,12 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="secondsLabel">
+   <widget class="QLabel" name="runningTimeLabel">
     <property name="geometry">
      <rect>
       <x>460</x>
       <y>410</y>
-      <width>241</width>
+      <width>271</width>
       <height>20</height>
      </rect>
     </property>

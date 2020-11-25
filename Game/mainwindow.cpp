@@ -16,7 +16,7 @@ const int NEXTROW = 30;
 const int WINDOW_WIDTH = 700;
 const int WINDOW_HEIGHT = 600;
 
-const int DESTROYED_NYSSES_NEEDED_FOR_WIN = 5;
+const int DESTROYED_NYSSES_NEEDED_FOR_WIN = 20;
 
 const int NYSSE = 1;
 const int PASSENGER = 2;
@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->startButton->move(width_ + PADDING , PADDING);
     ui->timeLabel->move(width_ + PADDING, 3*NEXTROW);
-    ui->runningTime->move(width_ + 3*PADDING, 3*NEXTROW);
+    ui->logicTime->move(width_ + 3*PADDING, 3*NEXTROW);
     ui->timeFrame->move(width_ + 2.75*PADDING, 3*NEXTROW);
 
     ui->busesLabel->move(width_ + PADDING, 5*NEXTROW);
@@ -57,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->statisticsFrame->move(width_ + 0.8*PADDING, 7*NEXTROW);
 
     ui->endGameLabel->move(width_ + 1.2*PADDING, 14*NEXTROW);
-    ui->secondsLabel->move(width_ + 1.2*PADDING, 15*NEXTROW);
+    ui->runningTimeLabel->move(width_ + 1.2*PADDING, 15*NEXTROW);
 
     ui->player1HealthLabel->setText(QString::number(player1Health_));
 
@@ -81,7 +81,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(cannonBullet_, &StudentSide::Bullet::bulletMoved, this,
             &StudentSide::MainWindow::cannonBulletMoved);
 }
-
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -179,7 +178,7 @@ void StudentSide::MainWindow::MainWindow::showTime()
         hours = "0" + hours;
     }
 
-    ui->runningTime->setText(hours + " : " + minutes);
+    ui->logicTime->setText(hours + " : " + minutes);
 }
 
 void MainWindow::setPicture(QImage &img)
@@ -193,9 +192,13 @@ void MainWindow::setTime(int hours, int minutes)
     minutes_ = minutes;
 }
 
-void MainWindow::nysseCount(int count, int delta)
+void MainWindow::nysseCount(int count, int delta, std::string type)
 {
     ui->busCount->setText(QString::number(count));
+    if (type == "destroyed" && delta == 1) {
+        return;
+    }
+
     if (delta == 1) {
         ui->busesAdded->setText(QString::number(delta)+ " new bus journey");
     } else if (delta == -1) {
@@ -326,7 +329,7 @@ void MainWindow::checkCollision(StudentSide::Bullet* bullet)
                         bullet->stopTimer();
                         map->removeItem(bullet);
                         nysse.first->remove();
-                        buses_.erase(nysse.first);
+                        //buses_.erase(nysse.first);
 
                         nyssesDestroyed_++;
                         emit nysseDestroyedSignal();
@@ -380,14 +383,26 @@ void MainWindow::endGame(QString player)
 
     ui->endGameLabel->setText(player + " won the game!");
 
-    QString seconds = QString::number(seconds_);
-    ui->secondsLabel->setText("Time spent: " + seconds + " seconds");
+    //for ()
+    if (runningMinutes_ == 0) {
+        ui->runningTimeLabel->setText("Time spent: " +
+                                      QString::number(runningSeconds_) + " seconds.");
+    } else {
+        ui->runningTimeLabel->setText(" Time spent: " +
+                                      QString::number(runningMinutes_) +
+                                      " minutes and " +
+                                    QString::number(runningSeconds_) + " seconds.");
+    }
     emit gameOverSignal();
 }
 
 void MainWindow::updateTime()
 {
-    seconds_++;
+    if (runningSeconds_ >= 60) {
+        runningMinutes_++;
+        runningSeconds_ = 0;
+    }
+    runningSeconds_++;
 }
 
 void MainWindow::updatePlayer1HealthLabel()

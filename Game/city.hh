@@ -31,8 +31,7 @@ public:
     void addStop(std::shared_ptr<Interface::IStop> stop);
 
     /**
-     * @brief Set time in MainWindow
-     * Updates statistics about how many are buses in traffic
+     * @brief Call MainWindow to update time
      */
     void setClock(QTime clock);
 
@@ -105,6 +104,13 @@ private:
     bool gameOver_ = false;
 
     int old_nysses_ = 0;
+
+    /**
+     * @Brief Call MainWindow to show updates in Nysse statistics
+     * @param type == "destroyed" if player 1 destroyed a bus,
+     *        else type == "logicUpdated"
+     */
+    void updateNysseCount(std::string type);
 
 };
 }

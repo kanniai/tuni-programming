@@ -16,7 +16,7 @@
 #include <QString>
 #include <map>
 #include <qmath.h>
-
+#include <string>
 
 namespace Ui {
 class MainWindow;
@@ -107,8 +107,10 @@ public:
      * @brief nysseCount displays the count of buses in traffic
      * @param count: total count of the buses in traffic
      * @param delta: change of buses compared to previous interval
+     * @param type == "destroyed" if player 1 destroyed a bus,
+     *        else type == "logicUpdated"
      */
-    void nysseCount(int count, int delta);
+    void nysseCount(int count, int delta, std::string type);
 
     /**
      * @brief updateStatistics updates destroyed buses and killed passengers
@@ -158,6 +160,10 @@ private:
      * @param Player who won the game
      */
     void endGame(QString player);
+
+    /**
+     * @param Updates time every second
+     */
     void updateTime();
     void updatePlayer1HealthLabel();
     bool isGameOver();
@@ -176,8 +182,9 @@ private:
     std::pair<std::shared_ptr<Interface::IActor>, ActorItem*> player1_;
     std::pair<std::shared_ptr<Interface::IActor>, ActorItem*> player2_;
 
-    // Time used in complete the game
-    int seconds_ = 0;
+    // Time according to real running time
+    int runningSeconds_ = 0;
+    int runningMinutes_ = 0;
 
     // Time according to logic
     int hours_;

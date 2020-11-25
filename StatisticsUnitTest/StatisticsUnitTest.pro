@@ -17,7 +17,8 @@ SOURCES +=  tst_statisticsunittest.cpp \
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 HEADERS += \
-    ../Game/statistics.hh
+    ../Game/statistics.hh \
+    ../Course/CourseLib/interfaces/istatistics.hh
 
 INCLUDEPATH += \
     $$PWD/../Game/ \
