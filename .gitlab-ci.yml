@@ -5,12 +5,13 @@
 
 # We use an image based on Alpine Linux that contains
 # Qt 5.9.6 and the necessary 
-variables:
-	GIT_SUBMODULE_STRATEGY:normal
  
 stages:
   - build
   - test
+
+variables:
+    GIT_SUBMODULE_STRATEGY: normal
 
 # Build job for StatisticsUnitTest's unit test
 StatisticsUnitTest:
