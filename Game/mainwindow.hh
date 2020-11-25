@@ -120,6 +120,11 @@ public:
      */
     void updateStatistics(int buses, int passengers);
 
+    /**
+     * @brief updateTop10 updates leaderboard
+     */
+    void updateTop10(QString name);
+
 signals:
     void gameStarted();
     void buttonPressed(char button);

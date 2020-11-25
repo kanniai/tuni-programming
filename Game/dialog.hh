@@ -29,19 +29,29 @@ public:
     explicit Dialog(QWidget *parent = nullptr);
     ~Dialog();
 
+    void selectName();
+
 signals:
     // Player vehicle selection
     void helicopterSelected();
     void fighterSelected();
     void spaceShipSelected();
 
+    void player1Name(QString name);
+    void player2Name(QString name);
+
 private slots:
     void on_heliButton_clicked();
     void on_jetButton_clicked();
     void on_spaceButton_clicked();
 
+    void on_name1Button_clicked();
+    void on_name2Button_clicked();
+
 private:
     Ui::Dialog *ui;
+    QString name1_;
+    QString name2_;
 };
 }
 #endif // DIALOG_HH

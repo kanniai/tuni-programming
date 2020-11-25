@@ -59,6 +59,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->endGameLabel->move(width_ + 1.2*PADDING, 14*NEXTROW);
     ui->runningTimeLabel->move(width_ + 1.2*PADDING, 15*NEXTROW);
 
+    ui->top10->move(width_ + 0.8*PADDING, 11*NEXTROW);
+
     updatePlayer1HealthLabel();
 
     map = new QGraphicsScene(this);
@@ -217,6 +219,19 @@ void MainWindow::updateStatistics(int buses, int passengers)
     ui->destroyedLabel->setText(QString::number(buses));
     ui->killedLabel->setText(QString::number(passengers));
 }
+
+void MainWindow::updateTop10(QString name)
+{
+    if (gameOver_ == true) {
+        if (player1Health_ == 0) {
+            ui->top10->setText(name + " | " + runningSeconds_);
+        } else {
+            ui->top10->setText(name + " | " + runningSeconds_);
+        }
+
+    }
+}
+
 
 void MainWindow::player1BulletMoved(int x2, int y2)
 {
@@ -383,7 +398,6 @@ void MainWindow::endGame(QString player)
 
     ui->endGameLabel->setText(player + " won the game!");
 
-    //for ()
     if (runningMinutes_ == 0) {
         ui->runningTimeLabel->setText("Time spent: " +
                                       QString::number(runningSeconds_) + " seconds.");
