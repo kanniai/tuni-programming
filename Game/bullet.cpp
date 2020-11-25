@@ -4,6 +4,11 @@ const int FIGHTERBULLETSPEED = 6;
 const int SPACEBULLETSPEED = 2;
 const int CANNONBULLETSPEED = 15;
 
+const int HELICOPTER= 3;
+const int FIGHTER = 4;
+const int SPACESHIP = 5;
+const int CANNON = 6;
+
 namespace StudentSide {
 
 Bullet::Bullet()
@@ -56,13 +61,13 @@ void Bullet::stopTimer()
 
 void Bullet::setBulletSpeed(int num)
 {
-    if (num == 1) {
+    if (num == HELICOPTER) {
         bulletSpeed_ = HELIBULLETSPEED;
-    } else if (num == 2) {
+    } else if (num == FIGHTER) {
         bulletSpeed_ = FIGHTERBULLETSPEED;
-    } else if (num == 3) {
+    } else if (num == SPACESHIP) {
         bulletSpeed_ = SPACEBULLETSPEED;
-    } else if (num == 4) {
+    } else if (num == CANNON) {
         bulletSpeed_ = CANNONBULLETSPEED;
     }
 }
