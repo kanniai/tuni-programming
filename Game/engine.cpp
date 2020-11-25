@@ -70,13 +70,10 @@ void Engine::movePlayer(char button)
 {
     if (helicopter_) {
         player1_->determineSpeed(HELICOPTER_NUM);
-        bullet_.setBulletSpeed(HELICOPTER_NUM);
     } else if (fighter_) {
         player1_->determineSpeed(FIGHTER_NUM);
-        bullet_.setBulletSpeed(FIGHTER_NUM);
     } else if (spaceShip_) {
         player1_->determineSpeed(SPACESHIP_NUM);
-        bullet_.setBulletSpeed(SPACESHIP_NUM);
     }
 
     if (button == 'w') {

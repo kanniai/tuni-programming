@@ -52,7 +52,7 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     } else if (type_ == SPACESHIP) {
         painter->drawImage(bounds, QImage(":/images/spaceship.jpg"));
     } else if (type_ == CANNON) {
-        painter->drawImage(bounds, QImage(":/images/spaceship.jpg"));
+        painter->drawImage(bounds, QImage(":/images/cannon.jpg"));
     }
 }
 

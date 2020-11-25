@@ -117,19 +117,23 @@ void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interfac
         player1_.first = actor;
         player1_.second = nActor;
         player1_.second->setTransformOriginPoint(WIDTH/2, WIDTH/2);
+        player1Bullet_->setBulletSpeed(HELICOPTER);
     } else if (type == FIGHTER) {
         player1_.first = actor;
         player1_.second = nActor;
         player1_.second->setTransformOriginPoint(WIDTH/2, WIDTH/2);
+        player1Bullet_->setBulletSpeed(FIGHTER);
     } else if (type == SPACESHIP) {
         player1_.first = actor;
         player1_.second = nActor;
         player1_.second->setTransformOriginPoint(WIDTH/2, WIDTH/2);
+        player1Bullet_->setBulletSpeed(SPACESHIP);
 
     } else if (type == CANNON)
         player2_.first = actor;
         player2_.second = nActor;
         player2_.second->setTransformOriginPoint(WIDTH/2, WIDTH/2);
+        cannonBullet_->setBulletSpeed(CANNON);
 
     map->addItem(nActor);
 }
@@ -273,7 +277,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     player2_.second->setRotation(angleInDegrees);
     map->addItem(cannonBullet_);
     cannonBullet_->setPos(x, y);
-    cannonBullet_->setBulletSpeed(CANNON_NUM);
     cannonBullet_->shoot(x, y, angleInDegrees);
 
 }

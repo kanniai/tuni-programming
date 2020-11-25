@@ -6,5 +6,6 @@
         <file>fighter.jpg</file>
         <file>spaceship.jpg</file>
         <file>heli.jpg</file>
+        <file>cannon.jpg</file>
     </qresource>
 </RCC>
