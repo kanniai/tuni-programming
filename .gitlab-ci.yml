@@ -4,7 +4,10 @@
 # For more information refer to: https://course-gitlab.tut.fi/help/ci/yaml/README.md
 
 # We use an image based on Alpine Linux that contains
-# Qt 5.9.6 and the necessary  
+# Qt 5.9.6 and the necessary 
+variables:
+	GIT_SUBMODULE_STRATEGY:normal
+ 
 stages:
   - build
   - test
