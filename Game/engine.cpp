@@ -21,10 +21,15 @@ Engine::Engine()
     connect(dialog_, &StudentSide::Dialog::helicopterSelected, this, &StudentSide::Engine::gameHelicopter);
     connect(dialog_, &StudentSide::Dialog::fighterSelected, this, &StudentSide::Engine::gameFighter);
     connect(dialog_, &StudentSide::Dialog::spaceShipSelected, this, &StudentSide::Engine::gameSpaceShip);
+
+    connect(dialog_, &StudentSide::Dialog::player1Name, this, &StudentSide::Engine::setName1);
+    connect(dialog_, &StudentSide::Dialog::player2Name, this, &StudentSide::Engine::setName2);
+
     dialog_->exec();
 
     //connect(dialog_, &StudentSide::Dialog::helicopterSelected, this, &StudentSide::Engine::gameHelicopter);
     mainWindow_->show();
+
     createGame();
 }
 
@@ -65,18 +70,31 @@ void Engine::nysseDestroyed()
     city_->nysseDestroyed();
 }
 
+void Engine::setName1(QString name)
+{
+    name1_ = name;
+}
+
+void Engine::setName2(QString name)
+{
+    name2_ = name;
+}
+
+void Engine::updateLeaderboard()
+{
+    mainWindow_->updateTop10(name1_);
+}
+
+
 
 void Engine::movePlayer(char button)
 {
     if (helicopter_) {
         player1_->determineSpeed(HELICOPTER_NUM);
-        bullet_.setBulletSpeed(HELICOPTER_NUM);
     } else if (fighter_) {
         player1_->determineSpeed(FIGHTER_NUM);
-        bullet_.setBulletSpeed(FIGHTER_NUM);
     } else if (spaceShip_) {
         player1_->determineSpeed(SPACESHIP_NUM);
-        bullet_.setBulletSpeed(SPACESHIP_NUM);
     }
 
     if (button == 'w') {

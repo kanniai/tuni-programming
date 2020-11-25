@@ -72,6 +72,11 @@ public slots:
     void gameOver();
     void nysseDestroyed();
 
+    void setName1(QString name);
+    void setName2(QString name);
+
+    void updateLeaderboard();
+
 
 private:
     /**
@@ -86,11 +91,13 @@ private:
     CourseSide::Logic logic_;
     StudentSide::ActorItem *actoritem_;
     std::shared_ptr<StudentSide::City> city_;
-    StudentSide::Bullet bullet_;
 
     bool helicopter_ = false;
     bool fighter_ = false;
     bool spaceShip_ = false;
+
+    QString name1_;
+    QString name2_;
 
 };
 

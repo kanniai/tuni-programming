@@ -56,8 +56,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->killedLabel->move(width_ + 6*PADDING, 9.5*NEXTROW);
     ui->statisticsFrame->move(width_ + 0.8*PADDING, 7*NEXTROW);
 
-    ui->endGameLabel->move(width_ + 1.2*PADDING, 14*NEXTROW);
-    ui->secondsLabel->move(width_ + 1.2*PADDING, 15*NEXTROW);
+    ui->top10->move(width_ + 0.8*PADDING, 11*NEXTROW);
+
+    //ui->endGameLabel->move(width_ + 1.2*PADDING, 14*NEXTROW);
+    //ui->secondsLabel->move(width_ + 1.2*PADDING, 15*NEXTROW);
 
     ui->player1HealthLabel->setText(QString::number(player1Health_));
 
@@ -210,6 +212,19 @@ void MainWindow::updateStatistics(int buses, int passengers)
     ui->destroyedLabel->setText(QString::number(buses));
     ui->killedLabel->setText(QString::number(passengers));
 }
+
+void MainWindow::updateTop10(QString name)
+{
+    if (gameOver_ == true) {
+        if (player1Health_ == 0) {
+            ui->top10->setText(name + " | " + seconds_);
+        } else {
+            ui->top10->setText(name + " | " + seconds_);
+        }
+
+    }
+}
+
 
 void MainWindow::player1BulletMoved(int x2, int y2)
 {
@@ -376,8 +391,8 @@ void MainWindow::endGame(QString player)
     gameOver_ = true;
 
     ui->endGameLabel->setText(player + " won the game!");
-
     QString seconds = QString::number(seconds_);
+
     ui->secondsLabel->setText("Time spent: " + seconds + " seconds");
     emit gameOverSignal();
 }
