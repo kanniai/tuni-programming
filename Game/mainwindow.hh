@@ -17,6 +17,7 @@
 #include <map>
 #include <qmath.h>
 #include <string>
+#include <QPixmap>
 
 namespace Ui {
 class MainWindow;

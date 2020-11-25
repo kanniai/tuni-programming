@@ -59,7 +59,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->endGameLabel->move(width_ + 1.2*PADDING, 14*NEXTROW);
     ui->runningTimeLabel->move(width_ + 1.2*PADDING, 15*NEXTROW);
 
-    ui->player1HealthLabel->setText(QString::number(player1Health_));
+    updatePlayer1HealthLabel();
 
     map = new QGraphicsScene(this);
     ui->gameView->setScene(map);
@@ -407,7 +407,14 @@ void MainWindow::updateTime()
 
 void MainWindow::updatePlayer1HealthLabel()
 {
-    ui->player1HealthLabel->setText(QString::number(player1Health_));
+    const char heart[] = "\xe2\x99\xa5";
+    QString x="";
+
+    for (unsigned int i; i < player1Health_; i++) {
+        x+=heart;
+    }
+
+    ui->player1HealthLabel->setText(x);
 }
 
 bool MainWindow::isGameOver()
