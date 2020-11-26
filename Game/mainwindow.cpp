@@ -16,7 +16,7 @@ const int NEXTROW = 30;
 const int WINDOW_WIDTH = 700;
 const int WINDOW_HEIGHT = 600;
 
-const int DESTROYED_NYSSES_NEEDED_FOR_WIN = 20;
+const int DESTROYED_NYSSES_NEEDED_FOR_WIN = 5;
 
 const int NYSSE = 1;
 const int PASSENGER = 2;
@@ -277,6 +277,9 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
+    if (gameOver_ == true) {
+        return;
+    }
 
     if (cannonBullet_->isBulletMoving() == true) {
         return;
@@ -344,7 +347,7 @@ void MainWindow::checkCollision(StudentSide::Bullet* bullet)
                         bullet->stopTimer();
                         map->removeItem(bullet);
                         nysse.first->remove();
-                        //buses_.erase(nysse.first);
+                        buses_.erase(nysse.first);
 
                         nyssesDestroyed_++;
                         emit nysseDestroyedSignal();

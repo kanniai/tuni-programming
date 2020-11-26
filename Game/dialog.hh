@@ -48,10 +48,13 @@ private slots:
     void on_name1Button_clicked();
     void on_name2Button_clicked();
 
+    void closeEvent(QCloseEvent *event);
+
 private:
     Ui::Dialog *ui;
     QString name1_;
     QString name2_;
+    bool startGame_ = false;
 };
 }
 #endif // DIALOG_HH
