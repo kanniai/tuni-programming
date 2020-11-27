@@ -68,7 +68,6 @@ public slots:
      */
     void gameSpaceShip();
 
-    void engineGameStarted();
     void gameOver();
     void nysseDestroyed();
 
@@ -90,6 +89,7 @@ private:
     StudentSide::Dialog* dialog_;
     CourseSide::Logic logic_;
     std::shared_ptr<StudentSide::City> city_;
+
 
     bool helicopter_ = false;
     bool fighter_ = false;

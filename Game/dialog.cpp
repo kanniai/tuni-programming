@@ -110,6 +110,6 @@ void StudentSide::Dialog::closeEvent(QCloseEvent *event)
 {
     if (startGame_ == true) {
         return;
-    }
+    } 
     exit(0);
 }

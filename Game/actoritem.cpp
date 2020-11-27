@@ -18,21 +18,18 @@ ActorItem::ActorItem(int x, int y, int type):x_(x), y_(y), type_(type)
 }
 
 ActorItem::~ActorItem()
-{
-
-}
+{}
 
 QRectF ActorItem::boundingRect() const
 {
     return QRectF(0, 0, WIDTH, HEIGHT);
 }
 
-void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                      QWidget *widget)
 {
-
     QRectF bounds = boundingRect();
 
-    //QColor color(type_%256, type_%256, type_%256);
     QColor color;
     QBrush brush(color);
     if (type_ == STOP) {
@@ -40,11 +37,7 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     } else if (type_ == NYSSE) {
         painter->drawImage(bounds, QImage(":/images/bus.jpg"));
     } else if (type_ == PASSENGER) {
-       // painter->drawImage(bounds, QImage(":/images/passenger.jpg"));
-        color = Qt::red;
-        QBrush brush(color);
-        painter->setBrush(brush);
-        painter->drawEllipse(bounds);
+        // Passengers are not printed on map
     } else if (type_ == HELICOPTER) {
         painter->drawImage(bounds, QImage(":/images/heli.jpg"));
     } else if (type_ == FIGHTER) {
@@ -56,11 +49,9 @@ void ActorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     }
 }
 
-
 void ActorItem::setCoord(int x, int y)
 {
     setX( x );
     setY( y );
 }
-
 }

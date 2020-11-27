@@ -57,8 +57,6 @@ public:
      */
     int returnPassengers();
 
-
-
 private:
     // Statistics for Nysses or passengers
     int nysses_ = 0;

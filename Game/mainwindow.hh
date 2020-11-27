@@ -7,6 +7,7 @@
 #include "actors/passenger.hh"
 #include "actoritem.hh"
 #include "bullet.hh"
+#include "gameoverdialog.hh"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -144,7 +145,6 @@ public:
 
 
 signals:
-    void gameStarted();
     void buttonPressed(char button);
     void gameOverSignal();
     void nysseDestroyedSignal();
@@ -155,7 +155,6 @@ public slots:
 
 private slots:
     // Slots of different actions
-    void on_startButton_clicked();
     void keyPressEvent(QKeyEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void spacePressed();
@@ -199,6 +198,7 @@ private:
     ActorItem* bullet_;
     StudentSide::Bullet* player1Bullet_;
     StudentSide::Bullet* cannonBullet_;
+    StudentSide::gameOverDialog* gameOverDialog_;
 
     // Data structures of different actors
     std::map<std::shared_ptr<CourseSide::Stop>, ActorItem*> stops_;

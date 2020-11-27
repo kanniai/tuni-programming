@@ -7,10 +7,8 @@
 #include <iostream>
 
 /**
-  * @brief Base class for class Player
+  * @brief Create QGraphicsItem objects to show actors on map
   */
-
-
 
 namespace StudentSide {
 
@@ -20,8 +18,12 @@ public:
     ActorItem(int x, int y, int type = 0);
     virtual ~ActorItem();
     QRectF boundingRect() const;
-    QRectF playerRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+    /**
+      * @brief Choose image for actors
+      */
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+               QWidget *widget);
     void setCoord(int x, int y);
 
     const int WIDTH = 15;

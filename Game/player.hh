@@ -5,13 +5,11 @@
 #include "actor.hh"
 #include "city.hh"
 
-
 #include <QTime>
 #include <memory>
 #include <set>
 #include <map>
 #include <vector>
-
 
 namespace StudentSide
 {
@@ -19,7 +17,6 @@ namespace StudentSide
 const int HELICOPTER_SPEED = 3;
 const int FIGHTER_SPEED = 8;
 const int SPACESHIP_SPEED = 13;
-
 
 /**
  * @brief The Player class is used to locate the player in the game grid

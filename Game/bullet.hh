@@ -9,9 +9,8 @@
 #include <QDebug>
 
 /**
-  * @brief Defines a bullet that moves when user shoots
+  * @brief Defines a bullet that moves when user shoots a gun
   */
-
 
 const int WIDTH = 15;
 const int HEIGHT = 15;
@@ -33,11 +32,12 @@ public:
      */
     void shoot(int x, int y, int angle);
     QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+               QWidget *widget);
 
     /**
      * @brief Timer is connected to this function
-     * emit bulletMoved which is connected to MainWindow
+     * move() emits bulletMoved which is connected to MainWindow
      */
     void move();
     void stopTimer();
@@ -57,9 +57,8 @@ private:
     int y_;
     double radianAngle_;
     QTimer* timer_;
-    int bulletSpeed_ = 10;
+    int bulletSpeed_;
 
 };
-
 }
 #endif // BULLET_HH

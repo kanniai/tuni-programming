@@ -12,6 +12,7 @@ SOURCES += \
     city.cpp \
     dialog.cpp \
     engine.cpp \
+    gameoverdialog.cpp \
     main.cc \
     mainwindow.cpp \
     player.cpp \
@@ -26,6 +27,7 @@ HEADERS += \
     city.hh \
     dialog.hh \
     engine.hh \
+    gameoverdialog.hh \
     mainwindow.hh \
     player.hh \
     statistics.hh
@@ -58,6 +60,7 @@ else:unix: PRE_TARGETDEPS += \
 
 FORMS += \
     dialog.ui \
+    gameoverdialog.ui \
     mainwindow.ui
 
 RESOURCES += \ \

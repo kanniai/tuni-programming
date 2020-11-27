@@ -35,9 +35,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     ui->gameView->setFixedSize(width_, height_);
-    ui->centralwidget->setFixedSize(WINDOW_WIDTH + ui->startButton->width() + PADDING, WINDOW_HEIGHT+ PADDING);
+    ui->centralwidget->setFixedSize(WINDOW_WIDTH + 3 * PADDING, WINDOW_HEIGHT+ PADDING);
 
-    ui->startButton->move(width_ + PADDING , PADDING);
     ui->timeLabel->move(width_ + PADDING, 3*NEXTROW);
     ui->logicTime->move(width_ + 3*PADDING, 3*NEXTROW);
     ui->timeFrame->move(width_ + 2.75*PADDING, 3*NEXTROW);
@@ -75,7 +74,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
     connect(timer, &QTimer::timeout, this, &StudentSide::MainWindow::updateTime);
 
-
     player1Bullet_ = new StudentSide::Bullet();
     cannonBullet_ = new StudentSide::Bullet();
 
@@ -83,6 +81,8 @@ MainWindow::MainWindow(QWidget *parent) :
             &StudentSide::MainWindow::player1BulletMoved);
     connect(cannonBullet_, &StudentSide::Bullet::bulletMoved, this,
             &StudentSide::MainWindow::cannonBulletMoved);
+    gameOverDialog_ = new StudentSide::gameOverDialog();
+
 }
 MainWindow::~MainWindow()
 {
@@ -414,6 +414,8 @@ void MainWindow::endGame(QString player)
                                       " minutes and " +
                                     QString::number(runningSeconds_) + " seconds.");
     }
+    gameOverDialog_->show();
+    gameOverDialog_->setLabelTexts(player, runningMinutes_, runningSeconds_);
     emit gameOverSignal();
 }
 
@@ -546,14 +548,6 @@ void MainWindow::saveTopScores()
     }
     readLeaderboard();
     showTopScores();
-}
-
-
-
-void StudentSide::MainWindow::on_startButton_clicked()
-{
-    qDebug() << "Start clicked";
-    emit gameStarted();
 }
 }
 
