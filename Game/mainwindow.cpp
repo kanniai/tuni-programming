@@ -483,7 +483,12 @@ void MainWindow::readLeaderboard()
             topscore.type = type;
 
             topscores_.push_back(topscore);
+            // If time < 10s, add 0 in front of the seconds
+            if (time.length() == 13){
+                time = time.insert(8,"0");
+            }
             times_.push_back(time);
+
             std::sort(times_.rbegin(), times_.rend(), std::greater<>());
 
         }
