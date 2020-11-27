@@ -126,6 +126,22 @@ public:
      */
     void updateTop10(QString name);
 
+    void setName1(QString name);
+    void setName2(QString name);
+
+    /**
+     * @brief saveToFile saves player name and game time
+     * @param name
+     */
+    void saveToFile(QString name);
+
+    /**
+     * @brief updateLeaderboard updates the top10-list
+     */
+    void updateLeaderboard();
+
+    std::string checkLeaderBoard(int sec, std::string name);
+
 signals:
     void gameStarted();
     void buttonPressed(char button);
@@ -168,6 +184,7 @@ private:
      */
     void endGame(QString player);
 
+
     /**
      * @param Updates time every second
      */
@@ -204,6 +221,9 @@ private:
     int width_ = 500; //pxls
     int height_ = 500;
     int tick_ = 1000; //ms
+
+    QString name1_;
+    QString name2_;
 
     int player1Health_ = 5;
 

@@ -7,5 +7,6 @@
         <file>spaceship.jpg</file>
         <file>heli.jpg</file>
         <file>cannon.jpg</file>
+        <file>scores.txt</file>
     </qresource>
 </RCC>

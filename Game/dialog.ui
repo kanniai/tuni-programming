@@ -146,7 +146,7 @@
   <widget class="QLabel" name="label_11">
    <property name="geometry">
     <rect>
-     <x>90</x>
+     <x>130</x>
      <y>10</y>
      <width>31</width>
      <height>51</height>
@@ -215,7 +215,7 @@ background-color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="label_12">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>160</x>
      <y>10</y>
      <width>31</width>
      <height>51</height>
@@ -231,7 +231,7 @@ background-color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="label_13">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>190</x>
      <y>10</y>
      <width>31</width>
      <height>51</height>
@@ -247,7 +247,7 @@ background-color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="label_15">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>220</x>
      <y>10</y>
      <width>31</width>
      <height>51</height>
@@ -263,7 +263,7 @@ background-color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="label_16">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>270</x>
      <y>10</y>
      <width>31</width>
      <height>51</height>
@@ -279,7 +279,7 @@ background-color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="label_17">
    <property name="geometry">
     <rect>
-     <x>310</x>
+     <x>350</x>
      <y>10</y>
      <width>31</width>
      <height>51</height>
@@ -295,7 +295,7 @@ background-color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="label_18">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>300</x>
      <y>10</y>
      <width>31</width>
      <height>51</height>
@@ -311,7 +311,7 @@ background-color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="label_19">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>380</x>
      <y>10</y>
      <width>41</width>
      <height>51</height>
@@ -327,7 +327,7 @@ background-color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="label_20">
    <property name="geometry">
     <rect>
-     <x>370</x>
+     <x>410</x>
      <y>10</y>
      <width>31</width>
      <height>51</height>
@@ -423,6 +423,86 @@ background-color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
     <string>&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_14">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>31</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 63 30pt &quot;URW Bookman&quot;;</string>
+   </property>
+   <property name="text">
+    <string>T</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_21">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>10</y>
+     <width>31</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 63 30pt &quot;URW Bookman&quot;;</string>
+   </property>
+   <property name="text">
+    <string>E</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_22">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>10</y>
+     <width>31</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 63 30pt &quot;URW Bookman&quot;;</string>
+   </property>
+   <property name="text">
+    <string>H</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_23">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>10</y>
+     <width>16</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 63 30pt &quot;URW Bookman&quot;;</string>
+   </property>
+   <property name="text">
+    <string>I</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_24">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>10</y>
+     <width>16</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 63 30pt &quot;URW Bookman&quot;;</string>
+   </property>
+   <property name="text">
+    <string>I</string>
    </property>
   </widget>
  </widget>

@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <iostream>
+#include <ios>
+#include <fstream>
 
 const int MATCH_MOUSEPRESS_XCOORD = 20;
 const int MATCH_MOUSEPRESS_YCOORD = 15;
@@ -56,10 +58,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->killedLabel->move(width_ + 6*PADDING, 9.5*NEXTROW);
     ui->statisticsFrame->move(width_ + 0.8*PADDING, 7*NEXTROW);
 
+    ui->top10->move(width_ + 0.8*PADDING, 12*NEXTROW);
+    ui->top10Label->move(width_ + 3*PADDING, 11.3*NEXTROW);
+    updateLeaderboard();
     ui->endGameLabel->move(width_ + 1.2*PADDING, 14*NEXTROW);
     ui->runningTimeLabel->move(width_ + 1.2*PADDING, 15*NEXTROW);
 
-    ui->top10->move(width_ + 0.8*PADDING, 11*NEXTROW);
 
     updatePlayer1HealthLabel();
 
@@ -331,7 +335,8 @@ void MainWindow::checkCollision(StudentSide::Bullet* bullet)
 
                 if (player1Health_ == 0) {
                     map->removeItem(player1_.second);
-                    endGame("Player 2");
+                    saveToFile(name2_);
+                    endGame(name2_);
                 }
                 break;
             }
@@ -362,7 +367,8 @@ void MainWindow::checkCollision(StudentSide::Bullet* bullet)
 
                         if (nyssesDestroyed_ >= DESTROYED_NYSSES_NEEDED_FOR_WIN) {
                             updateStatistics(nyssesDestroyed_, passengersKilled_);
-                            endGame("Player 1");
+                            saveToFile(name1_);
+                            endGame(name1_);
                         }
                         break;
                     }
@@ -402,6 +408,8 @@ void MainWindow::endGame(QString player)
 
     ui->endGameLabel->setText(player + " won the game!");
 
+    updateLeaderboard();
+
     if (runningMinutes_ == 0) {
         ui->runningTimeLabel->setText("Time spent: " +
                                       QString::number(runningSeconds_) + " seconds.");
@@ -439,6 +447,66 @@ void MainWindow::updatePlayer1HealthLabel()
 bool MainWindow::isGameOver()
 {
     return gameOver_;
+}
+
+void MainWindow::setName1(QString name)
+{
+    name1_ = name;
+}
+
+void MainWindow::setName2(QString name)
+{
+    name2_ = name;
+}
+
+void MainWindow::saveToFile(QString name)
+{
+    std::string fileName = "scores.txt";
+    std::ofstream outfile(fileName, std::ios::app);
+    QString seconds = QString::number(runningSeconds_);
+    std::string sec = seconds.toStdString();
+    std::string player_name = name.toStdString();
+    std::string line = checkLeaderBoard(runningSeconds_, player_name);
+
+    std::string player;
+
+    if (outfile) {
+        outfile << line + player
+                << std::endl;
+        outfile.close();
+    }
+
+}
+
+void MainWindow::updateLeaderboard()
+{
+    std::ifstream infile("scores.txt");
+    std::string line;
+    std::vector<QString> vector;
+    ui->top10->clear();
+
+    if (infile) {
+        while (getline(infile, line)) {
+            QString text_line = QString::fromStdString(line);
+            vector.push_back(text_line);
+        }
+        for (int i = (vector.size()-1) ; i >= 0; i--) {
+            ui->top10->append(vector.at(i));
+        }
+        infile.close();
+    }
+}
+
+std::string MainWindow::checkLeaderBoard(int sec, std::string name)
+{
+    std::string seconds = std::to_string(sec);
+    std::map<std::string, std::string> topscores;
+    topscores[seconds] = name;
+
+    for (auto const& row : topscores) {
+        std::string line = row.second + " | " + row.first + " seconds | ";
+        return line;
+    }
 }
 
 void StudentSide::MainWindow::on_startButton_clicked()
