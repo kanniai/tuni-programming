@@ -75,7 +75,7 @@ public slots:
     void setName1(QString name);
     void setName2(QString name);
 
-    void updateLeaderboard();
+    void updateNames();
 
 
 private:

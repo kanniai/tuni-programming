@@ -444,9 +444,9 @@ void MainWindow::saveToFile(QString name)
     std::string player;
 
     if (name == name1_) {
-        attacker_ = true;
+        player = "Attacker";
     } else {
-        defender_ = true;
+        player = "Defender";
     }
 
     if (outfile) {

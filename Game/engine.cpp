@@ -80,9 +80,10 @@ void Engine::setName2(QString name)
     name2_ = name;
 }
 
-void Engine::updateLeaderboard()
+void Engine::updateNames()
 {
-    mainWindow_->updateTop10(name1_);
+    mainWindow_->setName1(name1_);
+    mainWindow_->setName2(name2_);
 }
 
 
@@ -155,6 +156,7 @@ void Engine::createGame()
     city_->addActor(player2_);
 
     logic_.finalizeGameStart();
+    updateNames();
 }
 }
 
