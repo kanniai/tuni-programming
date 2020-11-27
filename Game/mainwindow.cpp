@@ -420,6 +420,7 @@ void MainWindow::endGame(QString player)
                                     QString::number(runningSeconds_) + " seconds.");
     }
     gameOverDialog_->show();
+    gameOverDialog_->setLabelTexts(player, runningMinutes_, runningSeconds_);
     emit gameOverSignal();
 }
 

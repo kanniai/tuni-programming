@@ -2,6 +2,7 @@
 #define GAMEOVERDIALOG_HH
 
 #include <QDialog>
+#include <string>
 
 namespace Ui {
 class gameOverDialog;
@@ -15,6 +16,7 @@ class gameOverDialog : public QDialog
 public:
     explicit gameOverDialog(QWidget *parent = nullptr);
     ~gameOverDialog();
+    void setLabelTexts(QString player, int runningMinutes, int runningSeconds);
 
 private:
     Ui::gameOverDialog *ui;
