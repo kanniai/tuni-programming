@@ -16,6 +16,7 @@ public:
     explicit gameOverDialog(QWidget *parent = nullptr);
     ~gameOverDialog();
     void setLabelTexts(QString player, int runningMinutes, int runningSeconds);
+    void setTop10(QString total_scores);
 
     static int const EXIT_CODE_REBOOT = -123456789;
 

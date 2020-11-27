@@ -41,7 +41,7 @@
      <string>TOP 10:</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="textBrowser">
+   <widget class="QTextBrowser" name="top10TextBrowser">
     <property name="geometry">
      <rect>
       <x>30</x>

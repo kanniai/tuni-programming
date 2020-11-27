@@ -34,7 +34,8 @@ QRectF Bullet::boundingRect() const
     return QRectF(0, 0, WIDTH, HEIGHT);
 }
 
-void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void Bullet::paint(QPainter *painter,
+                   const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QRectF bounds = boundingRect();
     QColor color = Qt::black;

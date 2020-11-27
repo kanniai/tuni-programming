@@ -33,6 +33,11 @@ void gameOverDialog::setLabelTexts(QString player, int runningMinutes,
     }
 }
 
+void gameOverDialog::setTop10(QString total_scores)
+{
+    ui->top10TextBrowser->setText(total_scores);
+}
+
 void StudentSide::gameOverDialog::on_restartPushButton_clicked()
 {
     qApp->exit( StudentSide::gameOverDialog::EXIT_CODE_REBOOT );
