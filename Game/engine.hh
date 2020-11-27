@@ -89,7 +89,6 @@ private:
     StudentSide::MainWindow* mainWindow_;
     StudentSide::Dialog* dialog_;
     CourseSide::Logic logic_;
-    StudentSide::ActorItem *actoritem_;
     std::shared_ptr<StudentSide::City> city_;
 
     bool helicopter_ = false;

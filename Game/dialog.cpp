@@ -42,23 +42,24 @@ Dialog::~Dialog()
 
 void StudentSide::Dialog::on_heliButton_clicked()
 {
+    startGame_ = true;
     emit helicopterSelected();
     close();
 }
 
 void StudentSide::Dialog::on_jetButton_clicked()
 {
+    startGame_ = true;
     emit fighterSelected();
     close();
 }
 
 void StudentSide::Dialog::on_spaceButton_clicked()
 {
+    startGame_ = true;
     emit spaceShipSelected();
     close();
 }
-
-
 
 void StudentSide::Dialog::on_name1Button_clicked()
 {
@@ -105,4 +106,12 @@ void StudentSide::Dialog::on_name2Button_clicked()
         ui->spaceStatsLabel_1->show();
         ui->spaceStatsLabel_2->show();
     }
+}
+
+void StudentSide::Dialog::closeEvent(QCloseEvent *event)
+{
+    if (startGame_ == true) {
+        return;
+    }
+    exit(0);
 }

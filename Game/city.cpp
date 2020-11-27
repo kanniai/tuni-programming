@@ -41,15 +41,8 @@ void City::setClock(QTime clock)
     mainWindow_->setTime(clock.hour(), clock.minute());
     mainWindow_->showTime();
 
-    int delta = 0;
-    int nysses = statistics_.returnNysses();
-    if (old_nysses_ == 0) {
-        old_nysses_ = nysses;
-    } else {
-        delta = nysses - old_nysses_;
-        old_nysses_ = nysses;
-    }
-    mainWindow_->nysseCount(nysses, delta);
+    updateNysseCount("logicUpdated");
+
 }
 
 void City::startGame()
@@ -216,11 +209,24 @@ void City::selectVehicle(int num)
 
 void City::nysseDestroyed()
 {
-    statistics_.nysseRemoved();
+    updateNysseCount("destroyed");
 }
 
 MainWindow* City::returnMainwindow()
 {
     return mainWindow_;
+}
+
+void City::updateNysseCount(std::string type)
+{
+    int delta = 0;
+    int nysses = statistics_.returnNysses();
+    if (old_nysses_ == 0) {
+        old_nysses_ = nysses;
+    } else {
+        delta = nysses - old_nysses_;
+        old_nysses_ = nysses;
+    }
+    mainWindow_->nysseCount(nysses, delta, type);
 }
 }
