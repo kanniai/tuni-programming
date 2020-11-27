@@ -7,6 +7,7 @@
 #include "actors/passenger.hh"
 #include "actoritem.hh"
 #include "bullet.hh"
+#include "gameoverdialog.hh"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -180,6 +181,7 @@ private:
     ActorItem* bullet_;
     StudentSide::Bullet* player1Bullet_;
     StudentSide::Bullet* cannonBullet_;
+    StudentSide::gameOverDialog* gameOverDialog_;
 
     // Data structures of different actors
     std::map<std::shared_ptr<CourseSide::Stop>, ActorItem*> stops_;

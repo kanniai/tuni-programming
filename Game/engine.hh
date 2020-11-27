@@ -91,6 +91,7 @@ private:
     CourseSide::Logic logic_;
     std::shared_ptr<StudentSide::City> city_;
 
+
     bool helicopter_ = false;
     bool fighter_ = false;
     bool spaceShip_ = false;

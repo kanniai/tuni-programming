@@ -74,7 +74,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
     connect(timer, &QTimer::timeout, this, &StudentSide::MainWindow::updateTime);
 
-
     player1Bullet_ = new StudentSide::Bullet();
     cannonBullet_ = new StudentSide::Bullet();
 
@@ -82,6 +81,8 @@ MainWindow::MainWindow(QWidget *parent) :
             &StudentSide::MainWindow::player1BulletMoved);
     connect(cannonBullet_, &StudentSide::Bullet::bulletMoved, this,
             &StudentSide::MainWindow::cannonBulletMoved);
+    gameOverDialog_ = new StudentSide::gameOverDialog();
+
 }
 MainWindow::~MainWindow()
 {
@@ -410,6 +411,7 @@ void MainWindow::endGame(QString player)
                                       " minutes and " +
                                     QString::number(runningSeconds_) + " seconds.");
     }
+    gameOverDialog_->show();
     emit gameOverSignal();
 }
 
