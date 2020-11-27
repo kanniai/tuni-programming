@@ -8,7 +8,6 @@ gameOverDialog::gameOverDialog(QWidget *parent) :
     ui(new Ui::gameOverDialog)
 {
     ui->setupUi(this);
-
 }
 
 gameOverDialog::~gameOverDialog()
@@ -16,18 +15,21 @@ gameOverDialog::~gameOverDialog()
     delete ui;
 }
 
-void gameOverDialog::setLabelTexts(QString player, int runningMinutes, int runningSeconds)
+void gameOverDialog::setLabelTexts(QString player, int runningMinutes,
+                                   int runningSeconds)
 {
     ui->winnerLabel->setText(player + " won the game!");
 
     if (runningMinutes == 0) {
         ui->timeSpentLabel->setText("Time spent: " +
-                                      QString::number(runningSeconds) + " seconds.");
+                                      QString::number(runningSeconds) +
+                                    " seconds.");
     } else {
         ui->timeSpentLabel->setText(" Time spent: " +
                                       QString::number(runningMinutes) +
                                       " minutes and " +
-                                    QString::number(runningSeconds) + " seconds.");
+                                    QString::number(runningSeconds) +
+                                    " seconds.");
     }
 }
 

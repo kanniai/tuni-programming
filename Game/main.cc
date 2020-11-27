@@ -2,11 +2,8 @@
 #include <QApplication>
 #include <QLabel>
 
-//#include "gameoverdialog.hh"
-
 int main(int argc, char *argv[])
 {
-
     int currentExitCode = 0;
 
     do {
@@ -17,5 +14,4 @@ int main(int argc, char *argv[])
     } while( currentExitCode == StudentSide::gameOverDialog::EXIT_CODE_REBOOT );
 
     return currentExitCode;
-
 }

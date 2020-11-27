@@ -5,9 +5,7 @@ namespace StudentSide
 {
 
 Player::Player()
-{
-
-}
+{}
 
 StudentSide::Player::~Player()
 {}
@@ -53,5 +51,4 @@ Interface::Location StudentSide::Player::giveLocation() const
     return playerLocation_;
 
 }
-
 }

@@ -1,4 +1,5 @@
 #include "bullet.hh"
+
 const int HELIBULLETSPEED = 10;
 const int FIGHTERBULLETSPEED = 6;
 const int SPACEBULLETSPEED = 2;

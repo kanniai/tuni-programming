@@ -38,9 +38,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     ui->gameView->setFixedSize(width_, height_);
-    ui->centralwidget->setFixedSize(WINDOW_WIDTH + ui->startButton->width() + PADDING, WINDOW_HEIGHT+ PADDING);
+    ui->centralwidget->setFixedSize(WINDOW_WIDTH + 3 * PADDING, WINDOW_HEIGHT+ PADDING);
 
-    ui->startButton->move(width_ + PADDING , PADDING);
     ui->timeLabel->move(width_ + PADDING, 3*NEXTROW);
     ui->logicTime->move(width_ + 3*PADDING, 3*NEXTROW);
     ui->timeFrame->move(width_ + 2.75*PADDING, 3*NEXTROW);
@@ -508,11 +507,5 @@ std::string MainWindow::checkLeaderBoard(int sec, std::string name)
         std::string line = row.second + " | " + row.first + " seconds | ";
         return line;
     }
-}
-
-void StudentSide::MainWindow::on_startButton_clicked()
-{
-    qDebug() << "Start clicked";
-    emit gameStarted();
 }
 }

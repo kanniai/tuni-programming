@@ -22,7 +22,6 @@ public:
 private:
     Ui::gameOverDialog *ui;
 
-
 private slots:
     void on_restartPushButton_clicked();
 };

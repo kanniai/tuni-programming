@@ -8,7 +8,6 @@
   * @brief Base class for class Player
   */
 
-
 namespace StudentSide
 {
 

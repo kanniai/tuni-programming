@@ -143,7 +143,6 @@ public:
     std::string checkLeaderBoard(int sec, std::string name);
 
 signals:
-    void gameStarted();
     void buttonPressed(char button);
     void gameOverSignal();
     void nysseDestroyedSignal();
@@ -154,7 +153,6 @@ public slots:
 
 private slots:
     // Slots of different actions
-    void on_startButton_clicked();
     void keyPressEvent(QKeyEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void spacePressed();

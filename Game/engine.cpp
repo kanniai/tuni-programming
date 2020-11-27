@@ -12,7 +12,6 @@ Engine::Engine()
     mainWindow_ = new StudentSide::MainWindow();
     city_ = std::make_shared<StudentSide::City>(mainWindow_);
 
-    connect(mainWindow_, &StudentSide::MainWindow::gameStarted, this, &StudentSide::Engine::engineGameStarted);
     connect(mainWindow_, &StudentSide::MainWindow::buttonPressed, this, &Engine::movePlayer);
     connect(mainWindow_, &StudentSide::MainWindow::gameOverSignal, this, &Engine::gameOver);
     connect(mainWindow_, &StudentSide::MainWindow::nysseDestroyedSignal, this, &Engine::nysseDestroyed);
@@ -122,12 +121,6 @@ void Engine::movePlayer(char button)
 
     mainWindow_->updatePlayerCoords(player1_->giveLocation().giveX(), player1_->giveLocation().giveY());
 }
-
-void Engine::engineGameStarted()
-{
-    std::cout << "gamestartedengine" << std::endl;
-}
-
 
 void Engine::createGame()
 {

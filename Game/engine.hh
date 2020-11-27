@@ -68,7 +68,6 @@ public slots:
      */
     void gameSpaceShip();
 
-    void engineGameStarted();
     void gameOver();
     void nysseDestroyed();
 
