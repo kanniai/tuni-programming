@@ -132,14 +132,16 @@ public:
      * @brief saveToFile saves player name and game time
      * @param name
      */
-    void saveToFile(QString name);
+    void readLeaderboard();
 
     /**
      * @brief updateLeaderboard updates the top10-list
      */
-    void updateLeaderboard();
+    void showTopScores();
 
-    std::string checkLeaderBoard(int sec, std::string name);
+    void saveTopScores();
+
+
 
 signals:
     void gameStarted();
@@ -205,6 +207,15 @@ private:
     std::pair<std::shared_ptr<Interface::IActor>, ActorItem*> player1_;
     std::pair<std::shared_ptr<Interface::IActor>, ActorItem*> player2_;
 
+    struct topScores {
+        std::string name;
+        std::string time;
+        std::string type;
+    };
+
+    std::vector<topScores> topscores_;
+    std::vector<std::string> times_;
+
     // Time according to real running time
     int runningSeconds_ = 0;
     int runningMinutes_ = 0;
@@ -222,6 +233,8 @@ private:
 
     QString name1_;
     QString name2_;
+    bool player1Won_ = false;
+    bool player2Won_ = false;
 
     int player1Health_ = 5;
 

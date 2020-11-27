@@ -1,8 +1,6 @@
 #include "dialog.hh"
 #include "ui_dialog.h"
 
-const int NEXTROW = 20;
-
 namespace StudentSide {
 
 Dialog::Dialog(QWidget *parent) :

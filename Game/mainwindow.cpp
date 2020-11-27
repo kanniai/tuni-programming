@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <iostream>
-#include <ios>
 #include <fstream>
 
 const int MATCH_MOUSEPRESS_XCOORD = 20;
@@ -26,8 +25,6 @@ const int HELICOPTER= 3;
 const int FIGHTER = 4;
 const int SPACESHIP = 5;
 const int CANNON = 6;
-
-const int CANNON_NUM = 4;
 
 namespace StudentSide {
 
@@ -60,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->top10->move(width_ + 0.8*PADDING, 12*NEXTROW);
     ui->top10Label->move(width_ + 3*PADDING, 11.3*NEXTROW);
-    updateLeaderboard();
+    saveTopScores();
     ui->endGameLabel->move(width_ + 1.2*PADDING, 14*NEXTROW);
     ui->runningTimeLabel->move(width_ + 1.2*PADDING, 15*NEXTROW);
 
@@ -134,12 +131,12 @@ void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interfac
         player1_.second->setTransformOriginPoint(WIDTH/2, WIDTH/2);
         player1Bullet_->setBulletSpeed(SPACESHIP);
 
-    } else if (type == CANNON)
+    } else if (type == CANNON) {
         player2_.first = actor;
         player2_.second = nActor;
         player2_.second->setTransformOriginPoint(WIDTH/2, WIDTH/2);
         cannonBullet_->setBulletSpeed(CANNON);
-
+    }
     map->addItem(nActor);
 }
 
@@ -334,7 +331,7 @@ void MainWindow::checkCollision(StudentSide::Bullet* bullet)
 
                 if (player1Health_ == 0) {
                     map->removeItem(player1_.second);
-                    saveToFile(name2_);
+                    player2Won_ = true;
                     endGame(name2_);
                 }
                 break;
@@ -366,7 +363,7 @@ void MainWindow::checkCollision(StudentSide::Bullet* bullet)
 
                         if (nyssesDestroyed_ >= DESTROYED_NYSSES_NEEDED_FOR_WIN) {
                             updateStatistics(nyssesDestroyed_, passengersKilled_);
-                            saveToFile(name1_);
+                            player1Won_ = true;
                             endGame(name1_);
                         }
                         break;
@@ -404,10 +401,9 @@ void MainWindow::checkBulletLocation(StudentSide::Bullet* bullet)
 void MainWindow::endGame(QString player)
 {
     gameOver_ = true;
+    saveTopScores();
 
     ui->endGameLabel->setText(player + " won the game!");
-
-    updateLeaderboard();
 
     if (runningMinutes_ == 0) {
         ui->runningTimeLabel->setText("Time spent: " +
@@ -435,7 +431,7 @@ void MainWindow::updatePlayer1HealthLabel()
     const char heart[] = "\xe2\x99\xa5";
     QString x="";
 
-    for (unsigned int i; i < player1Health_; i++) {
+    for (int i = 0; i < player1Health_; i++) {
         x+=heart;
     }
 
@@ -457,55 +453,97 @@ void MainWindow::setName2(QString name)
     name2_ = name;
 }
 
-void MainWindow::saveToFile(QString name)
+void MainWindow::readLeaderboard()
 {
-    std::string fileName = "scores.txt";
-    std::ofstream outfile(fileName, std::ios::app);
-    QString seconds = QString::number(runningSeconds_);
-    std::string sec = seconds.toStdString();
-    std::string player_name = name.toStdString();
-    std::string line = checkLeaderBoard(runningSeconds_, player_name);
+    std::ifstream file("scores.txt");
+        std::string row = "";
+        std::string name;
+        std::string time;
+        std::string type;
 
-    std::string player;
+        if (player1Won_) {
+            name = name1_.toStdString();
+            type = "Attacker";
+        } else {
+            name = name2_.toStdString();
+            type = "Defender";
+        }
 
-    if (outfile) {
-        outfile << line + player
-                << std::endl;
-        outfile.close();
-    }
+        while (getline(file, row)) {
+            std::string delimiter = "|";
+            std::string delimiter2 = ",";
+            name = row.substr(0, row.find(delimiter));
+            time = row.substr(row.find(delimiter) + 1, row.find(delimiter2)-(row.find(delimiter)+1));
+            std::cout << time;
+            type = row.substr(row.find(delimiter2) + 1);
 
+            topScores topscore;
+            topscore.name = name;
+            topscore.time = time;
+            topscore.type = type;
+
+            topscores_.push_back(topscore);
+            times_.push_back(time);
+            std::sort(times_.rbegin(), times_.rend(), std::greater<>());
+
+        }
+        file.close();
 }
 
-void MainWindow::updateLeaderboard()
+void MainWindow::showTopScores()
 {
-    std::ifstream infile("scores.txt");
-    std::string line;
-    std::vector<QString> vector;
+    QString total_scores = "PLAYER | SCORE | TYPE\n";
+    std::string time;
+    std::string name;
+    std::string type;
+    for (int i = 1; i < 11; i++) {
+        time = times_.at(i);
+
+        for (auto player : topscores_) {
+            if (time == player.time) {
+                name = player.name;
+                type = player.type;
+            }
+
+        }
+        total_scores += "\n" + QString::fromStdString(std::to_string(i) + "  ");
+        total_scores += QString::fromStdString(name);
+        total_scores += " | ";
+        total_scores += QString::fromStdString(time);
+        total_scores += " | ";
+        total_scores += QString::fromStdString(type);
+    }
     ui->top10->clear();
+    ui->top10->setText(total_scores);
+    topscores_.clear();
+    times_.clear();
 
-    if (infile) {
-        while (getline(infile, line)) {
-            QString text_line = QString::fromStdString(line);
-            vector.push_back(text_line);
-        }
-        for (int i = (vector.size()-1) ; i >= 0; i--) {
-            ui->top10->append(vector.at(i));
-        }
-        infile.close();
-    }
 }
 
-std::string MainWindow::checkLeaderBoard(int sec, std::string name)
+void MainWindow::saveTopScores()
 {
-    std::string seconds = std::to_string(sec);
-    std::map<std::string, std::string> topscores;
-    topscores[seconds] = name;
+    if (player1Won_ or player2Won_) {
+        std::ifstream file("scores.txt");
+        std::ofstream edit_file("scores.txt", std::ios_base::app);
+        std::string name;
+        std::string type;
+        if (player1Won_) {
+            name = name1_.toStdString();
+            type = "Attacker";
+        } else {
+            name = name2_.toStdString();
+            type = "Defender";
+        }
+        edit_file << name << "|" << runningMinutes_<< " min : " << runningSeconds_ << " sec," << type << std::endl;
+        file.close();
+        edit_file.close();
 
-    for (auto const& row : topscores) {
-        std::string line = row.second + " | " + row.first + " seconds | ";
-        return line;
     }
+    readLeaderboard();
+    showTopScores();
 }
+
+
 
 void StudentSide::MainWindow::on_startButton_clicked()
 {
@@ -513,3 +551,4 @@ void StudentSide::MainWindow::on_startButton_clicked()
     emit gameStarted();
 }
 }
+

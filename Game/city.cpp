@@ -26,6 +26,8 @@ StudentSide::City::~City()
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
     mainWindow_->setPicture(basicbackground);
+    // Image not used
+    QImage notUsed = bigbackground;
 }
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
@@ -142,6 +144,7 @@ void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
 
 }
+
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 {
 
@@ -163,6 +166,7 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
     }
 
 }
+
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
     if (isGameOver()) {
