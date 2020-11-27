@@ -8,6 +8,7 @@ gameOverDialog::gameOverDialog(QWidget *parent) :
     ui(new Ui::gameOverDialog)
 {
     ui->setupUi(this);
+
 }
 
 gameOverDialog::~gameOverDialog()
@@ -28,5 +29,10 @@ void gameOverDialog::setLabelTexts(QString player, int runningMinutes, int runni
                                       " minutes and " +
                                     QString::number(runningSeconds) + " seconds.");
     }
+}
+
+void StudentSide::gameOverDialog::on_restartPushButton_clicked()
+{
+    qApp->exit( StudentSide::gameOverDialog::EXIT_CODE_REBOOT );
 }
 }

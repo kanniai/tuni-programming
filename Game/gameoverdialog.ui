@@ -68,17 +68,17 @@
     <string>Time spent:</string>
    </property>
   </widget>
-  <widget class="QLabel" name="timeSpentValueLabel">
+  <widget class="QPushButton" name="restartPushButton">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>120</y>
-     <width>63</width>
-     <height>20</height>
+     <x>540</x>
+     <y>20</y>
+     <width>84</width>
+     <height>28</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>Play again</string>
    </property>
   </widget>
  </widget>

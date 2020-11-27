@@ -2,7 +2,6 @@
 #define GAMEOVERDIALOG_HH
 
 #include <QDialog>
-#include <string>
 
 namespace Ui {
 class gameOverDialog;
@@ -18,8 +17,14 @@ public:
     ~gameOverDialog();
     void setLabelTexts(QString player, int runningMinutes, int runningSeconds);
 
+    static int const EXIT_CODE_REBOOT = -123456789;
+
 private:
     Ui::gameOverDialog *ui;
+
+
+private slots:
+    void on_restartPushButton_clicked();
 };
 }
 #endif // GAMEOVERDIALOG_HH
