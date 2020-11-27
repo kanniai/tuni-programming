@@ -27,8 +27,6 @@ const int FIGHTER = 4;
 const int SPACESHIP = 5;
 const int CANNON = 6;
 
-const int CANNON_NUM = 4;
-
 namespace StudentSide {
 
 MainWindow::MainWindow(QWidget *parent) :

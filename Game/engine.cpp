@@ -61,6 +61,7 @@ void Engine::gameSpaceShip()
 
 void Engine::gameOver()
 {
+    delete mainWindow_;
     city_->gameOver();
 }
 
