@@ -17,7 +17,7 @@ const int NEXTROW = 30;
 const int WINDOW_WIDTH = 700;
 const int WINDOW_HEIGHT = 600;
 
-const int DESTROYED_NYSSES_NEEDED_FOR_WIN = 5;
+const int DESTROYED_NYSSES_NEEDED_FOR_WIN = 20;
 
 const int NYSSE = 1;
 const int PASSENGER = 2;

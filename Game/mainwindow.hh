@@ -241,7 +241,7 @@ private:
     bool player1Won_ = false;
     bool player2Won_ = false;
 
-    int player1Health_ = 1;
+    int player1Health_ = 10;
 
     bool gameOver_ = false;
 };
