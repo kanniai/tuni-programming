@@ -35,7 +35,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     ui->gameView->setFixedSize(width_, height_);
-    ui->centralwidget->setFixedSize(WINDOW_WIDTH + 3 * PADDING, WINDOW_HEIGHT+ PADDING);
+    ui->centralwidget->setFixedSize(WINDOW_WIDTH + 3 * PADDING,
+                                    WINDOW_HEIGHT+ PADDING);
 
     ui->timeLabel->move(width_ + PADDING, 3*NEXTROW);
     ui->logicTime->move(width_ + 3*PADDING, 3*NEXTROW);
@@ -47,7 +48,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->busesAdded->setText("");
 
     ui->statisticsLabel->move(width_ + 1.2*PADDING, 7.2*NEXTROW);
-    ui->statisticsLabel->setStyleSheet("border-bottom-width: 1px; border-bottom-style: solid; border-radius: 0px");
+    ui->statisticsLabel->setStyleSheet("border-bottom-width: 1px; "
+                                       "border-bottom-style: solid; "
+                                       "border-radius: 0px");
     ui->destroyedTextLabel->move(width_ + PADDING, 8.5*NEXTROW);
     ui->destroyedLabel->move(width_ + 6*PADDING, 8.5*NEXTROW);
     ui->killedTextLabel->move(width_ + PADDING, 9.5*NEXTROW);
@@ -107,7 +110,7 @@ void MainWindow::addActor(int locX, int locY, int type,
 
     } else if (type == PASSENGER) {
         std::shared_ptr<CourseSide::Passenger> passenger =
-                       std::dynamic_pointer_cast<CourseSide::Passenger> (actor);
+                       std::dynamic_pointer_cast<CourseSide::Passenger>(actor);
         passengers_.insert( {passenger, nActor} );
         return;
 
@@ -152,7 +155,8 @@ void MainWindow::updatePlayerCoords(int nX, int nY)
 }
 
 void MainWindow::updateActorCoords(int nX, int nY,
-                                   std::shared_ptr<Interface::IActor> actor, int type)
+                                   std::shared_ptr<Interface::IActor> actor,
+                                   int type)
 {
     if (type == 1) {
         std::map<std::shared_ptr<CourseSide::Nysse>,ActorItem*>::iterator it;
@@ -495,21 +499,24 @@ void MainWindow::showTopScores()
     std::string time;
     std::string name;
     std::string type;
-    for (int i = 1; i < 11; i++) {
-        time = times_.at(i);
+    if (times_.size() > 10) {
+        for (int i = 1; i < 11; i++) {
+            time = times_.at(i);
 
-        for (auto player : topscores_) {
-            if (time == player.time) {
-                name = player.name;
-                type = player.type;
+            for (auto player : topscores_) {
+                if (time == player.time) {
+                    name = player.name;
+                    type = player.type;
+                }
             }
+            total_scores += "\n" + QString::fromStdString
+                    (std::to_string(i) + "  ");
+            total_scores += QString::fromStdString(name);
+            total_scores += " | ";
+            total_scores += QString::fromStdString(time);
+            total_scores += " | ";
+            total_scores += QString::fromStdString(type);
         }
-        total_scores += "\n" + QString::fromStdString(std::to_string(i) + "  ");
-        total_scores += QString::fromStdString(name);
-        total_scores += " | ";
-        total_scores += QString::fromStdString(time);
-        total_scores += " | ";
-        total_scores += QString::fromStdString(type);
     }
     ui->top10->clear();
 

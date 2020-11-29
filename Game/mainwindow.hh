@@ -86,7 +86,7 @@ public:
      * @param type (nysse, passenger)
      */
     void updateActorCoords(int nX, int nY,
-                           std::shared_ptr<Interface::IActor>  actor, int type);
+                           std::shared_ptr<Interface::IActor> actor, int type);
 
     /**
      * @brief showTime displays time on widget
@@ -169,7 +169,7 @@ private:
     /**
      * @brief checkCollision checks if bullet hits the actor
      * If the bullet of player 1 hits a bus, bus is destroyed
-     * If the bullet of player 2 hits player 1, player 1 loses one health point.
+     * If the bullet of player 2 hits player 1, player 1 loses a health point.
      * @param actorItem
      */
     void checkCollision(StudentSide::Bullet* bullet);

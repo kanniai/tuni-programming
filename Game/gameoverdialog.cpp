@@ -43,3 +43,8 @@ void StudentSide::gameOverDialog::on_restartPushButton_clicked()
     qApp->exit( StudentSide::gameOverDialog::EXIT_CODE_REBOOT );
 }
 }
+
+void StudentSide::gameOverDialog::on_closeButton_clicked()
+{
+    close();
+}

@@ -9,7 +9,9 @@ int main(int argc, char *argv[])
     do {
     QApplication a(argc, argv);
     Q_INIT_RESOURCE(offlinedata);
+
     StudentSide::Engine engine;
+
     currentExitCode = a.exec();
     } while( currentExitCode == StudentSide::gameOverDialog::EXIT_CODE_REBOOT );
 

@@ -25,6 +25,7 @@ private:
 
 private slots:
     void on_restartPushButton_clicked();
+    void on_closeButton_clicked();
 };
 }
 #endif // GAMEOVERDIALOG_HH
