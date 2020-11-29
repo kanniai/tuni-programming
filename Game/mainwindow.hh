@@ -85,7 +85,8 @@ public:
      * @param actor
      * @param type (nysse, passenger)
      */
-    void updateActorCoords(int nX, int nY, std::shared_ptr<Interface::IActor>  actor, int type);
+    void updateActorCoords(int nX, int nY,
+                           std::shared_ptr<Interface::IActor>  actor, int type);
 
     /**
      * @brief showTime displays time on widget

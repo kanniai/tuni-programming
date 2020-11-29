@@ -35,5 +35,4 @@ void Statistics::morePassengers(int num)
     Q_ASSERT(num > 0);
     passengers_+= num;
 }
-
 }

@@ -57,9 +57,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->top10->move(width_ + 0.8*PADDING, 12*NEXTROW);
     ui->top10Label->move(width_ + 3*PADDING, 11.3*NEXTROW);
     saveTopScores();
-    ui->endGameLabel->move(width_ + 1.2*PADDING, 14*NEXTROW);
-    ui->runningTimeLabel->move(width_ + 1.2*PADDING, 15*NEXTROW);
-
 
     updatePlayer1HealthLabel();
 
@@ -68,10 +65,8 @@ MainWindow::MainWindow(QWidget *parent) :
     map->setSceneRect(0,0,width_,height_);
 
     resize(minimumSizeHint());
-    //ui->gameView->fitInView(0,0, MAPWIDTH, MAPHEIGHT, Qt::KeepAspectRatio);
 
     timer = new QTimer(this);
-    //connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
     connect(timer, &QTimer::timeout, this, &StudentSide::MainWindow::updateTime);
 
     player1Bullet_ = new StudentSide::Bullet();
@@ -101,7 +96,8 @@ void MainWindow::setTickAndStartTimer(int t)
     timer->start(tick_);
 }
 
-void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interface::IActor> actor)
+void MainWindow::addActor(int locX, int locY, int type,
+                          std::shared_ptr<Interface::IActor> actor)
 {
     ActorItem* nActor = new ActorItem(locX, locY, type);
     if (type == NYSSE) {
@@ -140,7 +136,8 @@ void MainWindow::addActor(int locX, int locY, int type, std::shared_ptr<Interfac
     map->addItem(nActor);
 }
 
-void MainWindow::addStop(int locX, int locY, int type, std::shared_ptr<Interface::IStop> stop)
+void MainWindow::addStop(int locX, int locY, int type,
+                         std::shared_ptr<Interface::IStop> stop)
 {
     std::shared_ptr<CourseSide::Stop> stop2 =
                    std::dynamic_pointer_cast<CourseSide::Stop> (stop);
@@ -154,8 +151,8 @@ void MainWindow::updatePlayerCoords(int nX, int nY)
     player1_.second->setCoord(nX, nY);
 }
 
-void MainWindow::updateActorCoords(int nX, int nY, std::shared_ptr<Interface::IActor> actor,
-                                   int type)
+void MainWindow::updateActorCoords(int nX, int nY,
+                                   std::shared_ptr<Interface::IActor> actor, int type)
 {
     if (type == 1) {
         std::map<std::shared_ptr<CourseSide::Nysse>,ActorItem*>::iterator it;
@@ -203,13 +200,17 @@ void MainWindow::nysseCount(int count, int delta, std::string type)
     }
 
     if (delta == 1) {
-        ui->busesAdded->setText(QString::number(delta)+ " new bus journey");
+        ui->busesAdded->setText(QString::number(delta)+
+                                " new bus journey");
     } else if (delta == -1) {
-        ui->busesAdded->setText(QString::number(abs(delta))+ " bus arrived to final stop");
+        ui->busesAdded->setText(QString::number(abs(delta))+
+                                " bus arrived to final stop");
     } else if (delta > 1) {
-        ui->busesAdded->setText(QString::number(delta)+ " new buses started the journey");
+        ui->busesAdded->setText(QString::number(delta)+
+                                " new buses started the journey");
     } else if (delta < -1) {
-        ui->busesAdded->setText(QString::number(abs(delta)) + " buses arrived to final stop");
+        ui->busesAdded->setText(QString::number(abs(delta)) +
+                                " buses arrived to final stop");
     } else if (delta == 0) {
         ui->busesAdded->setText(" ");
     }
@@ -229,10 +230,8 @@ void MainWindow::updateTop10(QString name)
         } else {
             ui->top10->setText(name + " | " + runningSeconds_);
         }
-
     }
 }
-
 
 void MainWindow::player1BulletMoved(int x2, int y2)
 {
@@ -337,13 +336,15 @@ void MainWindow::checkCollision(StudentSide::Bullet* bullet)
                 break;
             }
         }
+
     } else if (bullet == player1Bullet_) {
         QList<QGraphicsItem *> collidingActors = bullet->collidingItems();
         if (collidingActors.size() != 0) {
             for (QGraphicsItem* actor: collidingActors) {
 
                 for(auto nysse: buses_) {
-                    if (nysse.second->x() == actor->x() && nysse.second->y() == actor->y()) {
+                    if (nysse.second->x() == actor->x() &&
+                            nysse.second->y() == actor->y()) {
 
                         map->removeItem(nysse.second);
                         bullet->stopTimer();
@@ -370,7 +371,8 @@ void MainWindow::checkCollision(StudentSide::Bullet* bullet)
                     }
                 }
                 for(auto stop: stops_) {
-                    if (stop.second->x() == actor->x() && stop.second->y() == actor->y()) {
+                    if (stop.second->x() == actor->x() && stop.second->y()
+                            == actor->y()) {
                         bullet->stopTimer();
                         map->removeItem(player1Bullet_);
                         break;
@@ -401,20 +403,10 @@ void MainWindow::checkBulletLocation(StudentSide::Bullet* bullet)
 void MainWindow::endGame(QString player)
 {
     gameOver_ = true;
+    gameOverDialog_->show();
+
     saveTopScores();
 
-    ui->endGameLabel->setText(player + " won the game!");
-
-    if (runningMinutes_ == 0) {
-        ui->runningTimeLabel->setText("Time spent: " +
-                                      QString::number(runningSeconds_) + " seconds.");
-    } else {
-        ui->runningTimeLabel->setText(" Time spent: " +
-                                      QString::number(runningMinutes_) +
-                                      " minutes and " +
-                                    QString::number(runningSeconds_) + " seconds.");
-    }
-    gameOverDialog_->show();
     gameOverDialog_->setLabelTexts(player, runningMinutes_, runningSeconds_);
     emit gameOverSignal();
 }
@@ -475,7 +467,8 @@ void MainWindow::readLeaderboard()
             std::string delimiter = "|";
             std::string delimiter2 = ",";
             name = row.substr(0, row.find(delimiter));
-            time = row.substr(row.find(delimiter) + 1, row.find(delimiter2)-(row.find(delimiter)+1));
+            time = row.substr(row.find(delimiter) + 1,
+                              row.find(delimiter2)-(row.find(delimiter)+1));
             std::cout << time;
             type = row.substr(row.find(delimiter2) + 1);
 
@@ -511,7 +504,6 @@ void MainWindow::showTopScores()
                 name = player.name;
                 type = player.type;
             }
-
         }
         total_scores += "\n" + QString::fromStdString(std::to_string(i) + "  ");
         total_scores += QString::fromStdString(name);
@@ -521,10 +513,14 @@ void MainWindow::showTopScores()
         total_scores += QString::fromStdString(type);
     }
     ui->top10->clear();
+
+    if (isGameOver()) {
+        gameOverDialog_->setTop10(total_scores);
+    }
+
     ui->top10->setText(total_scores);
     topscores_.clear();
     times_.clear();
-
 }
 
 void MainWindow::saveTopScores()
@@ -541,7 +537,8 @@ void MainWindow::saveTopScores()
             name = name2_.toStdString();
             type = "Defender";
         }
-        edit_file << name << "|" << runningMinutes_<< " min : " << runningSeconds_ << " sec," << type << std::endl;
+        edit_file << name << "|" << runningMinutes_<< " min : " <<
+                     runningSeconds_ << " sec," << type << std::endl;
         file.close();
         edit_file.close();
 
@@ -550,4 +547,3 @@ void MainWindow::saveTopScores()
     showTopScores();
 }
 }
-

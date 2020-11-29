@@ -12,17 +12,25 @@ Engine::Engine()
     mainWindow_ = new StudentSide::MainWindow();
     city_ = std::make_shared<StudentSide::City>(mainWindow_);
 
-    connect(mainWindow_, &StudentSide::MainWindow::buttonPressed, this, &Engine::movePlayer);
-    connect(mainWindow_, &StudentSide::MainWindow::gameOverSignal, this, &Engine::gameOver);
-    connect(mainWindow_, &StudentSide::MainWindow::nysseDestroyedSignal, this, &Engine::nysseDestroyed);
+    connect(mainWindow_, &StudentSide::MainWindow::buttonPressed,
+            this, &Engine::movePlayer);
+    connect(mainWindow_, &StudentSide::MainWindow::gameOverSignal,
+            this, &Engine::gameOver);
+    connect(mainWindow_, &StudentSide::MainWindow::nysseDestroyedSignal,
+            this, &Engine::nysseDestroyed);
 
     dialog_->show();
-    connect(dialog_, &StudentSide::Dialog::helicopterSelected, this, &StudentSide::Engine::gameHelicopter);
-    connect(dialog_, &StudentSide::Dialog::fighterSelected, this, &StudentSide::Engine::gameFighter);
-    connect(dialog_, &StudentSide::Dialog::spaceShipSelected, this, &StudentSide::Engine::gameSpaceShip);
+    connect(dialog_, &StudentSide::Dialog::helicopterSelected,
+            this, &StudentSide::Engine::gameHelicopter);
+    connect(dialog_, &StudentSide::Dialog::fighterSelected,
+            this, &StudentSide::Engine::gameFighter);
+    connect(dialog_, &StudentSide::Dialog::spaceShipSelected,
+            this, &StudentSide::Engine::gameSpaceShip);
 
-    connect(dialog_, &StudentSide::Dialog::player1Name, this, &StudentSide::Engine::setName1);
-    connect(dialog_, &StudentSide::Dialog::player2Name, this, &StudentSide::Engine::setName2);
+    connect(dialog_, &StudentSide::Dialog::player1Name,
+            this, &StudentSide::Engine::setName1);
+    connect(dialog_, &StudentSide::Dialog::player2Name,
+            this, &StudentSide::Engine::setName2);
 
     dialog_->exec();
 
@@ -61,6 +69,7 @@ void Engine::gameSpaceShip()
 void Engine::gameOver()
 {
     //delete mainWindow_;
+    mainWindow_->hide();
     city_->gameOver();
 }
 
@@ -84,8 +93,6 @@ void Engine::updateNames()
     mainWindow_->setName1(name1_);
     mainWindow_->setName2(name2_);
 }
-
-
 
 void Engine::movePlayer(char button)
 {
@@ -119,7 +126,8 @@ void Engine::movePlayer(char button)
         player1_->moveLeft();
     }
 
-    mainWindow_->updatePlayerCoords(player1_->giveLocation().giveX(), player1_->giveLocation().giveY());
+    mainWindow_->updatePlayerCoords(player1_->giveLocation().giveX(),
+                                    player1_->giveLocation().giveY());
 }
 
 void Engine::createGame()

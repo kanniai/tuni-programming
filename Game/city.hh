@@ -66,7 +66,8 @@ public:
     void actorMoved(std::shared_ptr<Interface::IActor> actor);
 
     // empty method in our project
-    std::vector<std::shared_ptr<Interface::IActor>> getNearbyActors(Interface::Location loc) const;
+    std::vector<std::shared_ptr<Interface::IActor>>
+    getNearbyActors(Interface::Location loc) const;
 
     bool isGameOver() const;
     

@@ -65,4 +65,3 @@ FORMS += \
 
 RESOURCES += \ \
     data.qrc
-
