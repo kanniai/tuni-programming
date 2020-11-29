@@ -19,9 +19,7 @@ Bullet::Bullet()
 }
 
 Bullet::~Bullet()
-{
-    delete timer_;
-}
+{}
 
 void Bullet::shoot(int x, int y, int angle)
 {

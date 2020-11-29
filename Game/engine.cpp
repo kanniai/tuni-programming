@@ -38,9 +38,7 @@ Engine::Engine()
 }
 
 Engine::~Engine()
-{
-    delete mainWindow_;
-}
+{}
 
 void Engine::gameHelicopter()
 {
@@ -65,7 +63,6 @@ void Engine::gameSpaceShip()
 
 void Engine::gameOver()
 {
-    //delete mainWindow_;
     mainWindow_->hide();
     city_->gameOver();
 }

@@ -83,15 +83,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 }
 MainWindow::~MainWindow()
-{
-    delete ui;
-    delete map;
-    delete timer;
-    delete bullet_;
-    delete player1Bullet_;
-    delete cannonBullet_;
-    delete gameOverDialog_;
-}
+{}
 
 void MainWindow::setSize(int w, int h)
 {
