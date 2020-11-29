@@ -473,7 +473,6 @@ void MainWindow::readLeaderboard()
             name = row.substr(0, row.find(delimiter));
             time = row.substr(row.find(delimiter) + 1,
                               row.find(delimiter2)-(row.find(delimiter)+1));
-            std::cout << time;
             type = row.substr(row.find(delimiter2) + 1);
 
             topScores topscore;
