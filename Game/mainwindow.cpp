@@ -500,8 +500,9 @@ void MainWindow::showTopScores()
     std::string time;
     std::string name;
     std::string type;
-    if (times_.size() > 10) {
-        for (int i = 1; i < 11; i++) {
+    // If there is less than 10 players
+    if (times_.size() < 11) {
+        for (unsigned long int i = 0; i < times_.size(); i++) {
             time = times_.at(i);
 
             for (auto player : topscores_) {
@@ -511,7 +512,26 @@ void MainWindow::showTopScores()
                 }
             }
             total_scores += "\n" + QString::fromStdString
-                    (std::to_string(i) + "  ");
+                    (std::to_string(i+1) + "  ");
+            total_scores += QString::fromStdString(name);
+            total_scores += " | ";
+            total_scores += QString::fromStdString(time);
+            total_scores += " | ";
+            total_scores += QString::fromStdString(type);
+        }
+    } else {
+        // Get the top 10 players from more than 10 players
+        for (int i = 0; i < 10; i++) {
+            time = times_.at(i);
+
+            for (auto player : topscores_) {
+                if (time == player.time) {
+                    name = player.name;
+                    type = player.type;
+                }
+            }
+            total_scores += "\n" + QString::fromStdString
+                    (std::to_string(i+1) + "  ");
             total_scores += QString::fromStdString(name);
             total_scores += " | ";
             total_scores += QString::fromStdString(time);
@@ -519,6 +539,7 @@ void MainWindow::showTopScores()
             total_scores += QString::fromStdString(type);
         }
     }
+
     ui->top10->clear();
 
     if (isGameOver()) {
