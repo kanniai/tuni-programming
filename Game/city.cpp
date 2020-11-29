@@ -27,7 +27,7 @@ void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {
     mainWindow_->setPicture(basicbackground);
     // Image not used
-    QImage notUsed = bigbackground;
+    QImage NOTUSED = bigbackground;
 }
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
@@ -151,7 +151,10 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 }
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
-{}
+{
+    // Function is not used, and issue message is cleared by following
+    std::shared_ptr<Interface::IActor> NOTUSED = actor;
+}
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 {
@@ -159,7 +162,7 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
     std::shared_ptr<CourseSide::Nysse> nysse =
             std::dynamic_pointer_cast<CourseSide::Nysse>(actor);
     if (nysse != 0) {
-        if ( std::find(nysses_.begin(), nysses_.end(), nysse) != nysses_.end()) {
+        if (std::find(nysses_.begin(), nysses_.end(), nysse) != nysses_.end()){
            return true;
         } else {
            return false;
@@ -175,6 +178,7 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
            return false;
         }
     }
+    return false;
 }
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)

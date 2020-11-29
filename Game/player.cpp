@@ -17,22 +17,26 @@ void StudentSide::Player::move(Interface::Location loc)
 
 void Player::moveUp()
 {
-    playerLocation_.setXY(playerLocation_.giveX(), playerLocation_.giveY() - speed_);
+    playerLocation_.setXY(playerLocation_.giveX(),
+                          playerLocation_.giveY() - speed_);
 }
 
 void Player::moveDown()
 {
-    playerLocation_.setXY(playerLocation_.giveX(), playerLocation_.giveY() + speed_);
+    playerLocation_.setXY(playerLocation_.giveX(),
+                          playerLocation_.giveY() + speed_);
 }
 
 void Player::moveRight()
 {
-    playerLocation_.setXY(playerLocation_.giveX() + speed_, playerLocation_.giveY());
+    playerLocation_.setXY(playerLocation_.giveX() + speed_,
+                          playerLocation_.giveY());
 }
 
 void Player::moveLeft()
 {
-    playerLocation_.setXY(playerLocation_.giveX() - speed_, playerLocation_.giveY());
+    playerLocation_.setXY(playerLocation_.giveX() - speed_,
+                          playerLocation_.giveY());
 }
 
 void Player::determineSpeed(int num)
