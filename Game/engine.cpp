@@ -26,7 +26,6 @@ Engine::Engine()
 
     dialog_->exec();
 
-    //connect(dialog_, &StudentSide::Dialog::helicopterSelected, this, &StudentSide::Engine::gameHelicopter);
     mainWindow_->show();
 
     createGame();
@@ -61,7 +60,7 @@ void Engine::gameSpaceShip()
 
 void Engine::gameOver()
 {
-    delete mainWindow_;
+    //delete mainWindow_;
     city_->gameOver();
 }
 
