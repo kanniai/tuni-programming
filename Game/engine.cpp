@@ -38,7 +38,9 @@ Engine::Engine()
 }
 
 Engine::~Engine()
-{}
+{
+    delete mainWindow_;
+}
 
 void Engine::gameHelicopter()
 {
