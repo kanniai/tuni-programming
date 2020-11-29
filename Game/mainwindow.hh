@@ -158,9 +158,13 @@ private slots:
     // Slots of different actions
     void keyPressEvent(QKeyEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
-    void spacePressed();
 
 private:
+
+    /**
+     * @brief Player 1 shoots
+     */
+    void spacePressed();
 
     /**
      * @brief checkCollision checks if bullet hits the actor
@@ -217,7 +221,7 @@ private:
     std::vector<topScores> topscores_;
     std::vector<std::string> times_;
 
-    // Time according to real running time
+    // Real running time begins when MainWindow is opened
     int runningSeconds_ = 0;
     int runningMinutes_ = 0;
 

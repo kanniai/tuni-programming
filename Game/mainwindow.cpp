@@ -277,7 +277,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
-    if (gameOver_ == true) {
+    if (gameOver_) {
         return;
     }
 
@@ -299,7 +299,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     map->addItem(cannonBullet_);
     cannonBullet_->setPos(x, y);
     cannonBullet_->shoot(x, y, angleInDegrees);
-
 }
 
 void MainWindow::spacePressed()

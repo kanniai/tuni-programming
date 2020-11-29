@@ -2,8 +2,6 @@
 
 #include <QDebug>
 
-
-
 namespace StudentSide
 {
 Engine::Engine()
@@ -40,10 +38,7 @@ Engine::Engine()
 }
 
 Engine::~Engine()
-{
-
-
-}
+{}
 
 void Engine::gameHelicopter()
 {
