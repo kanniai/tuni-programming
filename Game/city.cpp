@@ -19,9 +19,7 @@ City::City(StudentSide::MainWindow* mainWindow) :
 }
 
 StudentSide::City::~City()
-{
-
-}
+{}
 
 void City::setBackground(QImage &basicbackground, QImage &bigbackground)
 {

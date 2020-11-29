@@ -17,7 +17,7 @@ const int NEXTROW = 30;
 const int WINDOW_WIDTH = 700;
 const int WINDOW_HEIGHT = 600;
 
-const int DESTROYED_NYSSES_NEEDED_FOR_WIN = 5;
+const int DESTROYED_NYSSES_NEEDED_FOR_WIN = 20;
 
 const int NYSSE = 1;
 const int PASSENGER = 2;
@@ -83,9 +83,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 }
 MainWindow::~MainWindow()
-{
-    delete ui;
-}
+{}
 
 void MainWindow::setSize(int w, int h)
 {
@@ -281,7 +279,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
 {
-    if (gameOver_ == true) {
+    if (gameOver_) {
         return;
     }
 
@@ -303,7 +301,6 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     map->addItem(cannonBullet_);
     cannonBullet_->setPos(x, y);
     cannonBullet_->shoot(x, y, angleInDegrees);
-
 }
 
 void MainWindow::spacePressed()

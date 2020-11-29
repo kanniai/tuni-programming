@@ -1,3 +1,14 @@
+/**
+  * Ohjelmointi 3 projekti - The Last of Bus II
+  * Syksy 2020, vastuuopettaja Terhi Kilamo
+  *
+  * Olli Luukkonen H282332
+  * olli.luukkonen@tuni.fi
+  *
+  * Matias Kanniainen H285295
+  * matias.kanniainen@tuni.fi
+  */
+
 #ifndef BULLET_HH
 #define BULLET_HH
 #include <QTimer>

@@ -1,3 +1,14 @@
+/**
+  * Ohjelmointi 3 projekti - The Last of Bus II
+  * Syksy 2020, vastuuopettaja Terhi Kilamo
+  *
+  * Olli Luukkonen H282332
+  * olli.luukkonen@tuni.fi
+  *
+  * Matias Kanniainen H285295
+  * matias.kanniainen@tuni.fi
+  */
+
 #ifndef MAINWINDOW_HH
 #define MAINWINDOW_HH
 
@@ -158,9 +169,13 @@ private slots:
     // Slots of different actions
     void keyPressEvent(QKeyEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
-    void spacePressed();
 
 private:
+
+    /**
+     * @brief Player 1 shoots
+     */
+    void spacePressed();
 
     /**
      * @brief checkCollision checks if bullet hits the actor
@@ -217,7 +232,7 @@ private:
     std::vector<topScores> topscores_;
     std::vector<std::string> times_;
 
-    // Time according to real running time
+    // Real running time begins when MainWindow is opened
     int runningSeconds_ = 0;
     int runningMinutes_ = 0;
 
@@ -237,7 +252,7 @@ private:
     bool player1Won_ = false;
     bool player2Won_ = false;
 
-    int player1Health_ = 5;
+    int player1Health_ = 10;
 
     bool gameOver_ = false;
 };
