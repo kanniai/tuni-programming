@@ -237,7 +237,6 @@ void MainWindow::updateTop10(QString name)
 
 void MainWindow::player1BulletMoved(int x2, int y2)
 {
-
     player1Bullet_->setPos(x2, y2);
     checkCollision(player1Bullet_);
     checkBulletLocation(player1Bullet_);
