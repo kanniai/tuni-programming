@@ -476,12 +476,18 @@ void MainWindow::readLeaderboard()
             topscore.name = name;
             topscore.time = time;
             topscore.type = type;
-
             topscores_.push_back(topscore);
-            // If time < 10s, add 0 in front of the seconds
-            if (time.length() == 13){
-                time = time.insert(8,"0");
+
+            // File is of form: "xx:yy sec"
+            // If yy < 10 seconds, add extra 0 before the second -> 6 sec = 06 sec
+            std::string delim = ":";
+            std::string delim2 = "s";
+            std::string seconds = time.substr(time.find(delim)+1,
+                                  time.find(delim2)-(time.find(delim)+1));
+            if(seconds.length() == 3) {
+                seconds.insert(1, "0");
             }
+
             times_.push_back(time);
 
             std::sort(times_.rbegin(), times_.rend(), std::greater<>());
