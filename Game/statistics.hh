@@ -17,7 +17,6 @@
 
 namespace StudentSide
 {
-
 /**
  * @brief The Statistics class is a class which provides information
  * of the numbers of statistics ingame. Class deals with counting the buses
